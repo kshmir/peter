@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Un celular más simple\npara quien más querés</string>
+
+    <!-- Navigation -->
+    <string name="back">Volver</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="save">Guardar Cambios</string>
+    <string name="done">¡Listo!</string>
+    <string name="grant_permission">Otorgar permiso</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Contactos</string>
+    <string name="no_apps_message">No hay aplicaciones configuradas</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Ingrese su PIN</string>
+    <string name="create_pin">Crear PIN de Administrador</string>
+    <string name="confirm_pin">Confirme su PIN</string>
+    <string name="pin_explanation">Este PIN será necesario para cambiar la configuración.</string>
+    <string name="pin_incorrect">PIN incorrecto</string>
+    <string name="pin_locked">Bloqueado por %1$ds</string>
+    <string name="pin_delete">Borrar</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Panel de Administración</string>
+    <string name="admin_apps">Aplicaciones permitidas</string>
+    <string name="admin_apps_subtitle">Administrar aplicaciones visibles</string>
+    <string name="admin_contacts">Contactos</string>
+    <string name="admin_contacts_subtitle">Administrar contactos permitidos</string>
+    <string name="admin_display">Pantalla y Texto</string>
+    <string name="admin_display_subtitle">Tamaño de texto y opciones de pantalla</string>
+    <string name="admin_security">Seguridad</string>
+    <string name="admin_security_subtitle">Cambiar PIN y monitoreo</string>
+    <string name="admin_permissions">Permisos del Sistema</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Aplicaciones Permitidas</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Pantalla y Texto</string>
+    <string name="font_size">Tamaño de texto</string>
+    <string name="font_small">Pequeño</string>
+    <string name="font_large">Grande</string>
+    <string name="font_preview">Vista previa: Este es el tamaño actual</string>
+    <string name="apps_per_row">Aplicaciones por fila</string>
+    <string name="show_clock">Mostrar reloj</string>
+    <string name="show_battery">Mostrar batería</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">No hay contactos configurados</string>
+    <string name="call">Llamar</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Comenzar</string>
+    <string name="setup_step">Paso %1$d de %2$d</string>
+    <string name="setup_permissions_title">Permisos necesarios</string>
+    <string name="setup_apps_title">Seleccionar Aplicaciones</string>
+    <string name="setup_apps_subtitle">Elija las aplicaciones que aparecerán en la pantalla.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Pantalla de inicio</string>
+    <string name="perm_home_desc">Establecer Peter como pantalla principal</string>
+    <string name="perm_usage">Acceso de uso</string>
+    <string name="perm_usage_desc">Necesario para proteger las aplicaciones permitidas</string>
+    <string name="perm_overlay">Mostrar sobre otras apps</string>
+    <string name="perm_overlay_desc">Permite bloquear aplicaciones no autorizadas</string>
+    <string name="perm_write_settings">Modificar ajustes</string>
+    <string name="perm_write_settings_desc">Permite cambiar el tamaño de texto del sistema</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Esta aplicación no está\ndisponible.</string>
+    <string name="blocker_return">Volver al Inicio</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Protección</string>
+    <string name="monitor_channel_desc">Mantiene la protección de aplicaciones activa</string>
+    <string name="monitor_notification_title">Peter activo</string>
+    <string name="monitor_notification_text">Protección de aplicaciones activa</string>
+</resources>

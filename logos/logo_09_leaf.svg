@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Organic leaf shape — natural, calm -->
+  <path d="M256 16 C400 16 496 112 496 256 C496 400 400 496 256 496 C112 496 16 400 16 256 C16 112 112 16 256 16Z" fill="#43A047"/>
+  <!-- Leaf veins suggesting growth -->
+  <path d="M128 384 Q256 256 384 128" stroke="#66BB6A" stroke-width="8" fill="none" opacity="0.5"/>
+  <path d="M128 320 Q220 256 320 128" stroke="#66BB6A" stroke-width="6" fill="none" opacity="0.3"/>
+  <path d="M192 384 Q280 300 384 192" stroke="#66BB6A" stroke-width="6" fill="none" opacity="0.3"/>
+  <text x="256" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="240" fill="white">P</text>
+</svg>

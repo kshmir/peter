@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Heart with house/home concept — caring for loved ones -->
+  <circle cx="256" cy="256" r="240" fill="#FFF8E1"/>
+  <path d="M256 420 C180 360 100 300 100 220 C100 160 140 120 190 120 C220 120 245 140 256 160 C267 140 292 120 322 120 C372 120 412 160 412 220 C412 300 332 360 256 420Z" fill="#FFB300"/>
+  <text x="256" y="300" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="160" fill="white">P</text>
+</svg>

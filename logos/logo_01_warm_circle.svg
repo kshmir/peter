@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Warm amber circle with white P -->
+  <circle cx="256" cy="256" r="240" fill="#FFB300"/>
+  <text x="256" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="280" fill="white">P</text>
+</svg>

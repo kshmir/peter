@@ -1,0 +1,52 @@
+plugins {
+    id("peter.android.application")
+    id("peter.android.compose")
+    id("peter.android.hilt")
+    alias(libs.plugins.kotlin.serialization)
+}
+
+android {
+    namespace = "com.peter.app"
+
+    defaultConfig {
+        applicationId = "com.peter.app"
+        versionCode = 1
+        versionName = "0.1.0"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+}
+
+dependencies {
+    implementation(project(":core"))
+    implementation(project(":ui"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:admin"))
+    implementation(project(":feature:contacts"))
+    implementation(project(":feature:setup"))
+
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+
+    implementation(libs.activity.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.core.ktx)
+    implementation(libs.kotlinx.serialization.json)
+
+    // Needed for Hilt KSP to resolve types from :core providers
+    implementation(libs.room.runtime)
+    implementation(libs.datastore.preferences)
+}

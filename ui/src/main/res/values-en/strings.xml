@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">A simpler phone\nfor who you love most</string>
+
+    <!-- Navigation -->
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_btn">Continue</string>
+    <string name="save">Save Changes</string>
+    <string name="done">Done!</string>
+    <string name="grant_permission">Grant permission</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Contacts</string>
+    <string name="no_apps_message">No apps configured</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Enter your PIN</string>
+    <string name="create_pin">Create Admin PIN</string>
+    <string name="confirm_pin">Confirm your PIN</string>
+    <string name="pin_explanation">This PIN will be required to change settings.</string>
+    <string name="pin_incorrect">Incorrect PIN</string>
+    <string name="pin_locked">Locked for %1$ds</string>
+    <string name="pin_delete">Delete</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Admin Panel</string>
+    <string name="admin_apps">Allowed Apps</string>
+    <string name="admin_apps_subtitle">Manage visible apps</string>
+    <string name="admin_contacts">Contacts</string>
+    <string name="admin_contacts_subtitle">Manage allowed contacts</string>
+    <string name="admin_display">Display &amp; Text</string>
+    <string name="admin_display_subtitle">Text size and display options</string>
+    <string name="admin_security">Security</string>
+    <string name="admin_security_subtitle">Change PIN and monitoring</string>
+    <string name="admin_permissions">System Permissions</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Allowed Apps</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Display &amp; Text</string>
+    <string name="font_size">Text Size</string>
+    <string name="font_small">Small</string>
+    <string name="font_large">Large</string>
+    <string name="font_preview">Preview: This is the current size</string>
+    <string name="apps_per_row">Apps per row</string>
+    <string name="show_clock">Show clock</string>
+    <string name="show_battery">Show battery</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">No contacts configured</string>
+    <string name="call">Call</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Get Started</string>
+    <string name="setup_step">Step %1$d of %2$d</string>
+    <string name="setup_permissions_title">Required Permissions</string>
+    <string name="setup_apps_title">Select Apps</string>
+    <string name="setup_apps_subtitle">Choose which apps will appear on the screen.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Home Screen</string>
+    <string name="perm_home_desc">Set Peter as the home screen</string>
+    <string name="perm_usage">Usage Access</string>
+    <string name="perm_usage_desc">Required to protect allowed apps</string>
+    <string name="perm_overlay">Display over other apps</string>
+    <string name="perm_overlay_desc">Allows blocking unauthorized apps</string>
+    <string name="perm_write_settings">Modify settings</string>
+    <string name="perm_write_settings_desc">Allows changing the system text size</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">This app is not\navailable.</string>
+    <string name="blocker_return">Return to Home</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Protection</string>
+    <string name="monitor_channel_desc">Keeps app protection active</string>
+    <string name="monitor_notification_title">Peter active</string>
+    <string name="monitor_notification_text">App protection active</string>
+</resources>

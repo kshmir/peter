@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Holding hand — care and support -->
+  <circle cx="256" cy="256" r="240" fill="#43A047"/>
+  <circle cx="256" cy="256" r="190" fill="#FFF8E1"/>
+  <!-- Simplified hand/palm icon -->
+  <path d="M200 320 L200 220 C200 208 210 200 220 200 C230 200 240 208 240 220 L240 180 C240 168 250 160 260 160 C270 160 280 168 280 180 L280 200 C280 188 290 180 300 180 C310 180 320 188 320 200 L320 240 C320 228 330 220 340 220 C350 220 360 228 360 240 L360 320 C360 380 320 400 280 400 L240 400 C200 400 180 380 180 340 L180 320 C180 308 188 300 200 300 C210 300 200 308 200 320Z" fill="#FFB300"/>
+  <text x="256" y="200" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="80" fill="#FF8F00">Peter</text>
+</svg>

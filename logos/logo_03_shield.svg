@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Shield shape — protection/care theme -->
+  <path d="M256 32 L448 128 L448 288 C448 400 360 480 256 496 C152 480 64 400 64 288 L64 128 Z" fill="#FFB300"/>
+  <path d="M256 64 L416 144 L416 288 C416 384 340 448 256 464 C172 448 96 384 96 288 L96 144 Z" fill="#FFF8E1"/>
+  <text x="256" y="320" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="240" fill="#FF8F00">P</text>
+</svg>

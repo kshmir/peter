@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Split dual-tone — modern warm -->
+  <defs>
+    <clipPath id="left">
+      <rect x="0" y="0" width="256" height="512"/>
+    </clipPath>
+    <clipPath id="right">
+      <rect x="256" y="0" width="256" height="512"/>
+    </clipPath>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#FFB300"/>
+  <rect width="512" height="512" rx="128" fill="#FF8F00" clip-path="url(#right)"/>
+  <!-- P letter spanning both halves -->
+  <text x="256" y="340" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="320" fill="white">P</text>
+  <!-- Small "eter" text -->
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="normal" font-size="60" fill="white" opacity="0.9">eter</text>
+</svg>
