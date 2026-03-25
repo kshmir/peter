@@ -140,34 +140,49 @@ class AppBlockerAccessibilityService : AccessibilityService() {
             if (packageName !in systemAllowlist) settingsTemporarilyAllowed = false
         }
 
+        // Fast path: check in-memory cache
         val currentAllowlist = expandedAllowlist
-        if (currentAllowlist.isEmpty()) return
-        if (packageName in currentAllowlist) return
+        if (currentAllowlist.isNotEmpty() && packageName in currentAllowlist) return
 
-        Log.w(TAG, "BLOCKING: $packageName")
-
+        // Slow path: verify against DB and block if needed
         scope.launch {
             try {
-                PeterDatabase.getInstance(this@AppBlockerAccessibilityService)
-                    .guardLogDao().insert(
-                        GuardLogEntity(
-                            eventType = "APP_BLOCKED",
-                            packageName = packageName,
-                            detail = "Blocked by accessibility service",
-                        )
-                    )
-            } catch (_: Exception) {}
-        }
+                val db = PeterDatabase.getInstance(this@AppBlockerAccessibilityService)
+                val freshWhitelist = db.whitelistedAppDao().getAllPackageNames().toSet()
+                val expanded = PackageGroupResolver.expandWhitelist(freshWhitelist)
+                expandedAllowlist = expanded
 
-        if (packageName in STORE_PACKAGES) {
-            performGlobalAction(GLOBAL_ACTION_BACK)
-        } else {
-            val homeIntent = Intent(Intent.ACTION_MAIN).apply {
-                addCategory(Intent.CATEGORY_HOME)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                setPackage(this@AppBlockerAccessibilityService.packageName)
+                if (packageName in expanded) {
+                    Log.w(TAG, "Allowed after DB check: $packageName")
+                    return@launch
+                }
+
+                Log.w(TAG, "BLOCKING: $packageName")
+
+                db.guardLogDao().insert(
+                    GuardLogEntity(
+                        eventType = "APP_BLOCKED",
+                        packageName = packageName,
+                        detail = "Blocked by accessibility service",
+                    )
+                )
+
+                // Block on main thread
+                kotlinx.coroutines.withContext(Dispatchers.Main) {
+                    if (packageName in STORE_PACKAGES) {
+                        performGlobalAction(GLOBAL_ACTION_BACK)
+                    } else {
+                        val homeIntent = Intent(Intent.ACTION_MAIN).apply {
+                            addCategory(Intent.CATEGORY_HOME)
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            setPackage(this@AppBlockerAccessibilityService.packageName)
+                        }
+                        startActivity(homeIntent)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error in blocking check", e)
             }
-            startActivity(homeIntent)
         }
     }
 
