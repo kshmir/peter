@@ -11,7 +11,8 @@ plugins {
 play {
     // Upload AAB to internal testing track; promote manually in Play Console
     track.set("internal")
-    releaseStatus.set(com.github.triplet.gradle.androidpublisher.ReleaseStatus.COMPLETED)
+    // DRAFT until app exits draft state in Play Console (need production release first)
+    releaseStatus.set(com.github.triplet.gradle.androidpublisher.ReleaseStatus.DRAFT)
     defaultToAppBundles.set(true)
     // Service account JSON provided via PLAY_SERVICE_ACCOUNT_JSON env var or file
     val saFile = rootProject.file("play-service-account.json")
