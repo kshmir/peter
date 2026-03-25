@@ -38,8 +38,7 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         "com.google.android.inputmethod.latin",  // Gboard
         "com.samsung.android.honeyboard",         // Samsung keyboard
         "com.android.inputmethod.latin",          // AOSP keyboard
-        // System chrome views used by other apps
-        "com.android.chrome",                     // WebView fallback
+        // WebView (NOT Chrome itself — Chrome must be whitelisted by admin)
         "com.google.android.webview",
     )
 
@@ -86,10 +85,16 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         if (event?.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
 
         // If monitoring is disabled, don't block anything
-        if (!monitoringEnabled) return
+        if (!monitoringEnabled) {
+            Log.d(TAG, "Monitoring disabled — allowing all")
+            return
+        }
 
         // If admin is unlocked (caregiver is managing), don't block anything
-        if (isAdminUnlocked) return
+        if (isAdminUnlocked) {
+            Log.d(TAG, "Admin unlocked — allowing all")
+            return
+        }
 
         val packageName = event.packageName?.toString() ?: return
         // Skip our own app and system UI

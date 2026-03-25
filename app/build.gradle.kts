@@ -25,8 +25,8 @@ android {
 
     defaultConfig {
         applicationId = "com.peter.app"
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 21
+        versionName = "0.2.1"
     }
 
     val keystorePropertiesFile = rootProject.file("keystore.properties")
