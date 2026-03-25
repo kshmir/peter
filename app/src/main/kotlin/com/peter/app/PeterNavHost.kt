@@ -7,10 +7,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.peter.app.core.service.AppBlockerAccessibilityService
 import com.peter.app.feature.admin.AdminScreen
 import com.peter.app.feature.admin.AppWhitelistScreen
+import com.peter.app.feature.admin.ContactManagementScreen
 import com.peter.app.feature.admin.DisplaySettingsScreen
+import com.peter.app.feature.admin.GuardLogScreen
 import com.peter.app.feature.admin.PinEntryScreen
+import com.peter.app.feature.admin.SecurityScreen
 import com.peter.app.feature.contacts.ContactsScreen
 import com.peter.app.feature.home.HomeScreen
 import com.peter.app.feature.setup.AppSelectionScreen
@@ -29,6 +33,8 @@ import kotlinx.serialization.Serializable
 @Serializable object AppWhitelistRoute
 @Serializable object ContactManagementRoute
 @Serializable object DisplaySettingsRoute
+@Serializable object SecurityRoute
+@Serializable object GuardLogRoute
 @Serializable object ContactsRoute
 
 @Composable
@@ -96,6 +102,7 @@ fun PeterNavHost(
         composable<PinEntryRoute> {
             PinEntryScreen(
                 onPinCorrect = {
+                    AppBlockerAccessibilityService.isAdminUnlocked = true
                     navController.navigate(AdminRoute) {
                         popUpTo(PinEntryRoute) { inclusive = true }
                     }
@@ -107,6 +114,7 @@ fun PeterNavHost(
         composable<AdminRoute> {
             AdminScreen(
                 onBack = {
+                    AppBlockerAccessibilityService.isAdminUnlocked = false
                     navController.popBackStack(HomeRoute, inclusive = false)
                 },
                 onNavigateToWhitelist = {
@@ -117,6 +125,12 @@ fun PeterNavHost(
                 },
                 onNavigateToDisplay = {
                     navController.navigate(DisplaySettingsRoute)
+                },
+                onNavigateToSecurity = {
+                    navController.navigate(SecurityRoute)
+                },
+                onNavigateToGuardLog = {
+                    navController.navigate(GuardLogRoute)
                 },
             )
         }
@@ -129,6 +143,24 @@ fun PeterNavHost(
 
         composable<DisplaySettingsRoute> {
             DisplaySettingsScreen(
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        composable<SecurityRoute> {
+            SecurityScreen(
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        composable<GuardLogRoute> {
+            GuardLogScreen(
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        composable<ContactManagementRoute> {
+            ContactManagementScreen(
                 onBack = { navController.popBackStack() },
             )
         }

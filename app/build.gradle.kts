@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("peter.android.application")
     id("peter.android.compose")
@@ -14,13 +16,41 @@ android {
         versionName = "0.1.0"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+    val keystorePropertiesFile = rootProject.file("keystore.properties")
+    if (keystorePropertiesFile.exists()) {
+        val keystoreProperties = Properties()
+        keystoreProperties.load(keystorePropertiesFile.inputStream())
+
+        signingConfigs {
+            create("release") {
+                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+            }
+        }
+
+        buildTypes {
+            release {
+                isMinifyEnabled = true
+                isShrinkResources = true
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
+    } else {
+        buildTypes {
+            release {
+                isMinifyEnabled = true
+                isShrinkResources = true
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
         }
     }
 }
@@ -44,6 +74,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.core.ktx)
+    implementation(libs.core.splashscreen)
     implementation(libs.kotlinx.serialization.json)
 
     // Needed for Hilt KSP to resolve types from :core providers

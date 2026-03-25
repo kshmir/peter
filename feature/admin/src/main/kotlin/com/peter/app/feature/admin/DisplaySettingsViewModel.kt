@@ -26,7 +26,7 @@ class DisplaySettingsViewModel @Inject constructor(
     val fontScale: StateFlow<Float> = userPreferences.fontScale
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 1.0f)
 
-    private val _appsPerRow = MutableStateFlow(3)
+    private val _appsPerRow = MutableStateFlow(2)
     val appsPerRow: StateFlow<Int> = _appsPerRow.asStateFlow()
 
     init {

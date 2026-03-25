@@ -14,7 +14,6 @@ dependencies {
     ksp(libs.room.compiler)
 
     implementation(libs.datastore.preferences)
-    implementation(libs.lifecycle.service)
     implementation(libs.coroutines.android)
     implementation(libs.core.ktx)
 

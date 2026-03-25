@@ -14,9 +14,9 @@ import javax.inject.Inject
 
 data class PermissionSetupState(
     val isDefaultHome: Boolean = false,
-    val hasUsageStats: Boolean = false,
-    val hasOverlay: Boolean = false,
+    val hasAccessibility: Boolean = false,
     val hasWriteSettings: Boolean = false,
+    val hasNotificationAccess: Boolean = false,
 )
 
 @HiltViewModel
@@ -40,9 +40,9 @@ class PermissionSetupViewModel @Inject constructor(
         _state.update {
             it.copy(
                 isDefaultHome = isHome,
-                hasUsageStats = permState.hasUsageStats,
-                hasOverlay = permState.hasOverlay,
+                hasAccessibility = permState.hasAccessibility,
                 hasWriteSettings = permState.hasWriteSettings,
+                hasNotificationAccess = permState.hasNotificationAccess,
             )
         }
     }

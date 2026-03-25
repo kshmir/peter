@@ -28,7 +28,9 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.peter.app.ui.R
 
 @Composable
 fun AppSelectionScreen(
@@ -44,7 +46,7 @@ fun AppSelectionScreen(
             .padding(24.dp),
     ) {
         Text(
-            text = "Paso 3 de 4",
+            text = stringResource(R.string.setup_step, 3, 4),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -56,12 +58,12 @@ fun AppSelectionScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Seleccionar Aplicaciones",
+            text = stringResource(R.string.setup_apps_title),
             style = MaterialTheme.typography.headlineSmall,
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Elija las aplicaciones que aparecerán en la pantalla.",
+            text = stringResource(R.string.setup_apps_subtitle),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -120,7 +122,7 @@ fun AppSelectionScreen(
             shape = MaterialTheme.shapes.medium,
         ) {
             Text(
-                text = "¡Listo!",
+                text = stringResource(R.string.done),
                 style = MaterialTheme.typography.labelLarge,
             )
         }

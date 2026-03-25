@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4FC3F7" />
+      <stop offset="100%" stop-color="#0288D1" />
+    </linearGradient>
+    <linearGradient id="g4s" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FF8F00" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="92" height="92" rx="20" fill="url(#g4)" />
+  <circle cx="50" cy="65" r="25" fill="url(#g4s)" />
+  <path d="M4 65 Q 25 50 50 65 T 96 65 V 96 H 4 Z" fill="#81C784" />
+  <text x="50" y="85" font-family="sans-serif" font-weight="bold" font-size="16" fill="#1b5e20" text-anchor="middle">PETER</text>
+</svg>

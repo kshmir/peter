@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
@@ -37,7 +39,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.peter.app.core.service.AppBlockerAccessibilityService
+import com.peter.app.ui.R
 
 @Composable
 fun PermissionSetupScreen(
@@ -46,6 +51,12 @@ fun PermissionSetupScreen(
 ) {
     val state by viewModel.state.collectAsState()
     val context = LocalContext.current
+
+    // Allow Settings access during permission setup
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        AppBlockerAccessibilityService.settingsTemporarilyAllowed = true
+        viewModel.refreshPermissions(context)
+    }
 
     val roleLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -60,7 +71,7 @@ fun PermissionSetupScreen(
             .padding(24.dp),
     ) {
         Text(
-            text = "Paso 2 de 4",
+            text = stringResource(R.string.setup_step, 2, 4),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -72,7 +83,7 @@ fun PermissionSetupScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Permisos necesarios",
+            text = stringResource(R.string.setup_permissions_title),
             style = MaterialTheme.typography.headlineSmall,
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -83,8 +94,8 @@ fun PermissionSetupScreen(
                 .verticalScroll(rememberScrollState()),
         ) {
             PermissionItem(
-                title = "Pantalla de inicio",
-                description = "Establecer Peter como pantalla principal",
+                title = stringResource(R.string.perm_home),
+                description = stringResource(R.string.perm_home_desc),
                 granted = state.isDefaultHome,
                 onGrant = {
                     val roleManager = context.getSystemService(Context.ROLE_SERVICE) as RoleManager
@@ -97,35 +108,19 @@ fun PermissionSetupScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             PermissionItem(
-                title = "Acceso de uso",
-                description = "Necesario para proteger las aplicaciones permitidas",
-                granted = state.hasUsageStats,
+                title = stringResource(R.string.perm_overlay),
+                description = stringResource(R.string.perm_overlay_desc),
+                granted = state.hasAccessibility,
                 onGrant = {
-                    context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                    context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                 },
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             PermissionItem(
-                title = "Mostrar sobre otras apps",
-                description = "Permite bloquear aplicaciones no autorizadas",
-                granted = state.hasOverlay,
-                onGrant = {
-                    context.startActivity(
-                        Intent(
-                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:${context.packageName}"),
-                        )
-                    )
-                },
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            PermissionItem(
-                title = "Modificar ajustes",
-                description = "Permite cambiar el tamaño de texto del sistema",
+                title = stringResource(R.string.perm_write_settings),
+                description = stringResource(R.string.perm_write_settings_desc),
                 granted = state.hasWriteSettings,
                 onGrant = {
                     context.startActivity(
@@ -136,20 +131,36 @@ fun PermissionSetupScreen(
                     )
                 },
             )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            PermissionItem(
+                title = stringResource(R.string.perm_notification_access),
+                description = stringResource(R.string.perm_notification_access_desc),
+                granted = state.hasNotificationAccess,
+                onGrant = {
+                    context.startActivity(
+                        Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+                    )
+                },
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = onAllGranted,
+            onClick = {
+                AppBlockerAccessibilityService.settingsTemporarilyAllowed = false
+                onAllGranted()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
             shape = MaterialTheme.shapes.medium,
-            enabled = state.hasUsageStats && state.hasOverlay,
+            enabled = state.hasAccessibility,
         ) {
             Text(
-                text = "Continuar",
+                text = stringResource(R.string.continue_btn),
                 style = MaterialTheme.typography.labelLarge,
             )
         }
@@ -193,7 +204,7 @@ private fun PermissionItem(
             if (!granted) {
                 Spacer(modifier = Modifier.width(8.dp))
                 OutlinedButton(onClick = onGrant) {
-                    Text("Otorgar", style = MaterialTheme.typography.labelMedium)
+                    Text(stringResource(R.string.grant_permission), style = MaterialTheme.typography.labelMedium)
                 }
             }
         }

@@ -69,10 +69,47 @@
     <string name="perm_overlay_desc">Permite bloquear aplicaciones no autorizadas</string>
     <string name="perm_write_settings">Modificar ajustes</string>
     <string name="perm_write_settings_desc">Permite cambiar el tamaño de texto del sistema</string>
+    <string name="perm_notification_access">Acceso a notificaciones</string>
+    <string name="perm_notification_access_desc">Filtra mensajes sospechosos de WhatsApp</string>
 
     <!-- Overlay Blocker -->
     <string name="blocker_message">Esta aplicación no está\ndisponible.</string>
     <string name="blocker_return">Volver al Inicio</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Protección activa</string>
+    <string name="security_monitoring_desc">Bloquear aplicaciones no permitidas</string>
+    <string name="security_change_pin">Cambiar PIN</string>
+    <string name="security_change_pin_desc">Establecer un nuevo PIN de administrador</string>
+    <string name="security_change_btn">Cambiar</string>
+    <string name="security_new_pin">Ingrese el nuevo PIN</string>
+    <string name="security_pin_mismatch">Los PINs no coinciden. Intente de nuevo.</string>
+    <string name="security_pin_changed">PIN cambiado exitosamente</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Teléfono</string>
+    <string name="contact_mgmt_name_label">Nombre</string>
+    <string name="contact_mgmt_title">Contactos Permitidos</string>
+    <string name="contact_mgmt_add">Agregar Contacto</string>
+    <string name="contact_mgmt_empty">No hay contactos configurados.\nAgregue contactos para que aparezcan en la pantalla.</string>
+    <string name="contact_mgmt_delete_confirm">¿Eliminar este contacto?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Invitación a grupo</string>
+    <string name="link_guard_group_message">Alguien intenta agregarte a un grupo de WhatsApp. Esto podría ser spam.</string>
+    <string name="link_guard_unknown_title">Contacto desconocido</string>
+    <string name="link_guard_unknown_message">Este enlace abre una conversación con alguien que no está en tus contactos.</string>
+    <string name="link_guard_allow">Abrir</string>
+    <string name="link_guard_block">Cancelar</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Registro de protección</string>
+    <string name="guard_log_subtitle">Ver eventos de seguridad</string>
+    <string name="guard_log_empty">No hay eventos registrados</string>
+    <string name="guard_install_blocked">Instalación bloqueada</string>
+    <string name="guard_notification_blocked">Notificación bloqueada</string>
+    <string name="guard_channel_name">Alertas de protección</string>
+    <string name="guard_channel_desc">Alertas cuando se bloquea una instalación no autorizada</string>
 
     <!-- Monitoring Service -->
     <string name="monitor_channel_name">Peter Protección</string>

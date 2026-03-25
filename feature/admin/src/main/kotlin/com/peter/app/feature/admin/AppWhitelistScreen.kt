@@ -31,7 +31,9 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.peter.app.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +51,7 @@ fun AppWhitelistScreen(
         TopAppBar(
             title = {
                 Text(
-                    "Aplicaciones Permitidas",
+                    stringResource(R.string.whitelist_title),
                     style = MaterialTheme.typography.titleLarge,
                 )
             },
@@ -57,7 +59,7 @@ fun AppWhitelistScreen(
                 IconButton(onClick = onBack) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Volver",
+                        contentDescription = stringResource(R.string.back),
                         modifier = Modifier.size(32.dp),
                     )
                 }

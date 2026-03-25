@@ -6,8 +6,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.peter.app.core.database.PeterDatabase
+import com.peter.app.core.database.MIGRATION_1_2
 import com.peter.app.core.database.dao.AdminSettingsDao
 import com.peter.app.core.database.dao.ContactDao
+import com.peter.app.core.database.dao.GuardLogDao
 import com.peter.app.core.database.dao.WhitelistedAppDao
 import com.peter.app.core.repository.AppRepository
 import com.peter.app.core.repository.AppRepositoryImpl
@@ -36,7 +38,9 @@ object AppModule {
             context,
             PeterDatabase::class.java,
             "peter_database",
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides
@@ -47,6 +51,9 @@ object AppModule {
 
     @Provides
     fun provideAdminSettingsDao(db: PeterDatabase): AdminSettingsDao = db.adminSettingsDao()
+
+    @Provides
+    fun provideGuardLogDao(db: PeterDatabase): GuardLogDao = db.guardLogDao()
 
     @Provides
     @Singleton

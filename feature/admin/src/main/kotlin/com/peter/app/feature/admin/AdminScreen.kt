@@ -18,6 +18,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -43,6 +44,8 @@ fun AdminScreen(
     onNavigateToWhitelist: () -> Unit,
     onNavigateToContacts: () -> Unit,
     onNavigateToDisplay: () -> Unit,
+    onNavigateToSecurity: () -> Unit,
+    onNavigateToGuardLog: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -75,30 +78,37 @@ fun AdminScreen(
         ) {
             AdminMenuItem(
                 icon = Icons.Filled.Star,
-                title = "Aplicaciones permitidas",
-                subtitle = "Administrar aplicaciones visibles",
+                title = stringResource(R.string.admin_apps),
+                subtitle = stringResource(R.string.admin_apps_subtitle),
                 onClick = onNavigateToWhitelist,
             )
             Spacer(modifier = Modifier.height(12.dp))
             AdminMenuItem(
                 icon = Icons.Filled.Person,
-                title = "Contactos",
-                subtitle = "Administrar contactos permitidos",
+                title = stringResource(R.string.admin_contacts),
+                subtitle = stringResource(R.string.admin_contacts_subtitle),
                 onClick = onNavigateToContacts,
             )
             Spacer(modifier = Modifier.height(12.dp))
             AdminMenuItem(
                 icon = Icons.Filled.Build,
-                title = "Pantalla y Texto",
-                subtitle = "Tamaño de texto y opciones de pantalla",
+                title = stringResource(R.string.admin_display),
+                subtitle = stringResource(R.string.admin_display_subtitle),
                 onClick = onNavigateToDisplay,
             )
             Spacer(modifier = Modifier.height(12.dp))
             AdminMenuItem(
                 icon = Icons.Filled.Lock,
-                title = "Seguridad",
-                subtitle = "Cambiar PIN y monitoreo",
-                onClick = { /* TODO: Phase 6 */ },
+                title = stringResource(R.string.admin_security),
+                subtitle = stringResource(R.string.admin_security_subtitle),
+                onClick = onNavigateToSecurity,
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            AdminMenuItem(
+                icon = Icons.Filled.Notifications,
+                title = stringResource(R.string.guard_log_title),
+                subtitle = stringResource(R.string.guard_log_subtitle),
+                onClick = onNavigateToGuardLog,
             )
         }
     }

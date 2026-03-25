@@ -1,16 +1,17 @@
 package com.peter.app.core.permission
 
-import android.app.AppOpsManager
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
-import android.os.Process
 import android.provider.Settings
+import android.view.accessibility.AccessibilityManager
+import androidx.core.app.NotificationManagerCompat
 import javax.inject.Inject
 import javax.inject.Singleton
 
 data class PermissionState(
-    val hasUsageStats: Boolean = false,
-    val hasOverlay: Boolean = false,
+    val hasAccessibility: Boolean = false,
     val hasWriteSettings: Boolean = false,
+    val hasNotificationAccess: Boolean = false,
 )
 
 @Singleton
@@ -18,19 +19,24 @@ class PermissionChecker @Inject constructor() {
 
     fun check(context: Context): PermissionState {
         return PermissionState(
-            hasUsageStats = hasUsageStatsPermission(context),
-            hasOverlay = Settings.canDrawOverlays(context),
+            hasAccessibility = isAccessibilityServiceEnabled(context),
             hasWriteSettings = Settings.System.canWrite(context),
+            hasNotificationAccess = isNotificationListenerEnabled(context),
         )
     }
 
-    fun hasUsageStatsPermission(context: Context): Boolean {
-        val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
-        val mode = appOps.checkOpNoThrow(
-            AppOpsManager.OPSTR_GET_USAGE_STATS,
-            Process.myUid(),
-            context.packageName,
+    fun isAccessibilityServiceEnabled(context: Context): Boolean {
+        val am = context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        val enabledServices = am.getEnabledAccessibilityServiceList(
+            AccessibilityServiceInfo.FEEDBACK_GENERIC
         )
-        return mode == AppOpsManager.MODE_ALLOWED
+        return enabledServices.any {
+            it.resolveInfo.serviceInfo.packageName == context.packageName
+        }
+    }
+
+    fun isNotificationListenerEnabled(context: Context): Boolean {
+        return NotificationManagerCompat.getEnabledListenerPackages(context)
+            .contains(context.packageName)
     }
 }

@@ -69,10 +69,47 @@
     <string name="perm_overlay_desc">Allows blocking unauthorized apps</string>
     <string name="perm_write_settings">Modify settings</string>
     <string name="perm_write_settings_desc">Allows changing the system text size</string>
+    <string name="perm_notification_access">Notification access</string>
+    <string name="perm_notification_access_desc">Filters suspicious WhatsApp messages</string>
 
     <!-- Overlay Blocker -->
     <string name="blocker_message">This app is not\navailable.</string>
     <string name="blocker_return">Return to Home</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Active Protection</string>
+    <string name="security_monitoring_desc">Block non-allowed apps</string>
+    <string name="security_change_pin">Change PIN</string>
+    <string name="security_change_pin_desc">Set a new admin PIN</string>
+    <string name="security_change_btn">Change</string>
+    <string name="security_new_pin">Enter the new PIN</string>
+    <string name="security_pin_mismatch">PINs don\'t match. Try again.</string>
+    <string name="security_pin_changed">PIN changed successfully</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Phone</string>
+    <string name="contact_mgmt_name_label">Name</string>
+    <string name="contact_mgmt_title">Allowed Contacts</string>
+    <string name="contact_mgmt_add">Add Contact</string>
+    <string name="contact_mgmt_empty">No contacts configured.\nAdd contacts to show them on screen.</string>
+    <string name="contact_mgmt_delete_confirm">Delete this contact?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Group Invite</string>
+    <string name="link_guard_group_message">Someone is trying to add you to a WhatsApp group. This could be spam.</string>
+    <string name="link_guard_unknown_title">Unknown Contact</string>
+    <string name="link_guard_unknown_message">This link opens a chat with someone not in your contacts.</string>
+    <string name="link_guard_allow">Open</string>
+    <string name="link_guard_block">Cancel</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Protection Log</string>
+    <string name="guard_log_subtitle">View security events</string>
+    <string name="guard_log_empty">No events recorded</string>
+    <string name="guard_install_blocked">Install blocked</string>
+    <string name="guard_notification_blocked">Notification blocked</string>
+    <string name="guard_channel_name">Protection Alerts</string>
+    <string name="guard_channel_desc">Alerts when an unauthorized install is blocked</string>
 
     <!-- Monitoring Service -->
     <string name="monitor_channel_name">Peter Protection</string>

@@ -1,14 +1,12 @@
 package com.peter.app.feature.setup
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peter.app.core.datastore.UserPreferences
 import com.peter.app.core.model.InstalledApp
 import com.peter.app.core.repository.AppRepository
-import com.peter.app.core.service.ServiceController
+import com.peter.app.core.service.AppBlockerAccessibilityService
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -19,7 +17,6 @@ import javax.inject.Inject
 class AppSelectionViewModel @Inject constructor(
     private val appRepository: AppRepository,
     private val userPreferences: UserPreferences,
-    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
     val installedApps: StateFlow<List<InstalledApp>> =
@@ -39,8 +36,7 @@ class AppSelectionViewModel @Inject constructor(
     fun finishSetup() {
         viewModelScope.launch {
             userPreferences.setFirstRunComplete()
-            // Start the monitoring service
-            ServiceController.startMonitoring(context)
+            AppBlockerAccessibilityService.settingsTemporarilyAllowed = false
         }
     }
 }

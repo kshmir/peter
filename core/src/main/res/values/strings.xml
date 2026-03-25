@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accessibility_service_description">Peter usa este servicio para proteger las aplicaciones permitidas. Solo monitorea qué aplicación está en pantalla para garantizar que únicamente las aplicaciones aprobadas por el cuidador sean accesibles.</string>
+</resources>

@@ -17,6 +17,7 @@ local.properties
 *.jks
 *.keystore
 signing.properties
+keystore.properties
 
 # APK/AAB
 *.apk

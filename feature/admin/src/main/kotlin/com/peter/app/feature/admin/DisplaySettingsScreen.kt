@@ -30,9 +30,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.peter.app.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +53,7 @@ fun DisplaySettingsScreen(
         TopAppBar(
             title = {
                 Text(
-                    "Pantalla y Texto",
+                    stringResource(R.string.display_title),
                     style = MaterialTheme.typography.titleLarge,
                 )
             },
@@ -59,7 +61,7 @@ fun DisplaySettingsScreen(
                 IconButton(onClick = onBack) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Volver",
+                        contentDescription = stringResource(R.string.back),
                         modifier = Modifier.size(32.dp),
                     )
                 }
@@ -72,9 +74,8 @@ fun DisplaySettingsScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
         ) {
-            // Font Scale
             Text(
-                text = "Tamaño de texto",
+                text = stringResource(R.string.font_size),
                 style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -89,7 +90,7 @@ fun DisplaySettingsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text("Pequeño", style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.font_small), style = MaterialTheme.typography.bodySmall)
                         Slider(
                             value = fontScale,
                             onValueChange = { viewModel.setFontScale(it) },
@@ -99,11 +100,11 @@ fun DisplaySettingsScreen(
                                 .weight(1f)
                                 .padding(horizontal = 8.dp),
                         )
-                        Text("Grande", style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.font_large), style = MaterialTheme.typography.bodySmall)
                     }
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = "Vista previa: Este es el tamaño actual",
+                        text = stringResource(R.string.font_preview),
                         fontSize = (18 * fontScale).sp,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
@@ -112,15 +113,14 @@ fun DisplaySettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Apps per row
             Text(
-                text = "Aplicaciones por fila",
+                text = stringResource(R.string.apps_per_row),
                 style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.height(8.dp))
 
             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                listOf(3, 4, 5).forEachIndexed { index, count ->
+                listOf(2, 3, 4).forEachIndexed { index, count ->
                     SegmentedButton(
                         selected = appsPerRow == count,
                         onClick = { viewModel.setAppsPerRow(count) },

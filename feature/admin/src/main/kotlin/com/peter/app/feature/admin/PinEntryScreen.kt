@@ -26,9 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.peter.app.ui.R
 import kotlin.math.roundToInt
 
 @Composable
@@ -49,7 +51,6 @@ fun PinEntryScreen(
 
     LaunchedEffect(state.isError) {
         if (state.isError) {
-            // Shake animation
             shakeOffset.animateTo(20f, spring(dampingRatio = 0.3f, stiffness = 800f))
             shakeOffset.animateTo(0f, spring(dampingRatio = 0.3f, stiffness = 800f))
         }
@@ -65,9 +66,10 @@ fun PinEntryScreen(
     ) {
         Text(
             text = if (isCreatingPin) {
-                if (state.isConfirming) "Confirme su PIN" else "Crear PIN de Administrador"
+                if (state.isConfirming) stringResource(R.string.confirm_pin)
+                else stringResource(R.string.create_pin)
             } else {
-                "Ingrese su PIN"
+                stringResource(R.string.enter_pin)
             },
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
@@ -76,7 +78,7 @@ fun PinEntryScreen(
         if (isCreatingPin && !state.isConfirming) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Este PIN será necesario para cambiar la configuración.",
+                text = stringResource(R.string.pin_explanation),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -84,7 +86,6 @@ fun PinEntryScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // PIN dots
         Row(
             modifier = Modifier.offset { IntOffset(shakeOffset.value.roundToInt(), 0) },
             horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -109,8 +110,11 @@ fun PinEntryScreen(
         if (state.isError) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = if (state.isLocked) "Bloqueado por ${state.lockSecondsRemaining}s"
-                else "PIN incorrecto",
+                text = if (state.isLocked) {
+                    stringResource(R.string.pin_locked, state.lockSecondsRemaining)
+                } else {
+                    stringResource(R.string.pin_incorrect)
+                },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.error,
             )
@@ -118,12 +122,11 @@ fun PinEntryScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Numpad
         val buttons = listOf(
             listOf("1", "2", "3"),
             listOf("4", "5", "6"),
             listOf("7", "8", "9"),
-            listOf("", "0", "⌫"),
+            listOf("", "0", "\u232B"),
         )
 
         buttons.forEach { row ->
@@ -138,7 +141,7 @@ fun PinEntryScreen(
                         NumpadButton(
                             label = label,
                             onClick = {
-                                if (label == "⌫") {
+                                if (label == "\u232B") {
                                     viewModel.onDelete()
                                 } else {
                                     if (isCreatingPin) {
@@ -160,7 +163,7 @@ fun PinEntryScreen(
 
         TextButton(onClick = onCancel) {
             Text(
-                text = "Cancelar",
+                text = stringResource(R.string.cancel),
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

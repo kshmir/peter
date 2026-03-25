@@ -9,7 +9,7 @@ data class AdminSettingsEntity(
     val id: Int = 1,
     val pinHash: String,
     val isMonitoringEnabled: Boolean = true,
-    val maxAppsPerRow: Int = 3,
+    val maxAppsPerRow: Int = 2,
     val showClock: Boolean = true,
     val showBatteryStatus: Boolean = true,
     val updatedAt: Long = System.currentTimeMillis(),

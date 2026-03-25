@@ -86,7 +86,7 @@ class PinEntryViewModel @Inject constructor(
 
     fun onDelete() {
         if (digits.isNotEmpty()) {
-            digits.removeLast()
+            digits.removeAt(digits.lastIndex)
             _state.update { it.copy(enteredDigits = digits.size, isError = false) }
         }
     }

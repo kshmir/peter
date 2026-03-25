@@ -1,7 +1,12 @@
 package com.peter.app.feature.contacts
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,11 +33,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.peter.app.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,6 +53,28 @@ fun ContactsScreen(
     viewModel: ContactsViewModel = hiltViewModel(),
 ) {
     val contacts by viewModel.contacts.collectAsState()
+    val context = LocalContext.current
+    var pendingPhoneNumber by remember { mutableStateOf<String?>(null) }
+
+    val callPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            pendingPhoneNumber?.let { viewModel.callContact(it) }
+        }
+        pendingPhoneNumber = null
+    }
+
+    fun tryCall(phoneNumber: String) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            viewModel.callContact(phoneNumber)
+        } else {
+            pendingPhoneNumber = phoneNumber
+            callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -50,7 +84,7 @@ fun ContactsScreen(
         TopAppBar(
             title = {
                 Text(
-                    "Contactos",
+                    stringResource(R.string.contacts_title),
                     style = MaterialTheme.typography.titleLarge,
                 )
             },
@@ -58,7 +92,7 @@ fun ContactsScreen(
                 IconButton(onClick = onBack) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Volver",
+                        contentDescription = stringResource(R.string.back),
                         modifier = Modifier.size(32.dp),
                     )
                 }
@@ -71,10 +105,10 @@ fun ContactsScreen(
                     .fillMaxSize()
                     .padding(32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
+                verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "No hay contactos configurados",
+                    text = stringResource(R.string.no_contacts),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -91,7 +125,7 @@ fun ContactsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 8.dp)
-                            .clickable { viewModel.callContact(contact.phoneNumber) },
+                            .clickable { tryCall(contact.phoneNumber) },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surface,
                         ),
@@ -102,10 +136,9 @@ fun ContactsScreen(
                                 .padding(20.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            // Contact avatar
                             Icon(
                                 imageVector = Icons.Filled.Person,
-                                contentDescription = null,
+                                contentDescription = contact.displayName,
                                 modifier = Modifier
                                     .size(64.dp)
                                     .clip(CircleShape)
@@ -127,7 +160,7 @@ fun ContactsScreen(
                             }
                             Icon(
                                 imageVector = Icons.Filled.Call,
-                                contentDescription = "Llamar",
+                                contentDescription = stringResource(R.string.call),
                                 modifier = Modifier.size(36.dp),
                                 tint = MaterialTheme.colorScheme.tertiary,
                             )

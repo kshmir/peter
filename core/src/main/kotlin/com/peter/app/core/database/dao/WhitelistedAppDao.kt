@@ -22,6 +22,9 @@ interface WhitelistedAppDao {
     @Query("SELECT packageName FROM whitelisted_apps")
     suspend fun getAllPackageNames(): List<String>
 
+    @Query("SELECT packageName FROM whitelisted_apps")
+    fun observeAllPackageNames(): Flow<List<String>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(app: WhitelistedAppEntity)
 
