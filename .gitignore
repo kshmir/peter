@@ -18,6 +18,7 @@ local.properties
 *.keystore
 signing.properties
 keystore.properties
+play-service-account.json
 
 # APK/AAB
 *.apk

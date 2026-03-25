@@ -1,0 +1,29 @@
+Peter es un launcher diseñado para adultos mayores y personas con deterioro cognitivo. Reemplaza la pantalla de inicio con una interfaz simple de íconos grandes, mostrando solo las aplicaciones que la familia aprueba.
+
+CARACTERÍSTICAS PRINCIPALES:
+
+• Pantalla de inicio simplificada con íconos grandes y texto legible
+• Solo muestra aplicaciones aprobadas por el cuidador
+• Bloqueo automático de instalaciones no autorizadas
+• Protección contra enlaces sospechosos de WhatsApp
+• Filtro de notificaciones de spam/estafa
+• Contactos de emergencia con llamada directa
+• Panel de administración protegido con PIN
+• Ajuste de tamaño de texto del sistema
+• Soporte en español e inglés
+
+DISEÑADO PARA:
+
+• Adultos mayores con dificultades tecnológicas
+• Personas con deterioro cognitivo leve o demencia
+• Familias que quieren proteger a sus seres queridos
+
+SEGURIDAD:
+
+• Las aplicaciones no aprobadas se desinstalan automáticamente
+• Los enlaces sospechosos de WhatsApp son interceptados
+• Los mensajes de spam son filtrados antes de llegar
+• El acceso de administrador requiere PIN de 4 dígitos
+• Registro completo de eventos de seguridad
+
+Peter fue creado con amor para proteger a quienes más queremos.

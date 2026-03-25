@@ -1,0 +1,29 @@
+Peter is a launcher designed for seniors and people with cognitive impairment. It replaces the home screen with a simple large-icon interface, showing only caregiver-approved apps.
+
+KEY FEATURES:
+
+• Simplified home screen with large icons and readable text
+• Only shows apps approved by the caregiver
+• Automatic blocking of unauthorized app installs
+• Protection against suspicious WhatsApp links
+• Spam/scam notification filtering
+• Emergency contacts with direct calling
+• PIN-protected admin panel
+• System text size adjustment
+• Spanish and English support
+
+DESIGNED FOR:
+
+• Seniors with technology difficulties
+• People with mild cognitive impairment or dementia
+• Families wanting to protect their loved ones
+
+SECURITY:
+
+• Unapproved apps are automatically uninstalled
+• Suspicious WhatsApp links are intercepted
+• Spam messages are filtered before delivery
+• Admin access requires a 4-digit PIN
+• Full security event log
+
+Peter was built with love to protect those we care about most.

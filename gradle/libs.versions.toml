@@ -22,6 +22,7 @@ espresso = "3.6.1"
 turbine = "1.2.0"
 mockk = "1.13.14"
 robolectric = "4.14.1"
+play-publisher = "3.10.1"
 
 [libraries]
 # Compose
@@ -81,3 +82,4 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+play-publisher = { id = "com.github.triplet.play", version.ref = "play-publisher" }

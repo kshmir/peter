@@ -5,6 +5,18 @@ plugins {
     id("peter.android.compose")
     id("peter.android.hilt")
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.play.publisher)
+}
+
+play {
+    // Upload AAB to internal testing track; promote manually in Play Console
+    track.set("internal")
+    defaultToAppBundles.set(true)
+    // Service account JSON provided via PLAY_SERVICE_ACCOUNT_JSON env var or file
+    val saFile = rootProject.file("play-service-account.json")
+    if (saFile.exists()) {
+        serviceAccountCredentials.set(saFile)
+    }
 }
 
 android {

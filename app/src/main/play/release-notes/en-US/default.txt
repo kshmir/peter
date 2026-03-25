@@ -1,0 +1,5 @@
+Initial release of Peter with ElderGuard protection:
+• Simplified launcher with large icons
+• Unauthorized app install blocking
+• WhatsApp suspicious link and notification protection
+• PIN-protected admin panel
