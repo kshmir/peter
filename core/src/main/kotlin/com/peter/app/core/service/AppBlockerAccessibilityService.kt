@@ -97,11 +97,21 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         }
 
         val packageName = event.packageName?.toString() ?: return
+
+        // When user returns to our launcher, auto-clear the settings flag
+        if (packageName == this.packageName && settingsTemporarilyAllowed) {
+            Log.d(TAG, "User returned home — clearing settingsTemporarilyAllowed")
+            settingsTemporarilyAllowed = false
+        }
+
         // Skip our own app and system UI
         if (packageName == this.packageName || packageName in systemAllowlist) return
 
-        // During setup, temporarily allow Settings
-        if (settingsTemporarilyAllowed && packageName in SETTINGS_PACKAGES) return
+        // During setup only, temporarily allow Settings
+        if (settingsTemporarilyAllowed && packageName in SETTINGS_PACKAGES) {
+            Log.d(TAG, "Settings allowed temporarily (setup mode)")
+            return
+        }
 
         // If cache not populated yet, don't block anything (fail open on startup)
         val currentAllowlist = expandedAllowlist
@@ -142,6 +152,8 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         private val SETTINGS_PACKAGES = setOf(
             "com.android.settings",
             "com.google.android.settings",
+            "com.samsung.android.settings",
+            "com.sec.android.app.SecSetupWizard",
         )
 
         /** App stores / installers — press BACK instead of HOME to return to previous app */
