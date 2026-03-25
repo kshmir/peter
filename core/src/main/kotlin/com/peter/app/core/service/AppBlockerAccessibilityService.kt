@@ -23,6 +23,10 @@ class AppBlockerAccessibilityService : AccessibilityService() {
     @Volatile
     private var expandedAllowlist: Set<String> = emptySet()
 
+    /** Whether monitoring/blocking is enabled. Updated from admin settings DB. */
+    @Volatile
+    private var monitoringEnabled: Boolean = true
+
     // System packages that must never be blocked
     private val systemAllowlist = setOf(
         "com.android.systemui",
@@ -49,10 +53,11 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         }
         Log.d(TAG, "Accessibility service connected")
 
+        val db = PeterDatabase.getInstance(this@AppBlockerAccessibilityService)
+
         // Observe whitelist changes and rebuild the expanded allowlist
         scope.launch {
             try {
-                val db = PeterDatabase.getInstance(this@AppBlockerAccessibilityService)
                 db.whitelistedAppDao().observeAllPackageNames()
                     .map { packages -> PackageGroupResolver.expandWhitelist(packages.toSet()) }
                     .collectLatest { expanded ->
@@ -63,10 +68,28 @@ class AppBlockerAccessibilityService : AccessibilityService() {
                 Log.e(TAG, "Error observing whitelist", e)
             }
         }
+
+        // Observe monitoring toggle from admin settings
+        scope.launch {
+            try {
+                db.adminSettingsDao().get().collectLatest { settings ->
+                    monitoringEnabled = settings?.isMonitoringEnabled ?: true
+                    Log.d(TAG, "Monitoring enabled: $monitoringEnabled")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error observing admin settings", e)
+            }
+        }
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event?.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
+
+        // If monitoring is disabled, don't block anything
+        if (!monitoringEnabled) return
+
+        // If admin is unlocked (caregiver is managing), don't block anything
+        if (isAdminUnlocked) return
 
         val packageName = event.packageName?.toString() ?: return
         // Skip our own app and system UI
