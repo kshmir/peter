@@ -1,11 +1,15 @@
 package com.peter.app.core.service
 
 import android.accessibilityservice.AccessibilityService
-import android.accessibilityservice.AccessibilityServiceInfo
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import com.peter.app.core.database.PeterDatabase
+import com.peter.app.core.database.entity.GuardLogEntity
 import com.peter.app.core.util.PackageGroupResolver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,113 +23,143 @@ class AppBlockerAccessibilityService : AccessibilityService() {
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    /** Cached expanded whitelist (includes package group members). Updated reactively. */
     @Volatile
     private var expandedAllowlist: Set<String> = emptySet()
 
-    /** Whether monitoring/blocking is enabled. Updated from admin settings DB. */
     @Volatile
     private var monitoringEnabled: Boolean = true
 
-    // System packages that must never be blocked
+    private var packageReceiver: BroadcastReceiver? = null
+
     private val systemAllowlist = setOf(
         "com.android.systemui",
         "com.google.android.permissioncontroller",
         "com.google.android.gms",
         "com.google.android.gsf",
         "android",
-        // Keyboards — blocking these breaks text input
-        "com.google.android.inputmethod.latin",  // Gboard
-        "com.samsung.android.honeyboard",         // Samsung keyboard
-        "com.android.inputmethod.latin",          // AOSP keyboard
-        // WebView (NOT Chrome itself — Chrome must be whitelisted by admin)
+        "com.google.android.inputmethod.latin",
+        "com.samsung.android.honeyboard",
+        "com.android.inputmethod.latin",
         "com.google.android.webview",
     )
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        serviceInfo = AccessibilityServiceInfo().apply {
-            eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
-            feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC
-            notificationTimeout = 200
-            flags = AccessibilityServiceInfo.DEFAULT
-        }
-        Log.d(TAG, "Accessibility service connected")
+        isAdminUnlocked = false
+        settingsTemporarilyAllowed = false
+        Log.w(TAG, "Service connected")
 
-        val db = PeterDatabase.getInstance(this@AppBlockerAccessibilityService)
+        val db = PeterDatabase.getInstance(this)
 
-        // Observe whitelist changes and rebuild the expanded allowlist
         scope.launch {
             try {
                 db.whitelistedAppDao().observeAllPackageNames()
-                    .map { packages -> PackageGroupResolver.expandWhitelist(packages.toSet()) }
+                    .map { PackageGroupResolver.expandWhitelist(it.toSet()) }
                     .collectLatest { expanded ->
                         expandedAllowlist = expanded
-                        Log.d(TAG, "Allowlist updated: ${expanded.size} packages")
+                        Log.w(TAG, "Allowlist: ${expanded.size} packages")
                     }
             } catch (e: Exception) {
                 Log.e(TAG, "Error observing whitelist", e)
             }
         }
 
-        // Observe monitoring toggle from admin settings
         scope.launch {
             try {
                 db.adminSettingsDao().get().collectLatest { settings ->
                     monitoringEnabled = settings?.isMonitoringEnabled ?: true
-                    Log.d(TAG, "Monitoring enabled: $monitoringEnabled")
+                    Log.w(TAG, "Monitoring: $monitoringEnabled")
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Error observing admin settings", e)
+                Log.e(TAG, "Error observing settings", e)
             }
         }
+
+        registerPackageReceiver(db)
+    }
+
+    private fun registerPackageReceiver(db: PeterDatabase) {
+        packageReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent.action != Intent.ACTION_PACKAGE_ADDED) return
+                if (intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) return
+
+                val pkg = intent.data?.schemeSpecificPart ?: return
+                Log.w(TAG, "PACKAGE_ADDED: $pkg (admin=$isAdminUnlocked)")
+
+                if (isAdminUnlocked) return
+
+                scope.launch {
+                    try {
+                        val whitelisted = db.whitelistedAppDao().getAllPackageNames().toSet()
+                        if (!PackageGroupResolver.isAllowed(pkg, whitelisted)) {
+                            Log.w(TAG, "Unauthorized install detected: $pkg")
+                            db.guardLogDao().insert(
+                                GuardLogEntity(
+                                    eventType = "INSTALL_DETECTED",
+                                    packageName = pkg,
+                                    detail = "Unauthorized app installed while admin locked",
+                                )
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error checking install: $pkg", e)
+                    }
+                }
+            }
+        }
+
+        val filter = IntentFilter(Intent.ACTION_PACKAGE_ADDED).apply {
+            addDataScheme("package")
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(packageReceiver, filter, RECEIVER_EXPORTED)
+        } else {
+            registerReceiver(packageReceiver, filter)
+        }
+        Log.w(TAG, "Package receiver registered")
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event?.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
-
-        // If monitoring is disabled, don't block anything
-        if (!monitoringEnabled) {
-            Log.d(TAG, "Monitoring disabled — allowing all")
-            return
-        }
-
-        // If admin is unlocked (caregiver is managing), don't block anything
-        if (isAdminUnlocked) {
-            Log.d(TAG, "Admin unlocked — allowing all")
-            return
-        }
+        if (!monitoringEnabled) return
+        if (isAdminUnlocked) return
 
         val packageName = event.packageName?.toString() ?: return
 
-        // When user returns to our launcher, auto-clear the settings flag
-        if (packageName == this.packageName && settingsTemporarilyAllowed) {
-            Log.d(TAG, "User returned home — clearing settingsTemporarilyAllowed")
-            settingsTemporarilyAllowed = false
-        }
-
-        // Skip our own app and system UI
-        if (packageName == this.packageName || packageName in systemAllowlist) return
-
-        // During setup only, temporarily allow Settings
-        if (settingsTemporarilyAllowed && packageName in SETTINGS_PACKAGES) {
-            Log.d(TAG, "Settings allowed temporarily (setup mode)")
+        if (packageName == this.packageName) {
+            if (settingsTemporarilyAllowed) settingsTemporarilyAllowed = false
+            if (isAdminUnlocked) isAdminUnlocked = false
             return
         }
 
-        // If cache not populated yet, don't block anything (fail open on startup)
+        if (packageName in systemAllowlist) return
+
+        if (settingsTemporarilyAllowed) {
+            if (packageName in SETTINGS_PACKAGES) return
+            if (packageName !in systemAllowlist) settingsTemporarilyAllowed = false
+        }
+
         val currentAllowlist = expandedAllowlist
         if (currentAllowlist.isEmpty()) return
-
-        // Check against the cached expanded allowlist (includes group members)
         if (packageName in currentAllowlist) return
 
-        Log.d(TAG, "BLOCKING: $packageName")
+        Log.w(TAG, "BLOCKING: $packageName")
 
-        // For stores/installers, press BACK to return to the previous app (e.g. YouTube)
-        // For everything else, go HOME
+        scope.launch {
+            try {
+                PeterDatabase.getInstance(this@AppBlockerAccessibilityService)
+                    .guardLogDao().insert(
+                        GuardLogEntity(
+                            eventType = "APP_BLOCKED",
+                            packageName = packageName,
+                            detail = "Blocked by accessibility service",
+                        )
+                    )
+            } catch (_: Exception) {}
+        }
+
         if (packageName in STORE_PACKAGES) {
-            Log.d(TAG, "Store detected — pressing BACK")
             performGlobalAction(GLOBAL_ACTION_BACK)
         } else {
             val homeIntent = Intent(Intent.ACTION_MAIN).apply {
@@ -137,11 +171,12 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         }
     }
 
-    override fun onInterrupt() {
-        Log.d(TAG, "Accessibility service interrupted")
-    }
+    override fun onInterrupt() {}
 
     override fun onDestroy() {
+        packageReceiver?.let {
+            try { unregisterReceiver(it) } catch (_: Exception) {}
+        }
         scope.cancel()
         super.onDestroy()
     }
@@ -156,19 +191,16 @@ class AppBlockerAccessibilityService : AccessibilityService() {
             "com.sec.android.app.SecSetupWizard",
         )
 
-        /** App stores / installers — press BACK instead of HOME to return to previous app */
         private val STORE_PACKAGES = setOf(
-            "com.android.vending",                  // Play Store
-            "com.android.packageinstaller",          // AOSP installer
-            "com.google.android.packageinstaller",   // Google installer
-            "com.samsung.android.packageinstaller",  // Samsung installer
+            "com.android.vending",
+            "com.android.packageinstaller",
+            "com.google.android.packageinstaller",
+            "com.samsung.android.packageinstaller",
         )
 
-        /** Set to true during setup to temporarily allow Settings. */
         @Volatile
         var settingsTemporarilyAllowed: Boolean = false
 
-        /** Set to true when admin PIN is entered. Allows app installs. */
         @Volatile
         var isAdminUnlocked: Boolean = false
     }

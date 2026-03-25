@@ -35,18 +35,18 @@ class PackageChangeReceiver : BroadcastReceiver() {
             }
             Intent.ACTION_PACKAGE_REMOVED -> {
                 if (!isReplacing) {
-                    Log.i(TAG, "App removed: $packageName")
+                    Log.w(TAG, "App removed: $packageName")
                 }
             }
         }
     }
 
     private fun handleNewInstall(context: Context, packageName: String) {
-        Log.i(TAG, "New app installed: $packageName")
+        Log.w(TAG, "New app installed: $packageName")
 
         // If admin is unlocked (caregiver is managing), allow the install
         if (AppBlockerAccessibilityService.isAdminUnlocked) {
-            Log.i(TAG, "Admin unlocked — allowing install of $packageName")
+            Log.w(TAG, "Admin unlocked — allowing install of $packageName")
             return
         }
 
@@ -58,28 +58,33 @@ class PackageChangeReceiver : BroadcastReceiver() {
                 val whitelistedPackages = db.whitelistedAppDao().getAllPackageNames().toSet()
 
                 if (PackageGroupResolver.isAllowed(packageName, whitelistedPackages)) {
-                    Log.i(TAG, "$packageName is whitelisted — keeping")
+                    Log.w(TAG, "$packageName is whitelisted — keeping")
                 } else {
                     Log.w(TAG, "UNAUTHORIZED install: $packageName — prompting uninstall")
 
-                    // Log the event
-                    db.guardLogDao().insert(
-                        GuardLogEntity(
-                            eventType = "INSTALL_BLOCKED",
-                            packageName = packageName,
-                            detail = "Auto-uninstall triggered (admin locked)",
+                    // Log the event FIRST, before any other action
+                    try {
+                        db.guardLogDao().insert(
+                            GuardLogEntity(
+                                eventType = "INSTALL_BLOCKED",
+                                packageName = packageName,
+                                detail = "Auto-uninstall triggered (admin locked)",
+                            )
                         )
-                    )
+                        Log.d(TAG, "Guard log entry saved for $packageName")
+                    } catch (e: Exception) {
+                        Log.e(TAG, "FAILED to save guard log for $packageName", e)
+                    }
 
-                    // Prompt uninstall
+                    // Notify caregiver
+                    postGuardNotification(context, packageName)
+
+                    // Prompt uninstall LAST
                     val uninstallIntent = Intent(Intent.ACTION_DELETE).apply {
                         data = Uri.parse("package:$packageName")
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     }
                     context.startActivity(uninstallIntent)
-
-                    // Notify caregiver
-                    postGuardNotification(context, packageName)
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Error handling install of $packageName", e)
