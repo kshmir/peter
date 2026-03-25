@@ -15,6 +15,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -25,17 +28,25 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Extract version from tag
+      - name: Bump version code
         id: version
         run: |
           TAG=${GITHUB_REF#refs/tags/v}
-          VERSION_CODE=$(echo "$TAG" | sed 's/\.//g' | sed 's/^0*//')
+
+          # Read current version code and increment
+          CURRENT=$(grep 'versionCode=' version.properties | cut -d= -f2 | tr -d ' ')
+          NEW_CODE=$((CURRENT + 1))
+
+          # Write back
+          echo "versionCode=$NEW_CODE" > version.properties
+          echo "versionName=$TAG" >> version.properties
+
           echo "version_name=$TAG" >> $GITHUB_OUTPUT
-          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
+          echo "version_code=$NEW_CODE" >> $GITHUB_OUTPUT
+          echo "Version: $TAG, Code: $NEW_CODE"
 
       - name: Decode keystore
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > peter-release.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > peter-release.jks
 
       - name: Create keystore.properties
         run: |
@@ -47,19 +58,16 @@ jobs:
           EOF
 
       - name: Create Play service account
-        run: |
-          echo '${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}' > play-service-account.json
-
-      - name: Set version
-        run: |
-          sed -i "s/versionCode = 1/versionCode = ${{ steps.version.outputs.version_code }}/" app/build.gradle.kts
-          sed -i "s/versionName = \"0.1.0\"/versionName = \"${{ steps.version.outputs.version_name }}\"/" app/build.gradle.kts
+        run: echo '${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}' > play-service-account.json
 
       - name: Run tests
         run: ./gradlew test
 
       - name: Build release AAB
         run: ./gradlew bundleRelease
+
+      - name: Build release APK
+        run: ./gradlew assembleRelease
 
       - name: Upload to Play Store (internal track)
         run: ./gradlew publishReleaseBundle
@@ -77,3 +85,11 @@ jobs:
           files: |
             app/build/outputs/bundle/release/app-release.aab
             app/build/outputs/apk/release/app-release.apk
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add version.properties
+          git commit -m "Bump version code to ${{ steps.version.outputs.version_code }} [skip ci]"
+          git push origin main

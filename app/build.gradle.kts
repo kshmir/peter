@@ -23,10 +23,13 @@ play {
 android {
     namespace = "com.peter.app"
 
+    val versionProps = Properties()
+    rootProject.file("version.properties").inputStream().use { versionProps.load(it) }
+
     defaultConfig {
         applicationId = "com.peter.app"
-        versionCode = 21
-        versionName = "0.2.1"
+        versionCode = (versionProps["versionCode"] as String).trim().toInt()
+        versionName = (versionProps["versionName"] as? String)?.trim() ?: "0.0.$versionCode"
     }
 
     val keystorePropertiesFile = rootProject.file("keystore.properties")
