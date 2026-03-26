@@ -48,6 +48,18 @@
             </intent-filter>
         </activity>
 
+        <!-- Notification intercept screen -->
+        <activity
+            android:name=".NotificationInterceptActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Peter.Transparent"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="com.peter.app.ACTION_INTERCEPT_NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- WhatsApp link interception -->
         <activity
             android:name=".WhatsAppLinkInterceptActivity"
@@ -92,6 +104,16 @@
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- Call screening service -->
+        <service
+            android:name="com.peter.app.core.service.PeterCallScreeningService"
+            android:exported="true"
+            android:permission="android.permission.BIND_SCREENING_SERVICE">
+            <intent-filter>
+                <action android:name="android.telecom.CallScreeningService" />
+            </intent-filter>
         </service>
 
         <!-- WhatsApp notification guard -->

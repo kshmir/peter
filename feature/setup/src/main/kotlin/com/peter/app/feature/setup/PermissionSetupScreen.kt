@@ -93,6 +93,7 @@ fun PermissionSetupScreen(
                 .weight(1f)
                 .verticalScroll(rememberScrollState()),
         ) {
+            // 1. Home screen (no blocking involved)
             PermissionItem(
                 title = stringResource(R.string.perm_home),
                 description = stringResource(R.string.perm_home_desc),
@@ -107,17 +108,7 @@ fun PermissionSetupScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            PermissionItem(
-                title = stringResource(R.string.perm_overlay),
-                description = stringResource(R.string.perm_overlay_desc),
-                granted = state.hasAccessibility,
-                onGrant = {
-                    context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-                },
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
+            // 2. Write settings (no blocking involved)
             PermissionItem(
                 title = stringResource(R.string.perm_write_settings),
                 description = stringResource(R.string.perm_write_settings_desc),
@@ -134,6 +125,7 @@ fun PermissionSetupScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
+            // 3. Notification access (no blocking involved)
             PermissionItem(
                 title = stringResource(R.string.perm_notification_access),
                 description = stringResource(R.string.perm_notification_access_desc),
@@ -142,6 +134,18 @@ fun PermissionSetupScreen(
                     context.startActivity(
                         Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
                     )
+                },
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // 4. Accessibility — LAST because it enables app blocking
+            PermissionItem(
+                title = stringResource(R.string.perm_overlay),
+                description = stringResource(R.string.perm_overlay_desc),
+                granted = state.hasAccessibility,
+                onGrant = {
+                    context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                 },
             )
         }

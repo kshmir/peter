@@ -7,6 +7,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.peter.app.core.database.PeterDatabase
 import com.peter.app.core.database.MIGRATION_1_2
+import com.peter.app.core.database.MIGRATION_2_3
 import com.peter.app.core.database.dao.AdminSettingsDao
 import com.peter.app.core.database.dao.ContactDao
 import com.peter.app.core.database.dao.GuardLogDao
@@ -39,7 +40,7 @@ object AppModule {
             PeterDatabase::class.java,
             "peter_database",
         )
-            .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
             .build()
     }
 

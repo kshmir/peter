@@ -15,6 +15,14 @@ import com.peter.app.core.database.entity.ContactEntity
 import com.peter.app.core.database.entity.GuardLogEntity
 import com.peter.app.core.database.entity.WhitelistedAppEntity
 
+val MIGRATION_2_3 = object : Migration(2, 3) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE admin_settings ADD COLUMN isNotificationFilterEnabled INTEGER NOT NULL DEFAULT 1")
+        db.execSQL("ALTER TABLE admin_settings ADD COLUMN isConversationScanEnabled INTEGER NOT NULL DEFAULT 1")
+        db.execSQL("ALTER TABLE admin_settings ADD COLUMN isCallScreeningEnabled INTEGER NOT NULL DEFAULT 1")
+    }
+}
+
 val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(db: SupportSQLiteDatabase) {
         db.execSQL(
@@ -36,7 +44,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
         AdminSettingsEntity::class,
         GuardLogEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = false,
 )
 abstract class PeterDatabase : RoomDatabase() {
@@ -56,7 +64,7 @@ abstract class PeterDatabase : RoomDatabase() {
                     PeterDatabase::class.java,
                     "peter_database",
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build()
                     .also { INSTANCE = it }
             }

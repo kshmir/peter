@@ -19,6 +19,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -46,6 +48,9 @@ fun AdminScreen(
     onNavigateToDisplay: () -> Unit,
     onNavigateToSecurity: () -> Unit,
     onNavigateToGuardLog: () -> Unit,
+    onNavigateToGuardDemo: () -> Unit,
+    onNavigateToSecurityFilters: () -> Unit,
+    onNavigateToPermissions: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -109,6 +114,27 @@ fun AdminScreen(
                 title = stringResource(R.string.guard_log_title),
                 subtitle = stringResource(R.string.guard_log_subtitle),
                 onClick = onNavigateToGuardLog,
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            AdminMenuItem(
+                icon = Icons.Filled.Shield,
+                title = "Filtros de seguridad",
+                subtitle = "Notificaciones, conversaciones y llamadas",
+                onClick = onNavigateToSecurityFilters,
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            AdminMenuItem(
+                icon = Icons.Filled.Notifications,
+                title = "Demo de interceptor",
+                subtitle = "Vista previa del filtro de WhatsApp",
+                onClick = onNavigateToGuardDemo,
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            AdminMenuItem(
+                icon = Icons.Filled.Settings,
+                title = stringResource(R.string.admin_permissions),
+                subtitle = "Gestionar permisos del sistema",
+                onClick = onNavigateToPermissions,
             )
         }
     }

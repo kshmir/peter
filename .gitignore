@@ -31,3 +31,5 @@ play-service-account.json
 captures/
 .externalNativeBuild/
 .cxx/
+demo/node_modules/
+demo/test-results/

@@ -28,4 +28,7 @@ interface ContactDao {
 
     @Query("DELETE FROM contacts WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Query("SELECT * FROM contacts ORDER BY sortOrder ASC")
+    suspend fun getAllSync(): List<ContactEntity>
 }
