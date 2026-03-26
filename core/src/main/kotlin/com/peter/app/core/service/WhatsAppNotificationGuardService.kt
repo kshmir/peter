@@ -79,6 +79,21 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         val title = extras.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: ""
         if (title.isBlank() || title == "WhatsApp") return
 
+        // Skip group chats
+        val isGroup = extras.getBoolean(Notification.EXTRA_IS_GROUP_CONVERSATION, false)
+        val conversationTitle = extras.getCharSequence(Notification.EXTRA_CONVERSATION_TITLE)?.toString() ?: ""
+        if (isGroup || conversationTitle.isNotBlank()) {
+            Log.w(TAG, "Skipping group chat: $title / $conversationTitle")
+            return
+        }
+
+        // Only alert for phone numbers (unknown contacts), not named contacts
+        val isPhoneNumber = PHONE_REGEX.matches(title.trim())
+        if (!isPhoneNumber) {
+            Log.w(TAG, "Skipping named contact (not a phone number): $title")
+            return
+        }
+
         val textPreview = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
 
         // Detect incoming WhatsApp CALLS — handle separately
@@ -115,8 +130,7 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         val subText = extras.getCharSequence(Notification.EXTRA_SUB_TEXT)?.toString() ?: ""
         val infoText = extras.getCharSequence(Notification.EXTRA_INFO_TEXT)?.toString() ?: ""
         val summaryText = extras.getString(Notification.EXTRA_SUMMARY_TEXT) ?: ""
-        val conversationTitle = extras.getCharSequence(Notification.EXTRA_CONVERSATION_TITLE)?.toString() ?: ""
-        val isGroupConversation = extras.getBoolean(Notification.EXTRA_IS_GROUP_CONVERSATION, false)
+        // conversationTitle and isGroup already checked above
 
         // Extract MessagingStyle messages if available
         val messages = extras.getParcelableArray(Notification.EXTRA_MESSAGES)
@@ -135,7 +149,7 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         Log.w(TAG, "  infoText: '$infoText'")
         Log.w(TAG, "  summaryText: '$summaryText'")
         Log.w(TAG, "  conversationTitle: '$conversationTitle'")
-        Log.w(TAG, "  isGroup: $isGroupConversation")
+        Log.w(TAG, "  isGroup: $isGroup")
         Log.w(TAG, "  messageCount: $messageCount")
         Log.w(TAG, "  people: ${people?.toList()}")
         Log.w(TAG, "  category: ${sbn.notification.category}")

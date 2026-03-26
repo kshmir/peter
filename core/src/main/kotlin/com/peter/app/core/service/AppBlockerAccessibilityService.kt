@@ -384,6 +384,14 @@ class AppBlockerAccessibilityService : AccessibilityService() {
             // Check if this is an unknown contact (phone number as name)
             val isPhoneNumber = PHONE_REGEX.matches(contactName.trim())
 
+            // Skip named contacts — only alert for phone numbers
+            if (!isPhoneNumber) return
+
+            // Detect group chats: if message senders contain ":" it's a group (sender: message format)
+            // Also WhatsApp groups show member count in subtitle area
+            val hasGroupIndicator = allText.any { it.contains("participants") || it.contains("participantes") || it.contains("membros") }
+            if (hasGroupIndicator) return
+
             // Only warn once per contact
             if (contactName == lastWarnedContact) return
 
