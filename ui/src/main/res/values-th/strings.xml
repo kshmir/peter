@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">โทรศัพท์ที่ง่ายขึ้น\nสำหรับคนที่คุณรักมากที่สุด</string>
+
+    <!-- Navigation -->
+    <string name="back">กลับ</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="continue_btn">ดำเนินการต่อ</string>
+    <string name="save">บันทึกการเปลี่ยนแปลง</string>
+    <string name="done">เสร็จแล้ว!</string>
+    <string name="grant_permission">อนุญาตสิทธิ์</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">รายชื่อผู้ติดต่อ</string>
+    <string name="no_apps_message">ยังไม่มีแอปที่กำหนดค่า</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">ใส่รหัส PIN</string>
+    <string name="create_pin">สร้างรหัส PIN ผู้ดูแล</string>
+    <string name="confirm_pin">ยืนยันรหัส PIN</string>
+    <string name="pin_explanation">รหัส PIN นี้จะใช้ในการเปลี่ยนแปลงการตั้งค่า</string>
+    <string name="pin_incorrect">รหัส PIN ไม่ถูกต้อง</string>
+    <string name="pin_locked">ล็อค %1$ds</string>
+    <string name="pin_delete">ลบ</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">แผงควบคุมผู้ดูแล</string>
+    <string name="admin_apps">แอปที่อนุญาต</string>
+    <string name="admin_apps_subtitle">จัดการแอปที่แสดง</string>
+    <string name="admin_contacts">รายชื่อผู้ติดต่อ</string>
+    <string name="admin_contacts_subtitle">จัดการรายชื่อที่อนุญาต</string>
+    <string name="admin_display">การแสดงผลและข้อความ</string>
+    <string name="admin_display_subtitle">ขนาดข้อความและตัวเลือกการแสดงผล</string>
+    <string name="admin_security">ความปลอดภัย</string>
+    <string name="admin_security_subtitle">เปลี่ยน PIN และการตรวจสอบ</string>
+    <string name="admin_permissions">สิทธิ์ระบบ</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">แอปที่อนุญาต</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">การแสดงผลและข้อความ</string>
+    <string name="font_size">ขนาดข้อความ</string>
+    <string name="font_small">เล็ก</string>
+    <string name="font_large">ใหญ่</string>
+    <string name="font_preview">ตัวอย่าง: นี่คือขนาดปัจจุบัน</string>
+    <string name="apps_per_row">แอปต่อแถว</string>
+    <string name="show_clock">แสดงนาฬิกา</string>
+    <string name="show_battery">แสดงแบตเตอรี่</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">ยังไม่มีรายชื่อผู้ติดต่อที่กำหนดค่า</string>
+    <string name="call">โทร</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">เริ่มต้นใช้งาน</string>
+    <string name="setup_step">ขั้นตอนที่ %1$d จาก %2$d</string>
+    <string name="setup_permissions_title">สิทธิ์ที่จำเป็น</string>
+    <string name="setup_apps_title">เลือกแอป</string>
+    <string name="setup_apps_subtitle">เลือกแอปที่จะแสดงบนหน้าจอ</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">หน้าจอหลัก</string>
+    <string name="perm_home_desc">ตั้ง Peter เป็นหน้าจอหลัก</string>
+    <string name="perm_usage">การเข้าถึงข้อมูลการใช้งาน</string>
+    <string name="perm_usage_desc">จำเป็นสำหรับการปกป้องแอปที่อนุญาต</string>
+    <string name="perm_overlay">แสดงทับแอปอื่น</string>
+    <string name="perm_overlay_desc">อนุญาตให้บล็อกแอปที่ไม่ได้รับอนุญาต</string>
+    <string name="perm_write_settings">แก้ไขการตั้งค่า</string>
+    <string name="perm_write_settings_desc">อนุญาตให้เปลี่ยนขนาดข้อความระบบ</string>
+    <string name="perm_notification_access">การเข้าถึงการแจ้งเตือน</string>
+    <string name="perm_notification_access_desc">กรองข้อความที่น่าสงสัยจาก WhatsApp</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">แอปนี้\nไม่สามารถใช้งานได้</string>
+    <string name="blocker_return">กลับหน้าหลัก</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">การปกป้องเชิงรุก</string>
+    <string name="security_monitoring_desc">บล็อกแอปที่ไม่ได้รับอนุญาต</string>
+    <string name="security_change_pin">เปลี่ยนรหัส PIN</string>
+    <string name="security_change_pin_desc">ตั้งรหัส PIN ผู้ดูแลใหม่</string>
+    <string name="security_change_btn">เปลี่ยน</string>
+    <string name="security_new_pin">ใส่รหัส PIN ใหม่</string>
+    <string name="security_pin_mismatch">รหัส PIN ไม่ตรงกัน กรุณาลองอีกครั้ง</string>
+    <string name="security_pin_changed">เปลี่ยนรหัส PIN สำเร็จ</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">โทรศัพท์</string>
+    <string name="contact_mgmt_name_label">ชื่อ</string>
+    <string name="contact_mgmt_title">รายชื่อที่อนุญาต</string>
+    <string name="contact_mgmt_add">เพิ่มผู้ติดต่อ</string>
+    <string name="contact_mgmt_empty">ยังไม่มีรายชื่อผู้ติดต่อที่กำหนดค่า\nเพิ่มรายชื่อเพื่อแสดงบนหน้าจอ</string>
+    <string name="contact_mgmt_delete_confirm">ลบผู้ติดต่อนี้หรือไม่?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">คำเชิญเข้ากลุ่ม</string>
+    <string name="link_guard_group_message">มีคนพยายามเพิ่มคุณเข้ากลุ่ม WhatsApp อาจเป็นสแปม</string>
+    <string name="link_guard_unknown_title">ผู้ติดต่อที่ไม่รู้จัก</string>
+    <string name="link_guard_unknown_message">ลิงก์นี้เปิดแชทกับคนที่ไม่อยู่ในรายชื่อผู้ติดต่อของคุณ</string>
+    <string name="link_guard_allow">เปิด</string>
+    <string name="link_guard_block">ยกเลิก</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">บันทึกการปกป้อง</string>
+    <string name="guard_log_subtitle">ดูเหตุการณ์ด้านความปลอดภัย</string>
+    <string name="guard_log_empty">ยังไม่มีเหตุการณ์ที่บันทึก</string>
+    <string name="guard_install_blocked">บล็อกการติดตั้ง</string>
+    <string name="guard_notification_blocked">บล็อกการแจ้งเตือน</string>
+    <string name="guard_channel_name">การแจ้งเตือนการปกป้อง</string>
+    <string name="guard_channel_desc">แจ้งเตือนเมื่อการติดตั้งที่ไม่ได้รับอนุญาตถูกบล็อก</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">ตัวกรองความปลอดภัย</string>
+    <string name="security_filters_subtitle">ควบคุมการปกป้องที่เปิดใช้งาน</string>
+    <string name="filter_notification_title">ตัวกรองการแจ้งเตือน</string>
+    <string name="filter_notification_desc">ดักจับข้อความ WhatsApp จากผู้ติดต่อที่ไม่รู้จักและวิเคราะห์รูปแบบการหลอกลวง</string>
+    <string name="filter_conversation_title">สแกนการสนทนา</string>
+    <string name="filter_conversation_desc">อ่านหน้าจอ WhatsApp แบบเรียลไทม์เพื่อตรวจจับการหลอกลวงระหว่างสนทนา</string>
+    <string name="filter_calls_title">ตัวกรองสาย</string>
+    <string name="filter_calls_desc">กรองสายเรียกเข้าจากหมายเลขที่ไม่รู้จักและตรวจจับหมายเลขที่ถูกรายงานว่าเป็นมิจฉาชีพ</string>
+    <string name="filter_auto_reply_title">ตอบกลับอัตโนมัติ</string>
+    <string name="filter_auto_reply_desc">ตอบกลับผู้ติดต่อที่ไม่รู้จักโดยอัตโนมัติเมื่อตรวจพบรูปแบบที่น่าสงสัย แจ้งว่าหมายเลขนี้ได้รับการปกป้อง</string>
+    <string name="admin_security_filters">ตัวกรองความปลอดภัย</string>
+    <string name="admin_security_filters_subtitle">การแจ้งเตือน การสนทนา และสาย</string>
+    <string name="admin_guard_demo">ตัวอย่างตัวดักจับ</string>
+    <string name="admin_guard_demo_subtitle">ตัวอย่างตัวกรอง WhatsApp</string>
+    <string name="admin_manage_permissions">จัดการสิทธิ์ระบบ</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter การปกป้อง</string>
+    <string name="monitor_channel_desc">รักษาการปกป้องแอปให้ทำงานอยู่</string>
+    <string name="monitor_notification_title">Peter ทำงานอยู่</string>
+    <string name="monitor_notification_text">การปกป้องแอปทำงานอยู่</string>
+</resources>

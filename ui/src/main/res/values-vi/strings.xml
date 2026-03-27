@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Chiếc điện thoại đơn giản hơn\ncho người bạn yêu thương nhất</string>
+
+    <!-- Navigation -->
+    <string name="back">Quay lại</string>
+    <string name="cancel">Hủy</string>
+    <string name="continue_btn">Tiếp tục</string>
+    <string name="save">Lưu thay đổi</string>
+    <string name="done">Xong!</string>
+    <string name="grant_permission">Cấp quyền</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Danh bạ</string>
+    <string name="no_apps_message">Chưa có ứng dụng nào được cấu hình</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Nhập mã PIN</string>
+    <string name="create_pin">Tạo mã PIN quản trị</string>
+    <string name="confirm_pin">Xác nhận mã PIN</string>
+    <string name="pin_explanation">Mã PIN này sẽ được yêu cầu khi thay đổi cài đặt.</string>
+    <string name="pin_incorrect">Mã PIN không đúng</string>
+    <string name="pin_locked">Đã khóa trong %1$ds</string>
+    <string name="pin_delete">Xóa</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Bảng quản trị</string>
+    <string name="admin_apps">Ứng dụng được phép</string>
+    <string name="admin_apps_subtitle">Quản lý ứng dụng hiển thị</string>
+    <string name="admin_contacts">Danh bạ</string>
+    <string name="admin_contacts_subtitle">Quản lý danh bạ được phép</string>
+    <string name="admin_display">Hiển thị &amp; Văn bản</string>
+    <string name="admin_display_subtitle">Cỡ chữ và tùy chọn hiển thị</string>
+    <string name="admin_security">Bảo mật</string>
+    <string name="admin_security_subtitle">Đổi mã PIN và giám sát</string>
+    <string name="admin_permissions">Quyền hệ thống</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Ứng dụng được phép</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Hiển thị &amp; Văn bản</string>
+    <string name="font_size">Cỡ chữ</string>
+    <string name="font_small">Nhỏ</string>
+    <string name="font_large">Lớn</string>
+    <string name="font_preview">Xem trước: Đây là cỡ chữ hiện tại</string>
+    <string name="apps_per_row">Ứng dụng mỗi hàng</string>
+    <string name="show_clock">Hiện đồng hồ</string>
+    <string name="show_battery">Hiện pin</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">Chưa có liên hệ nào được cấu hình</string>
+    <string name="call">Gọi</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Bắt đầu</string>
+    <string name="setup_step">Bước %1$d / %2$d</string>
+    <string name="setup_permissions_title">Quyền cần thiết</string>
+    <string name="setup_apps_title">Chọn ứng dụng</string>
+    <string name="setup_apps_subtitle">Chọn ứng dụng sẽ hiển thị trên màn hình.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Màn hình chính</string>
+    <string name="perm_home_desc">Đặt Peter làm màn hình chính</string>
+    <string name="perm_usage">Quyền truy cập sử dụng</string>
+    <string name="perm_usage_desc">Cần thiết để bảo vệ ứng dụng được phép</string>
+    <string name="perm_overlay">Hiển thị trên ứng dụng khác</string>
+    <string name="perm_overlay_desc">Cho phép chặn ứng dụng trái phép</string>
+    <string name="perm_write_settings">Sửa đổi cài đặt</string>
+    <string name="perm_write_settings_desc">Cho phép thay đổi cỡ chữ hệ thống</string>
+    <string name="perm_notification_access">Truy cập thông báo</string>
+    <string name="perm_notification_access_desc">Lọc tin nhắn đáng ngờ trên WhatsApp</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Ứng dụng này\nkhông khả dụng.</string>
+    <string name="blocker_return">Về màn hình chính</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Bảo vệ chủ động</string>
+    <string name="security_monitoring_desc">Chặn ứng dụng không được phép</string>
+    <string name="security_change_pin">Đổi mã PIN</string>
+    <string name="security_change_pin_desc">Đặt mã PIN quản trị mới</string>
+    <string name="security_change_btn">Đổi</string>
+    <string name="security_new_pin">Nhập mã PIN mới</string>
+    <string name="security_pin_mismatch">Mã PIN không khớp. Vui lòng thử lại.</string>
+    <string name="security_pin_changed">Đã đổi mã PIN thành công</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Điện thoại</string>
+    <string name="contact_mgmt_name_label">Tên</string>
+    <string name="contact_mgmt_title">Danh bạ được phép</string>
+    <string name="contact_mgmt_add">Thêm liên hệ</string>
+    <string name="contact_mgmt_empty">Chưa có liên hệ nào được cấu hình.\nThêm liên hệ để hiển thị trên màn hình.</string>
+    <string name="contact_mgmt_delete_confirm">Xóa liên hệ này?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Lời mời nhóm</string>
+    <string name="link_guard_group_message">Ai đó đang cố thêm bạn vào nhóm WhatsApp. Đây có thể là tin rác.</string>
+    <string name="link_guard_unknown_title">Liên hệ không xác định</string>
+    <string name="link_guard_unknown_message">Liên kết này mở cuộc trò chuyện với người không có trong danh bạ của bạn.</string>
+    <string name="link_guard_allow">Mở</string>
+    <string name="link_guard_block">Hủy</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Nhật ký bảo vệ</string>
+    <string name="guard_log_subtitle">Xem sự kiện bảo mật</string>
+    <string name="guard_log_empty">Chưa có sự kiện nào được ghi nhận</string>
+    <string name="guard_install_blocked">Cài đặt bị chặn</string>
+    <string name="guard_notification_blocked">Thông báo bị chặn</string>
+    <string name="guard_channel_name">Cảnh báo bảo vệ</string>
+    <string name="guard_channel_desc">Cảnh báo khi một cài đặt trái phép bị chặn</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">Bộ lọc bảo mật</string>
+    <string name="security_filters_subtitle">Kiểm soát các biện pháp bảo vệ đang hoạt động</string>
+    <string name="filter_notification_title">Bộ lọc thông báo</string>
+    <string name="filter_notification_desc">Chặn tin nhắn WhatsApp từ liên hệ không xác định và phân tích các mẫu lừa đảo</string>
+    <string name="filter_conversation_title">Quét hội thoại</string>
+    <string name="filter_conversation_desc">Đọc màn hình WhatsApp theo thời gian thực để phát hiện lừa đảo trong cuộc trò chuyện</string>
+    <string name="filter_calls_title">Bộ lọc cuộc gọi</string>
+    <string name="filter_calls_desc">Lọc cuộc gọi đến từ số lạ và phát hiện số bị báo cáo là lừa đảo</string>
+    <string name="filter_auto_reply_title">Trả lời tự động</string>
+    <string name="filter_auto_reply_desc">Tự động trả lời liên hệ không xác định khi phát hiện mẫu đáng ngờ, thông báo rằng số này được bảo vệ</string>
+    <string name="admin_security_filters">Bộ lọc bảo mật</string>
+    <string name="admin_security_filters_subtitle">Thông báo, hội thoại và cuộc gọi</string>
+    <string name="admin_guard_demo">Demo bộ chặn</string>
+    <string name="admin_guard_demo_subtitle">Xem trước bộ lọc WhatsApp</string>
+    <string name="admin_manage_permissions">Quản lý quyền hệ thống</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Bảo vệ</string>
+    <string name="monitor_channel_desc">Duy trì bảo vệ ứng dụng hoạt động</string>
+    <string name="monitor_notification_title">Peter đang hoạt động</string>
+    <string name="monitor_notification_text">Bảo vệ ứng dụng đang hoạt động</string>
+</resources>

@@ -111,6 +111,23 @@
     <string name="guard_channel_name">Alertas de protección</string>
     <string name="guard_channel_desc">Alertas cuando se bloquea una instalación no autorizada</string>
 
+    <!-- Security Filters -->
+    <string name="security_filters_title">Filtros de seguridad</string>
+    <string name="security_filters_subtitle">Controla qué protecciones están activas</string>
+    <string name="filter_notification_title">Filtro de notificaciones</string>
+    <string name="filter_notification_desc">Intercepta mensajes de WhatsApp de contactos desconocidos y analiza patrones de estafa</string>
+    <string name="filter_conversation_title">Escaneo de conversaciones</string>
+    <string name="filter_conversation_desc">Lee la pantalla de WhatsApp en tiempo real para detectar estafas mientras se conversa</string>
+    <string name="filter_calls_title">Filtro de llamadas</string>
+    <string name="filter_calls_desc">Filtra llamadas entrantes de números desconocidos y detecta números reportados como estafa</string>
+    <string name="filter_auto_reply_title">Respuesta automática</string>
+    <string name="filter_auto_reply_desc">Responde automáticamente a contactos desconocidos cuando se detecta un patrón sospechoso, informando que el número está protegido</string>
+    <string name="admin_security_filters">Filtros de seguridad</string>
+    <string name="admin_security_filters_subtitle">Notificaciones, conversaciones y llamadas</string>
+    <string name="admin_guard_demo">Demo de interceptor</string>
+    <string name="admin_guard_demo_subtitle">Vista previa del filtro de WhatsApp</string>
+    <string name="admin_manage_permissions">Gestionar permisos del sistema</string>
+
     <!-- Monitoring Service -->
     <string name="monitor_channel_name">Peter Protección</string>
     <string name="monitor_channel_desc">Mantiene la protección de aplicaciones activa</string>

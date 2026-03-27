@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">가장 소중한 사람을 위한\n더 간편한 휴대폰</string>
+
+    <!-- Navigation -->
+    <string name="back">뒤로</string>
+    <string name="cancel">취소</string>
+    <string name="continue_btn">계속</string>
+    <string name="save">변경사항 저장</string>
+    <string name="done">완료!</string>
+    <string name="grant_permission">권한 허용</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">연락처</string>
+    <string name="no_apps_message">구성된 앱이 없습니다</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">PIN을 입력하세요</string>
+    <string name="create_pin">관리자 PIN 만들기</string>
+    <string name="confirm_pin">PIN을 확인하세요</string>
+    <string name="pin_explanation">설정을 변경하려면 이 PIN이 필요합니다.</string>
+    <string name="pin_incorrect">PIN이 올바르지 않습니다</string>
+    <string name="pin_locked">%1$ds 동안 잠김</string>
+    <string name="pin_delete">삭제</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">관리자 패널</string>
+    <string name="admin_apps">허용된 앱</string>
+    <string name="admin_apps_subtitle">표시할 앱 관리</string>
+    <string name="admin_contacts">연락처</string>
+    <string name="admin_contacts_subtitle">허용된 연락처 관리</string>
+    <string name="admin_display">화면 &amp; 텍스트</string>
+    <string name="admin_display_subtitle">텍스트 크기 및 화면 옵션</string>
+    <string name="admin_security">보안</string>
+    <string name="admin_security_subtitle">PIN 변경 및 모니터링</string>
+    <string name="admin_permissions">시스템 권한</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">허용된 앱</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">화면 &amp; 텍스트</string>
+    <string name="font_size">텍스트 크기</string>
+    <string name="font_small">작게</string>
+    <string name="font_large">크게</string>
+    <string name="font_preview">미리보기: 현재 크기입니다</string>
+    <string name="apps_per_row">한 줄당 앱 수</string>
+    <string name="show_clock">시계 표시</string>
+    <string name="show_battery">배터리 표시</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">구성된 연락처가 없습니다</string>
+    <string name="call">전화걸기</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">시작하기</string>
+    <string name="setup_step">%2$d단계 중 %1$d단계</string>
+    <string name="setup_permissions_title">필요한 권한</string>
+    <string name="setup_apps_title">앱 선택</string>
+    <string name="setup_apps_subtitle">화면에 표시할 앱을 선택하세요.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">홈 화면</string>
+    <string name="perm_home_desc">Peter를 홈 화면으로 설정</string>
+    <string name="perm_usage">사용 정보 접근</string>
+    <string name="perm_usage_desc">허용된 앱을 보호하는 데 필요</string>
+    <string name="perm_overlay">다른 앱 위에 표시</string>
+    <string name="perm_overlay_desc">허가되지 않은 앱 차단 허용</string>
+    <string name="perm_write_settings">설정 변경</string>
+    <string name="perm_write_settings_desc">시스템 텍스트 크기 변경 허용</string>
+    <string name="perm_notification_access">알림 접근</string>
+    <string name="perm_notification_access_desc">WhatsApp의 의심스러운 메시지를 필터링</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">이 앱은\n사용할 수 없습니다.</string>
+    <string name="blocker_return">홈으로 돌아가기</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">활성 보호</string>
+    <string name="security_monitoring_desc">허용되지 않은 앱 차단</string>
+    <string name="security_change_pin">PIN 변경</string>
+    <string name="security_change_pin_desc">새로운 관리자 PIN 설정</string>
+    <string name="security_change_btn">변경</string>
+    <string name="security_new_pin">새 PIN을 입력하세요</string>
+    <string name="security_pin_mismatch">PIN이 일치하지 않습니다. 다시 시도해 주세요.</string>
+    <string name="security_pin_changed">PIN이 변경되었습니다</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">전화번호</string>
+    <string name="contact_mgmt_name_label">이름</string>
+    <string name="contact_mgmt_title">허용된 연락처</string>
+    <string name="contact_mgmt_add">연락처 추가</string>
+    <string name="contact_mgmt_empty">구성된 연락처가 없습니다.\n화면에 표시할 연락처를 추가하세요.</string>
+    <string name="contact_mgmt_delete_confirm">이 연락처를 삭제할까요?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">그룹 초대</string>
+    <string name="link_guard_group_message">누군가가 WhatsApp 그룹에 초대하려고 합니다. 스팸일 수 있습니다.</string>
+    <string name="link_guard_unknown_title">알 수 없는 연락처</string>
+    <string name="link_guard_unknown_message">이 링크는 연락처에 없는 사람과의 대화를 엽니다.</string>
+    <string name="link_guard_allow">열기</string>
+    <string name="link_guard_block">취소</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">보호 기록</string>
+    <string name="guard_log_subtitle">보안 이벤트 보기</string>
+    <string name="guard_log_empty">기록된 이벤트가 없습니다</string>
+    <string name="guard_install_blocked">설치 차단됨</string>
+    <string name="guard_notification_blocked">알림 차단됨</string>
+    <string name="guard_channel_name">보호 알림</string>
+    <string name="guard_channel_desc">허가되지 않은 설치가 차단되었을 때 알림</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">보안 필터</string>
+    <string name="security_filters_subtitle">활성화된 보호 기능 관리</string>
+    <string name="filter_notification_title">알림 필터</string>
+    <string name="filter_notification_desc">알 수 없는 연락처의 WhatsApp 메시지를 감지하고 사기 패턴을 분석</string>
+    <string name="filter_conversation_title">대화 스캔</string>
+    <string name="filter_conversation_desc">WhatsApp 화면을 실시간으로 읽어 대화 중 사기를 감지</string>
+    <string name="filter_calls_title">통화 필터</string>
+    <string name="filter_calls_desc">알 수 없는 번호의 수신 전화를 필터링하고 사기로 신고된 번호를 감지</string>
+    <string name="filter_auto_reply_title">자동 응답</string>
+    <string name="filter_auto_reply_desc">의심스러운 패턴이 감지되면 알 수 없는 연락처에 자동 응답하여 이 번호가 보호되고 있음을 알림</string>
+    <string name="admin_security_filters">보안 필터</string>
+    <string name="admin_security_filters_subtitle">알림, 대화 및 통화</string>
+    <string name="admin_guard_demo">인터셉터 데모</string>
+    <string name="admin_guard_demo_subtitle">WhatsApp 필터 미리보기</string>
+    <string name="admin_manage_permissions">시스템 권한 관리</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter 보호</string>
+    <string name="monitor_channel_desc">앱 보호를 활성 상태로 유지</string>
+    <string name="monitor_notification_title">Peter 활성화됨</string>
+    <string name="monitor_notification_text">앱 보호가 활성화되어 있습니다</string>
+</resources>

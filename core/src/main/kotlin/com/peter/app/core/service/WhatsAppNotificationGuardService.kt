@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.RemoteInput
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -376,7 +377,92 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
                 putExtra("status", contactLookup.status)
             }
             startActivity(intent)
+
+            // Auto-reply if enabled and scam detected
+            if (analysis.isSuspicious) {
+                try {
+                    val settings = PeterDatabase.getInstance(this).adminSettingsDao().let {
+                        kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.IO) { it.getSync() }
+                    }
+                    if (settings?.isAutoReplyEnabled == true) {
+                        sendAutoReply(sbn)
+                    }
+                } catch (_: Exception) {}
+            }
         }
+    }
+
+    /** Auto-reply message in 20 languages, ordered by world population coverage */
+    private fun getAutoReplyMessage(): String {
+        val lang = java.util.Locale.getDefault().language
+        val msg = when (lang) {
+            "es" -> "Este número está protegido por Peter. Esta conversación es monitoreada por seguridad."
+            "en" -> "This number is protected by Peter. This conversation is monitored for security."
+            "zh" -> "此号码受 Peter 保护。此对话受安全监控。"
+            "hi" -> "यह नंबर Peter द्वारा सुरक्षित है। यह बातचीत सुरक्षा के लिए मॉनिटर की जाती है।"
+            "ar" -> "هذا الرقم محمي بواسطة Peter. هذه المحادثة مراقبة لأغراض أمنية."
+            "pt" -> "Este número está protegido por Peter. Esta conversa é monitorada por segurança."
+            "bn" -> "এই নম্বরটি Peter দ্বারা সুরক্ষিত। এই কথোপকথন নিরাপত্তার জন্য পর্যবেক্ষণ করা হয়।"
+            "ru" -> "Этот номер защищён Peter. Этот разговор отслеживается в целях безопасности."
+            "ja" -> "この番号は Peter によって保護されています。この会話はセキュリティのために監視されています。"
+            "fr" -> "Ce numéro est protégé par Peter. Cette conversation est surveillée pour des raisons de sécurité."
+            "de" -> "Diese Nummer wird von Peter geschützt. Dieses Gespräch wird aus Sicherheitsgründen überwacht."
+            "id", "ms" -> "Nomor ini dilindungi oleh Peter. Percakapan ini dipantau untuk keamanan."
+            "tr" -> "Bu numara Peter tarafından korunmaktadır. Bu görüşme güvenlik amacıyla izlenmektedir."
+            "ko" -> "이 번호는 Peter에 의해 보호됩니다. 이 대화는 보안을 위해 모니터링됩니다."
+            "it" -> "Questo numero è protetto da Peter. Questa conversazione è monitorata per sicurezza."
+            "ur" -> "یہ نمبر Peter کے ذریعے محفوظ ہے۔ یہ گفتگو سیکیورٹی کے لیے مانیٹر کی جاتی ہے۔"
+            "pl" -> "Ten numer jest chroniony przez Peter. Ta rozmowa jest monitorowana w celach bezpieczeństwa."
+            "uk" -> "Цей номер захищений Peter. Ця розмова контролюється з міркувань безпеки."
+            "vi" -> "Số này được bảo vệ bởi Peter. Cuộc trò chuyện này được giám sát vì lý do an ninh."
+            "th" -> "หมายเลขนี้ได้รับการปกป้องโดย Peter การสนทนานี้ถูกตรวจสอบเพื่อความปลอดภัย"
+            "sw" -> "Nambari hii inalindwa na Peter. Mazungumzo haya yanafuatiliwa kwa usalama."
+            "nl" -> "Dit nummer wordt beschermd door Peter. Dit gesprek wordt beveiligd gemonitord."
+            "ro" -> "Acest număr este protejat de Peter. Această conversație este monitorizată pentru securitate."
+            else -> "This number is protected by Peter. This conversation is monitored for security."
+        }
+        return "⚠\uFE0F $msg"
+    }
+
+    /** Auto-reply to scam messages via WhatsApp's notification RemoteInput */
+    private fun sendAutoReply(sbn: StatusBarNotification) {
+        val actions = sbn.notification.actions ?: return
+        for (action in actions) {
+            val remoteInputs = action.remoteInputs ?: continue
+            if (remoteInputs.isEmpty()) continue
+
+            // Found the reply action — build the reply intent
+            val replyMessage = getAutoReplyMessage()
+
+            val replyBundle = Bundle().apply {
+                putCharSequence(remoteInputs[0].resultKey, replyMessage)
+            }
+            val replyIntent = Intent().apply {
+                RemoteInput.addResultsToIntent(remoteInputs, this, replyBundle)
+            }
+
+            try {
+                action.actionIntent.send(this, 0, replyIntent)
+                Log.w(TAG, "AUTO-REPLY sent via notification RemoteInput")
+
+                scope.launch {
+                    try {
+                        PeterDatabase.getInstance(this@WhatsAppNotificationGuardService)
+                            .guardLogDao().insert(
+                                GuardLogEntity(
+                                    eventType = "AUTO_REPLY_SENT",
+                                    packageName = sbn.packageName,
+                                    detail = "Auto-reply sent to suspicious sender",
+                                )
+                            )
+                    } catch (_: Exception) {}
+                }
+            } catch (e: PendingIntent.CanceledException) {
+                Log.e(TAG, "Auto-reply PendingIntent cancelled", e)
+            }
+            return
+        }
+        Log.w(TAG, "No RemoteInput action found — cannot auto-reply")
     }
 
     private fun postWarning(sender: String, matchedPattern: String) {

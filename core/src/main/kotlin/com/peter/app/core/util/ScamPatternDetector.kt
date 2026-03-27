@@ -718,6 +718,105 @@ object ScamPatternDetector {
             "PT-BR: iToken expired",
         ))
 
+        // ── Spanish: Venezuela ──
+
+        add(PatternRule(
+            Regex("\\b(banco de venezuela|banesco|mercantil|provincial|bicentenario|bnc|exterior|car[oó]ni|banplus|bancamiga|plaza|fondo com[uú]n)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "VE", 0.2f,
+            "ES-VE: Venezuelan bank name",
+        ))
+        add(PatternRule(
+            Regex("\\bpago m[oó]vil.{0,25}(bloque|suspend|verific|problem|error|fallo|rechaz)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "VE", 0.35f,
+            "ES-VE: Pago Móvil fraud",
+        ))
+        add(PatternRule(
+            Regex("\\bzelle.{0,25}(bloque|suspend|verific|problem|compromet|limit)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "VE", 0.35f,
+            "ES-VE: Zelle fraud",
+        ))
+
+        // ── Spanish: Ecuador ──
+
+        add(PatternRule(
+            Regex("\\b(banco pichincha|banco del pac[ií]fico|produbanco|banco guayaquil|banco bolivariano|cooperativa|mutualista)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "EC", 0.2f,
+            "ES-EC: Ecuadorian bank name",
+        ))
+        add(PatternRule(
+            Regex("\\bbimo.{0,25}(bloque|suspend|verific|problem|error)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "EC", 0.35f,
+            "ES-EC: BIMO payment fraud",
+        ))
+
+        // ── Spanish: Costa Rica ──
+
+        add(PatternRule(
+            Regex("\\b(banco nacional|bac|bct|banco popular|scotiabank|davivienda|bncr|mucap)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "CR", 0.2f,
+            "ES-CR: Costa Rican bank name",
+        ))
+        add(PatternRule(
+            Regex("\\bsinpe( m[oó]vil)?.{0,25}(bloque|suspend|verific|problem|error|fallo)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "CR", 0.35f,
+            "ES-CR: SINPE fraud",
+        ))
+
+        // ── Spanish: Panama ──
+
+        add(PatternRule(
+            Regex("\\b(banco general|banistmo|bac panama|global bank|banesco panam[aá]|caja de ahorros)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "PA", 0.2f,
+            "ES-PA: Panamanian bank name",
+        ))
+        add(PatternRule(
+            Regex("\\byappy.{0,25}(bloque|suspend|verific|problem|error|compromet)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "PA", 0.35f,
+            "ES-PA: Yappy fraud",
+        ))
+
+        // ── Spanish: Uruguay ──
+
+        add(PatternRule(
+            Regex("\\b(brou|banco rep[uú]blica|banco ita[uú]|santander|bbva|scotiabank|hsbc|heritage|prex|midinero)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "UY", 0.2f,
+            "ES-UY: Uruguayan bank/wallet name",
+        ))
+        add(PatternRule(
+            Regex("\\bprex.{0,25}(bloque|suspend|verific|problem|error|compromet)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "UY", 0.35f,
+            "ES-UY: Prex wallet fraud",
+        ))
+
+        // ── Spanish: Paraguay, Bolivia, Guatemala, Honduras ──
+
+        add(PatternRule(
+            Regex("\\btigo money.{0,25}(bloque|suspend|verific|problem|error|compromet|fallo)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "ALL", 0.35f,
+            "ES-LATAM: Tigo Money fraud (PY/BO/GT/HN)",
+        ))
+
+        // ── Spanish: El Salvador ──
+
+        add(PatternRule(
+            Regex("\\b(banco agr[ií]cola|davivienda|bac credomatic|banco azteca|banco cuscatl[aá]n|chivo wallet|chivo)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "SV", 0.2f,
+            "ES-SV: Salvadoran bank/wallet name",
+        ))
+        add(PatternRule(
+            Regex("\\bchivo( wallet)?.{0,25}(bloque|suspend|verific|problem|error|compromet)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "SV", 0.35f,
+            "ES-SV: Chivo Wallet fraud",
+        ))
+
+        // ── Spanish: Dominican Republic ──
+
+        add(PatternRule(
+            Regex("\\b(banreservas|banco popular|bhd|scotiabank|asociaci[oó]n popular|tpago)", RegexOption.IGNORE_CASE),
+            ScamCategory.BANK_FRAUD, "ES", "DO", 0.2f,
+            "ES-DO: Dominican bank name",
+        ))
+
         // ── English ──
 
         add(PatternRule(
@@ -1767,6 +1866,165 @@ object ScamPatternDetector {
             Regex("\\b(depósito|transferencia) spei.{0,15}(clabe|cuenta)", RegexOption.IGNORE_CASE),
             ScamCategory.MONEY_REQUEST, "ES", "MX", 0.3f,
             "ES-MX: SPEI deposit + CLABE",
+        ))
+
+        // ── Spanish: Colombia ──
+
+        add(PatternRule(
+            Regex("\\b(nequi|daviplata).{0,15}(mand[aá]|env[ií]a|pas[aá]|transfer)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CO", 0.3f,
+            "ES-CO: Nequi/Daviplata transfer request",
+        ))
+        add(PatternRule(
+            Regex("\\b(mand[aá]|env[ií]a|pas[aá]|consign[aá]).{0,15}(a mi|al) (nequi|daviplata)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CO", 0.35f,
+            "ES-CO: Send to my Nequi/Daviplata",
+        ))
+
+        // ── Spanish: Chile ──
+
+        add(PatternRule(
+            Regex("\\b(datos para (la )?transferencia|datos bancarios)\\s*[:=\\n]", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CL", 0.35f,
+            "ES-CL: Transfer data block (nombre/RUT/banco/cuenta)",
+        ))
+        add(PatternRule(
+            Regex("\\btransfiere a (mi |esta )?cuenta.?rut", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CL", 0.35f,
+            "ES-CL: Transfer to CuentaRUT",
+        ))
+
+        // ── Spanish: Peru ──
+
+        add(PatternRule(
+            Regex("\\b(yap[eé]ame|yapeame|hazme un yape|mand[aá] (un )?yape|pásame (por )?yape)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "PE", 0.3f,
+            "ES-PE: Send via Yape",
+        ))
+        add(PatternRule(
+            Regex("\\b(hazme un plin|mand[aá] (un )?plin|pásame (por )?plin)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "PE", 0.3f,
+            "ES-PE: Send via Plin",
+        ))
+        add(PatternRule(
+            Regex("\\bcci\\s*[:=]?\\s*\\d{20}", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "PE", 0.3f,
+            "ES-PE: CCI interbank account number provided",
+        ))
+
+        // ── Spanish: Venezuela ──
+
+        add(PatternRule(
+            Regex("\\b(hazme|haz) (un )?pago m[oó]vil", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "VE", 0.35f,
+            "ES-VE: Send via Pago Móvil",
+        ))
+        add(PatternRule(
+            Regex("\\b(c\\.?i\\.?|c[eé]dula)\\s*[:=]?\\s*[VvEe]-?\\d{6,8}", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "VE", 0.3f,
+            "ES-VE: Venezuelan C.I. provided (Pago Móvil data)",
+        ))
+        add(PatternRule(
+            Regex("\\b(hazme|mand[aá]) un zelle", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "VE", 0.3f,
+            "ES-VE: Send via Zelle",
+        ))
+
+        // ── Spanish: Costa Rica ──
+
+        add(PatternRule(
+            Regex("\\b(haceme|hac[eé]) un sinpe", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CR", 0.35f,
+            "ES-CR: Send via SINPE",
+        ))
+        add(PatternRule(
+            Regex("\\bsinpe( m[oó]vil)?\\s*[:=]?\\s*[678]\\d{7}", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CR", 0.3f,
+            "ES-CR: SINPE Móvil number provided",
+        ))
+        add(PatternRule(
+            Regex("\\biban\\s*[:=]?\\s*CR\\d{20}", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "CR", 0.3f,
+            "ES-CR: Costa Rican IBAN provided",
+        ))
+
+        // ── Spanish: Panama ──
+
+        add(PatternRule(
+            Regex("\\b(hazme|mand[aá]) un yappy", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "PA", 0.35f,
+            "ES-PA: Send via Yappy",
+        ))
+        add(PatternRule(
+            Regex("\\byappy\\s*[:=]?\\s*[6]\\d{7}", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "PA", 0.3f,
+            "ES-PA: Yappy number provided",
+        ))
+
+        // ── Spanish: Central America / Caribbean ──
+
+        add(PatternRule(
+            Regex("\\b(mand[aá]|env[ií]a|hac[eé]|pas[aá]) (un )?tigo money", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "ALL", 0.3f,
+            "ES-LATAM: Send via Tigo Money (PY/BO/GT/HN)",
+        ))
+
+        // ── Raw financial identifiers shared in messages (all regions) ──
+
+        add(PatternRule(
+            Regex("\\b\\d{22}\\b", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "AR", 0.25f,
+            "AR: 22-digit number (possible CBU/CVU)",
+        ))
+        add(PatternRule(
+            Regex("\\b\\d{18}\\b", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "MX", 0.25f,
+            "MX: 18-digit number (possible CLABE)",
+        ))
+        add(PatternRule(
+            Regex("\\b[a-z]+\\.[a-z]+\\.[a-z]+\\b", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "AR", 0.2f,
+            "AR: Dotted alias pattern (possible alias bancario)",
+        ))
+        add(PatternRule(
+            Regex("\\bchave pix\\s*[:=]?\\s*\\S{5,}", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "PT", "BR", 0.3f,
+            "BR: PIX key shared",
+        ))
+        add(PatternRule(
+            Regex("\\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\b", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "PT", "BR", 0.25f,
+            "BR: UUID (possible PIX random key)",
+        ))
+        add(PatternRule(
+            Regex("\\b\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}\\b"),
+            ScamCategory.MONEY_REQUEST, "PT", "BR", 0.25f,
+            "BR: Formatted CPF (possible PIX key)",
+        ))
+        add(PatternRule(
+            Regex("\\b\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}\\b"),
+            ScamCategory.MONEY_REQUEST, "PT", "BR", 0.25f,
+            "BR: Formatted CNPJ (possible PIX key)",
+        ))
+        add(PatternRule(
+            Regex("\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}\\b"),
+            ScamCategory.MONEY_REQUEST, "ES", "ALL", 0.2f,
+            "ALL: 16-digit card number pattern",
+        ))
+        add(PatternRule(
+            Regex("\\b(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,62}\\b"),
+            ScamCategory.MONEY_REQUEST, "EN", "ALL", 0.3f,
+            "ALL: Bitcoin address",
+        ))
+        add(PatternRule(
+            Regex("\\b0x[a-fA-F0-9]{40}\\b"),
+            ScamCategory.MONEY_REQUEST, "EN", "ALL", 0.3f,
+            "ALL: Ethereum address",
+        ))
+        add(PatternRule(
+            Regex("\\bT[A-Za-z1-9]{33}\\b"),
+            ScamCategory.MONEY_REQUEST, "EN", "ALL", 0.3f,
+            "ALL: USDT/Tron address",
         ))
 
         // ── Portuguese: Brazil ──

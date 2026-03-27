@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">هاتف أبسط\nلمن تحبهم أكثر</string>
+
+    <!-- Navigation -->
+    <string name="back">رجوع</string>
+    <string name="cancel">إلغاء</string>
+    <string name="continue_btn">متابعة</string>
+    <string name="save">حفظ التغييرات</string>
+    <string name="done">تم!</string>
+    <string name="grant_permission">منح الإذن</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">جهات الاتصال</string>
+    <string name="no_apps_message">لا توجد تطبيقات مُعدّة</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">أدخل رمز PIN</string>
+    <string name="create_pin">إنشاء رمز PIN للمسؤول</string>
+    <string name="confirm_pin">تأكيد رمز PIN</string>
+    <string name="pin_explanation">سيكون رمز PIN هذا مطلوبًا لتغيير الإعدادات.</string>
+    <string name="pin_incorrect">رمز PIN غير صحيح</string>
+    <string name="pin_locked">مقفل لمدة %1$ds</string>
+    <string name="pin_delete">حذف</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">لوحة المسؤول</string>
+    <string name="admin_apps">التطبيقات المسموحة</string>
+    <string name="admin_apps_subtitle">إدارة التطبيقات الظاهرة</string>
+    <string name="admin_contacts">جهات الاتصال</string>
+    <string name="admin_contacts_subtitle">إدارة جهات الاتصال المسموحة</string>
+    <string name="admin_display">العرض &amp; النص</string>
+    <string name="admin_display_subtitle">حجم النص وخيارات العرض</string>
+    <string name="admin_security">الأمان</string>
+    <string name="admin_security_subtitle">تغيير رمز PIN والمراقبة</string>
+    <string name="admin_permissions">أذونات النظام</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">التطبيقات المسموحة</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">العرض &amp; النص</string>
+    <string name="font_size">حجم النص</string>
+    <string name="font_small">صغير</string>
+    <string name="font_large">كبير</string>
+    <string name="font_preview">معاينة: هذا هو الحجم الحالي</string>
+    <string name="apps_per_row">تطبيقات في كل صف</string>
+    <string name="show_clock">إظهار الساعة</string>
+    <string name="show_battery">إظهار البطارية</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">لا توجد جهات اتصال مُعدّة</string>
+    <string name="call">اتصال</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">ابدأ</string>
+    <string name="setup_step">الخطوة %1$d من %2$d</string>
+    <string name="setup_permissions_title">الأذونات المطلوبة</string>
+    <string name="setup_apps_title">اختيار التطبيقات</string>
+    <string name="setup_apps_subtitle">اختر التطبيقات التي ستظهر على الشاشة.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">الشاشة الرئيسية</string>
+    <string name="perm_home_desc">تعيين Peter كشاشة رئيسية</string>
+    <string name="perm_usage">إذن الاستخدام</string>
+    <string name="perm_usage_desc">مطلوب لحماية التطبيقات المسموحة</string>
+    <string name="perm_overlay">العرض فوق التطبيقات الأخرى</string>
+    <string name="perm_overlay_desc">يسمح بحظر التطبيقات غير المصرح بها</string>
+    <string name="perm_write_settings">تعديل الإعدادات</string>
+    <string name="perm_write_settings_desc">يسمح بتغيير حجم نص النظام</string>
+    <string name="perm_notification_access">الوصول إلى الإشعارات</string>
+    <string name="perm_notification_access_desc">يُصفّي رسائل WhatsApp المشبوهة</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">هذا التطبيق غير\nمتاح.</string>
+    <string name="blocker_return">العودة إلى الرئيسية</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">الحماية النشطة</string>
+    <string name="security_monitoring_desc">حظر التطبيقات غير المسموحة</string>
+    <string name="security_change_pin">تغيير رمز PIN</string>
+    <string name="security_change_pin_desc">تعيين رمز PIN جديد للمسؤول</string>
+    <string name="security_change_btn">تغيير</string>
+    <string name="security_new_pin">أدخل رمز PIN الجديد</string>
+    <string name="security_pin_mismatch">رمزا PIN غير متطابقين. حاول مرة أخرى.</string>
+    <string name="security_pin_changed">تم تغيير رمز PIN بنجاح</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">الهاتف</string>
+    <string name="contact_mgmt_name_label">الاسم</string>
+    <string name="contact_mgmt_title">جهات الاتصال المسموحة</string>
+    <string name="contact_mgmt_add">إضافة جهة اتصال</string>
+    <string name="contact_mgmt_empty">لا توجد جهات اتصال مُعدّة.\nأضف جهات اتصال لإظهارها على الشاشة.</string>
+    <string name="contact_mgmt_delete_confirm">حذف جهة الاتصال هذه؟</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">دعوة مجموعة</string>
+    <string name="link_guard_group_message">يحاول شخص ما إضافتك إلى مجموعة WhatsApp. قد يكون هذا رسائل مزعجة.</string>
+    <string name="link_guard_unknown_title">جهة اتصال غير معروفة</string>
+    <string name="link_guard_unknown_message">يفتح هذا الرابط محادثة مع شخص غير موجود في جهات اتصالك.</string>
+    <string name="link_guard_allow">فتح</string>
+    <string name="link_guard_block">إلغاء</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">سجل الحماية</string>
+    <string name="guard_log_subtitle">عرض أحداث الأمان</string>
+    <string name="guard_log_empty">لا توجد أحداث مسجلة</string>
+    <string name="guard_install_blocked">تم حظر التثبيت</string>
+    <string name="guard_notification_blocked">تم حظر الإشعار</string>
+    <string name="guard_channel_name">تنبيهات الحماية</string>
+    <string name="guard_channel_desc">تنبيهات عند حظر تثبيت غير مصرح به</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">فلاتر الأمان</string>
+    <string name="security_filters_subtitle">تحكّم في الحمايات النشطة</string>
+    <string name="filter_notification_title">فلتر الإشعارات</string>
+    <string name="filter_notification_desc">يعترض رسائل WhatsApp من جهات اتصال غير معروفة ويحلل أنماط الاحتيال</string>
+    <string name="filter_conversation_title">فحص المحادثات</string>
+    <string name="filter_conversation_desc">يقرأ شاشة WhatsApp في الوقت الفعلي لاكتشاف الاحتيال أثناء المحادثات</string>
+    <string name="filter_calls_title">فلتر المكالمات</string>
+    <string name="filter_calls_desc">يُصفّي المكالمات الواردة من أرقام غير معروفة ويكشف الأرقام المُبلغ عنها كاحتيال</string>
+    <string name="filter_auto_reply_title">الرد التلقائي</string>
+    <string name="filter_auto_reply_desc">يرد تلقائيًا على جهات الاتصال غير المعروفة عند اكتشاف نمط مشبوه، مُبلغًا بأن الرقم محمي</string>
+    <string name="admin_security_filters">فلاتر الأمان</string>
+    <string name="admin_security_filters_subtitle">الإشعارات والمحادثات والمكالمات</string>
+    <string name="admin_guard_demo">عرض توضيحي للاعتراض</string>
+    <string name="admin_guard_demo_subtitle">معاينة فلتر WhatsApp</string>
+    <string name="admin_manage_permissions">إدارة أذونات النظام</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter حماية</string>
+    <string name="monitor_channel_desc">يحافظ على حماية التطبيقات نشطة</string>
+    <string name="monitor_notification_title">Peter نشط</string>
+    <string name="monitor_notification_text">حماية التطبيقات نشطة</string>
+</resources>

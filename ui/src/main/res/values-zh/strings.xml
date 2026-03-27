@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">一部更简单的手机\n给你最爱的人</string>
+
+    <!-- Navigation -->
+    <string name="back">返回</string>
+    <string name="cancel">取消</string>
+    <string name="continue_btn">继续</string>
+    <string name="save">保存更改</string>
+    <string name="done">完成！</string>
+    <string name="grant_permission">授予权限</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">联系人</string>
+    <string name="no_apps_message">尚未配置应用</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">请输入PIN码</string>
+    <string name="create_pin">创建管理员PIN码</string>
+    <string name="confirm_pin">确认您的PIN码</string>
+    <string name="pin_explanation">更改设置时需要输入此PIN码。</string>
+    <string name="pin_incorrect">PIN码错误</string>
+    <string name="pin_locked">已锁定 %1$ds</string>
+    <string name="pin_delete">删除</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">管理面板</string>
+    <string name="admin_apps">允许的应用</string>
+    <string name="admin_apps_subtitle">管理可见应用</string>
+    <string name="admin_contacts">联系人</string>
+    <string name="admin_contacts_subtitle">管理允许的联系人</string>
+    <string name="admin_display">显示与文字</string>
+    <string name="admin_display_subtitle">文字大小和显示选项</string>
+    <string name="admin_security">安全</string>
+    <string name="admin_security_subtitle">更改PIN码和监控</string>
+    <string name="admin_permissions">系统权限</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">允许的应用</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">显示与文字</string>
+    <string name="font_size">文字大小</string>
+    <string name="font_small">小</string>
+    <string name="font_large">大</string>
+    <string name="font_preview">预览：这是当前大小</string>
+    <string name="apps_per_row">每行应用数</string>
+    <string name="show_clock">显示时钟</string>
+    <string name="show_battery">显示电量</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">尚未配置联系人</string>
+    <string name="call">拨打</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">开始</string>
+    <string name="setup_step">第 %1$d 步，共 %2$d 步</string>
+    <string name="setup_permissions_title">所需权限</string>
+    <string name="setup_apps_title">选择应用</string>
+    <string name="setup_apps_subtitle">选择将显示在屏幕上的应用。</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">主屏幕</string>
+    <string name="perm_home_desc">将Peter设为主屏幕</string>
+    <string name="perm_usage">使用情况访问</string>
+    <string name="perm_usage_desc">保护允许的应用所必需</string>
+    <string name="perm_overlay">显示在其他应用上层</string>
+    <string name="perm_overlay_desc">允许阻止未授权的应用</string>
+    <string name="perm_write_settings">修改设置</string>
+    <string name="perm_write_settings_desc">允许更改系统文字大小</string>
+    <string name="perm_notification_access">通知访问</string>
+    <string name="perm_notification_access_desc">过滤WhatsApp中的可疑消息</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">此应用\n不可用。</string>
+    <string name="blocker_return">返回主屏幕</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">主动保护</string>
+    <string name="security_monitoring_desc">阻止未允许的应用</string>
+    <string name="security_change_pin">更改PIN码</string>
+    <string name="security_change_pin_desc">设置新的管理员PIN码</string>
+    <string name="security_change_btn">更改</string>
+    <string name="security_new_pin">输入新PIN码</string>
+    <string name="security_pin_mismatch">PIN码不一致，请重试。</string>
+    <string name="security_pin_changed">PIN码修改成功</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">电话</string>
+    <string name="contact_mgmt_name_label">姓名</string>
+    <string name="contact_mgmt_title">允许的联系人</string>
+    <string name="contact_mgmt_add">添加联系人</string>
+    <string name="contact_mgmt_empty">尚未配置联系人。\n添加联系人以在屏幕上显示。</string>
+    <string name="contact_mgmt_delete_confirm">删除此联系人？</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">群组邀请</string>
+    <string name="link_guard_group_message">有人正在尝试将您添加到WhatsApp群组。这可能是垃圾信息。</string>
+    <string name="link_guard_unknown_title">未知联系人</string>
+    <string name="link_guard_unknown_message">此链接将打开与不在您联系人列表中的人的对话。</string>
+    <string name="link_guard_allow">打开</string>
+    <string name="link_guard_block">取消</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">保护日志</string>
+    <string name="guard_log_subtitle">查看安全事件</string>
+    <string name="guard_log_empty">暂无事件记录</string>
+    <string name="guard_install_blocked">安装已阻止</string>
+    <string name="guard_notification_blocked">通知已阻止</string>
+    <string name="guard_channel_name">保护警报</string>
+    <string name="guard_channel_desc">当未授权的安装被阻止时发出警报</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">安全过滤</string>
+    <string name="security_filters_subtitle">控制已启用的保护功能</string>
+    <string name="filter_notification_title">通知过滤</string>
+    <string name="filter_notification_desc">拦截来自未知联系人的WhatsApp消息并分析诈骗模式</string>
+    <string name="filter_conversation_title">对话扫描</string>
+    <string name="filter_conversation_desc">实时读取WhatsApp屏幕，在对话中检测诈骗行为</string>
+    <string name="filter_calls_title">来电过滤</string>
+    <string name="filter_calls_desc">过滤来自未知号码的来电，并检测被举报为诈骗的号码</string>
+    <string name="filter_auto_reply_title">自动回复</string>
+    <string name="filter_auto_reply_desc">当检测到可疑模式时，自动回复未知联系人，告知该号码受到保护</string>
+    <string name="admin_security_filters">安全过滤</string>
+    <string name="admin_security_filters_subtitle">通知、对话和来电</string>
+    <string name="admin_guard_demo">拦截器演示</string>
+    <string name="admin_guard_demo_subtitle">WhatsApp过滤预览</string>
+    <string name="admin_manage_permissions">管理系统权限</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter 保护</string>
+    <string name="monitor_channel_desc">保持应用保护处于活动状态</string>
+    <string name="monitor_notification_title">Peter 已启动</string>
+    <string name="monitor_notification_text">应用保护已启动</string>
+</resources>

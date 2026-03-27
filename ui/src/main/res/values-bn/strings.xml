@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">একটি সহজ ফোন\nআপনার সবচেয়ে প্রিয়জনের জন্য</string>
+
+    <!-- Navigation -->
+    <string name="back">পিছনে</string>
+    <string name="cancel">বাতিল</string>
+    <string name="continue_btn">চালিয়ে যান</string>
+    <string name="save">পরিবর্তন সংরক্ষণ করুন</string>
+    <string name="done">হয়ে গেছে!</string>
+    <string name="grant_permission">অনুমতি দিন</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">পরিচিতি</string>
+    <string name="no_apps_message">কোনো অ্যাপ কনফিগার করা নেই</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">আপনার PIN দিন</string>
+    <string name="create_pin">অ্যাডমিন PIN তৈরি করুন</string>
+    <string name="confirm_pin">আপনার PIN নিশ্চিত করুন</string>
+    <string name="pin_explanation">সেটিংস পরিবর্তন করতে এই PIN প্রয়োজন হবে।</string>
+    <string name="pin_incorrect">ভুল PIN</string>
+    <string name="pin_locked">%1$ds এর জন্য লক করা</string>
+    <string name="pin_delete">মুছুন</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">অ্যাডমিন প্যানেল</string>
+    <string name="admin_apps">অনুমোদিত অ্যাপ</string>
+    <string name="admin_apps_subtitle">দৃশ্যমান অ্যাপ পরিচালনা করুন</string>
+    <string name="admin_contacts">পরিচিতি</string>
+    <string name="admin_contacts_subtitle">অনুমোদিত পরিচিতি পরিচালনা করুন</string>
+    <string name="admin_display">ডিসপ্লে &amp; টেক্সট</string>
+    <string name="admin_display_subtitle">টেক্সটের আকার এবং ডিসপ্লে বিকল্প</string>
+    <string name="admin_security">নিরাপত্তা</string>
+    <string name="admin_security_subtitle">PIN এবং পর্যবেক্ষণ পরিবর্তন করুন</string>
+    <string name="admin_permissions">সিস্টেম অনুমতি</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">অনুমোদিত অ্যাপ</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">ডিসপ্লে &amp; টেক্সট</string>
+    <string name="font_size">টেক্সটের আকার</string>
+    <string name="font_small">ছোট</string>
+    <string name="font_large">বড়</string>
+    <string name="font_preview">পূর্বরূপ: এটি বর্তমান আকার</string>
+    <string name="apps_per_row">প্রতি সারিতে অ্যাপ</string>
+    <string name="show_clock">ঘড়ি দেখান</string>
+    <string name="show_battery">ব্যাটারি দেখান</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">কোনো পরিচিতি কনফিগার করা নেই</string>
+    <string name="call">কল করুন</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">শুরু করুন</string>
+    <string name="setup_step">ধাপ %1$d / %2$d</string>
+    <string name="setup_permissions_title">প্রয়োজনীয় অনুমতি</string>
+    <string name="setup_apps_title">অ্যাপ নির্বাচন করুন</string>
+    <string name="setup_apps_subtitle">স্ক্রিনে কোন অ্যাপগুলো দেখাবে তা বেছে নিন।</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">হোম স্ক্রিন</string>
+    <string name="perm_home_desc">Peter কে হোম স্ক্রিন হিসেবে সেট করুন</string>
+    <string name="perm_usage">ব্যবহার অ্যাক্সেস</string>
+    <string name="perm_usage_desc">অনুমোদিত অ্যাপ সুরক্ষার জন্য প্রয়োজন</string>
+    <string name="perm_overlay">অন্য অ্যাপের উপরে দেখান</string>
+    <string name="perm_overlay_desc">অননুমোদিত অ্যাপ ব্লক করার অনুমতি দেয়</string>
+    <string name="perm_write_settings">সেটিংস পরিবর্তন করুন</string>
+    <string name="perm_write_settings_desc">সিস্টেম টেক্সটের আকার পরিবর্তনের অনুমতি দেয়</string>
+    <string name="perm_notification_access">বিজ্ঞপ্তি অ্যাক্সেস</string>
+    <string name="perm_notification_access_desc">সন্দেহজনক WhatsApp বার্তা ফিল্টার করে</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">এই অ্যাপটি\nউপলব্ধ নয়।</string>
+    <string name="blocker_return">হোমে ফিরে যান</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">সক্রিয় সুরক্ষা</string>
+    <string name="security_monitoring_desc">অনুমোদিত নয় এমন অ্যাপ ব্লক করুন</string>
+    <string name="security_change_pin">PIN পরিবর্তন করুন</string>
+    <string name="security_change_pin_desc">নতুন অ্যাডমিন PIN সেট করুন</string>
+    <string name="security_change_btn">পরিবর্তন</string>
+    <string name="security_new_pin">নতুন PIN দিন</string>
+    <string name="security_pin_mismatch">PIN মিলছে না। আবার চেষ্টা করুন।</string>
+    <string name="security_pin_changed">PIN সফলভাবে পরিবর্তিত হয়েছে</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">ফোন</string>
+    <string name="contact_mgmt_name_label">নাম</string>
+    <string name="contact_mgmt_title">অনুমোদিত পরিচিতি</string>
+    <string name="contact_mgmt_add">পরিচিতি যোগ করুন</string>
+    <string name="contact_mgmt_empty">কোনো পরিচিতি কনফিগার করা নেই।\nস্ক্রিনে দেখানোর জন্য পরিচিতি যোগ করুন।</string>
+    <string name="contact_mgmt_delete_confirm">এই পরিচিতি মুছবেন?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">গ্রুপ আমন্ত্রণ</string>
+    <string name="link_guard_group_message">কেউ আপনাকে একটি WhatsApp গ্রুপে যোগ করতে চাইছে। এটি স্প্যাম হতে পারে।</string>
+    <string name="link_guard_unknown_title">অপরিচিত পরিচিতি</string>
+    <string name="link_guard_unknown_message">এই লিঙ্কটি আপনার পরিচিতিতে নেই এমন কারো সাথে চ্যাট খোলে।</string>
+    <string name="link_guard_allow">খুলুন</string>
+    <string name="link_guard_block">বাতিল</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">সুরক্ষা লগ</string>
+    <string name="guard_log_subtitle">নিরাপত্তা ঘটনা দেখুন</string>
+    <string name="guard_log_empty">কোনো ঘটনা রেকর্ড হয়নি</string>
+    <string name="guard_install_blocked">ইনস্টল ব্লক করা হয়েছে</string>
+    <string name="guard_notification_blocked">বিজ্ঞপ্তি ব্লক করা হয়েছে</string>
+    <string name="guard_channel_name">সুরক্ষা সতর্কতা</string>
+    <string name="guard_channel_desc">অননুমোদিত ইনস্টল ব্লক হলে সতর্কতা</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">নিরাপত্তা ফিল্টার</string>
+    <string name="security_filters_subtitle">কোন সুরক্ষাগুলো সক্রিয় তা নিয়ন্ত্রণ করুন</string>
+    <string name="filter_notification_title">বিজ্ঞপ্তি ফিল্টার</string>
+    <string name="filter_notification_desc">অপরিচিত পরিচিতি থেকে WhatsApp বার্তা ইন্টারসেপ্ট করে এবং প্রতারণার ধরন বিশ্লেষণ করে</string>
+    <string name="filter_conversation_title">কথোপকথন স্ক্যানিং</string>
+    <string name="filter_conversation_desc">কথোপকথনের সময় প্রতারণা শনাক্ত করতে রিয়েল টাইমে WhatsApp স্ক্রিন পড়ে</string>
+    <string name="filter_calls_title">কল ফিল্টার</string>
+    <string name="filter_calls_desc">অপরিচিত নম্বর থেকে আসা কল ফিল্টার করে এবং প্রতারণা হিসেবে রিপোর্ট করা নম্বর শনাক্ত করে</string>
+    <string name="filter_auto_reply_title">স্বয়ংক্রিয় উত্তর</string>
+    <string name="filter_auto_reply_desc">সন্দেহজনক ধরন শনাক্ত হলে অপরিচিত পরিচিতিদের স্বয়ংক্রিয়ভাবে উত্তর দেয়, জানিয়ে দেয় যে নম্বরটি সুরক্ষিত</string>
+    <string name="admin_security_filters">নিরাপত্তা ফিল্টার</string>
+    <string name="admin_security_filters_subtitle">বিজ্ঞপ্তি, কথোপকথন এবং কল</string>
+    <string name="admin_guard_demo">ইন্টারসেপ্টর ডেমো</string>
+    <string name="admin_guard_demo_subtitle">WhatsApp ফিল্টার পূর্বরূপ</string>
+    <string name="admin_manage_permissions">সিস্টেম অনুমতি পরিচালনা করুন</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter সুরক্ষা</string>
+    <string name="monitor_channel_desc">অ্যাপ সুরক্ষা সক্রিয় রাখে</string>
+    <string name="monitor_notification_title">Peter সক্রিয়</string>
+    <string name="monitor_notification_text">অ্যাপ সুরক্ষা সক্রিয়</string>
+</resources>

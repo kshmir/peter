@@ -48,7 +48,7 @@ fun SecurityFiltersScreen(
     ) {
         TopAppBar(
             title = {
-                Text("Filtros de seguridad", style = MaterialTheme.typography.titleLarge)
+                Text(stringResource(R.string.security_filters_title), style = MaterialTheme.typography.titleLarge)
             },
             navigationIcon = {
                 IconButton(onClick = onBack) {
@@ -68,7 +68,7 @@ fun SecurityFiltersScreen(
                 .padding(16.dp),
         ) {
             Text(
-                text = "Controla qué protecciones están activas",
+                text = stringResource(R.string.security_filters_subtitle),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -76,8 +76,8 @@ fun SecurityFiltersScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             FilterToggle(
-                title = "Filtro de notificaciones",
-                description = "Intercepta mensajes de WhatsApp de contactos desconocidos y analiza patrones de estafa",
+                title = stringResource(R.string.filter_notification_title),
+                description = stringResource(R.string.filter_notification_desc),
                 checked = state.isNotificationFilterEnabled,
                 onCheckedChange = { viewModel.toggleNotificationFilter(it) },
             )
@@ -85,8 +85,8 @@ fun SecurityFiltersScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             FilterToggle(
-                title = "Escaneo de conversaciones",
-                description = "Lee la pantalla de WhatsApp en tiempo real para detectar estafas mientras se conversa",
+                title = stringResource(R.string.filter_conversation_title),
+                description = stringResource(R.string.filter_conversation_desc),
                 checked = state.isConversationScanEnabled,
                 onCheckedChange = { viewModel.toggleConversationScan(it) },
             )
@@ -94,10 +94,19 @@ fun SecurityFiltersScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             FilterToggle(
-                title = "Filtro de llamadas",
-                description = "Filtra llamadas entrantes de números desconocidos y detecta números reportados como estafa",
+                title = stringResource(R.string.filter_calls_title),
+                description = stringResource(R.string.filter_calls_desc),
                 checked = state.isCallScreeningEnabled,
                 onCheckedChange = { viewModel.toggleCallScreening(it) },
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            FilterToggle(
+                title = stringResource(R.string.filter_auto_reply_title),
+                description = stringResource(R.string.filter_auto_reply_desc),
+                checked = state.isAutoReplyEnabled,
+                onCheckedChange = { viewModel.toggleAutoReply(it) },
             )
         }
     }

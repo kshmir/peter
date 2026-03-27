@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Простой телефон\nдля самого дорогого человека</string>
+
+    <!-- Navigation -->
+    <string name="back">Назад</string>
+    <string name="cancel">Отмена</string>
+    <string name="continue_btn">Продолжить</string>
+    <string name="save">Сохранить изменения</string>
+    <string name="done">Готово!</string>
+    <string name="grant_permission">Предоставить разрешение</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Контакты</string>
+    <string name="no_apps_message">Приложения не настроены</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Введите PIN-код</string>
+    <string name="create_pin">Создать PIN-код администратора</string>
+    <string name="confirm_pin">Подтвердите PIN-код</string>
+    <string name="pin_explanation">Этот PIN-код потребуется для изменения настроек.</string>
+    <string name="pin_incorrect">Неверный PIN-код</string>
+    <string name="pin_locked">Заблокировано на %1$ds</string>
+    <string name="pin_delete">Удалить</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Панель администратора</string>
+    <string name="admin_apps">Разрешённые приложения</string>
+    <string name="admin_apps_subtitle">Управление видимыми приложениями</string>
+    <string name="admin_contacts">Контакты</string>
+    <string name="admin_contacts_subtitle">Управление разрешёнными контактами</string>
+    <string name="admin_display">Экран &amp; Текст</string>
+    <string name="admin_display_subtitle">Размер текста и параметры экрана</string>
+    <string name="admin_security">Безопасность</string>
+    <string name="admin_security_subtitle">Изменить PIN-код и мониторинг</string>
+    <string name="admin_permissions">Системные разрешения</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Разрешённые приложения</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Экран &amp; Текст</string>
+    <string name="font_size">Размер текста</string>
+    <string name="font_small">Маленький</string>
+    <string name="font_large">Большой</string>
+    <string name="font_preview">Предпросмотр: Это текущий размер</string>
+    <string name="apps_per_row">Приложений в ряду</string>
+    <string name="show_clock">Показать часы</string>
+    <string name="show_battery">Показать батарею</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">Контакты не настроены</string>
+    <string name="call">Позвонить</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Начать</string>
+    <string name="setup_step">Шаг %1$d из %2$d</string>
+    <string name="setup_permissions_title">Необходимые разрешения</string>
+    <string name="setup_apps_title">Выберите приложения</string>
+    <string name="setup_apps_subtitle">Выберите, какие приложения будут отображаться на экране.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Главный экран</string>
+    <string name="perm_home_desc">Установить Peter как главный экран</string>
+    <string name="perm_usage">Доступ к использованию</string>
+    <string name="perm_usage_desc">Необходим для защиты разрешённых приложений</string>
+    <string name="perm_overlay">Отображение поверх приложений</string>
+    <string name="perm_overlay_desc">Позволяет блокировать неразрешённые приложения</string>
+    <string name="perm_write_settings">Изменение настроек</string>
+    <string name="perm_write_settings_desc">Позволяет изменять размер системного текста</string>
+    <string name="perm_notification_access">Доступ к уведомлениям</string>
+    <string name="perm_notification_access_desc">Фильтрует подозрительные сообщения WhatsApp</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Это приложение\nнедоступно.</string>
+    <string name="blocker_return">Вернуться на главный экран</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Активная защита</string>
+    <string name="security_monitoring_desc">Блокировать неразрешённые приложения</string>
+    <string name="security_change_pin">Изменить PIN-код</string>
+    <string name="security_change_pin_desc">Установить новый PIN-код администратора</string>
+    <string name="security_change_btn">Изменить</string>
+    <string name="security_new_pin">Введите новый PIN-код</string>
+    <string name="security_pin_mismatch">PIN-коды не совпадают. Попробуйте снова.</string>
+    <string name="security_pin_changed">PIN-код успешно изменён</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Телефон</string>
+    <string name="contact_mgmt_name_label">Имя</string>
+    <string name="contact_mgmt_title">Разрешённые контакты</string>
+    <string name="contact_mgmt_add">Добавить контакт</string>
+    <string name="contact_mgmt_empty">Контакты не настроены.\nДобавьте контакты, чтобы они отображались на экране.</string>
+    <string name="contact_mgmt_delete_confirm">Удалить этот контакт?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Приглашение в группу</string>
+    <string name="link_guard_group_message">Кто-то пытается добавить вас в группу WhatsApp. Это может быть спам.</string>
+    <string name="link_guard_unknown_title">Неизвестный контакт</string>
+    <string name="link_guard_unknown_message">Эта ссылка открывает чат с человеком, которого нет в ваших контактах.</string>
+    <string name="link_guard_allow">Открыть</string>
+    <string name="link_guard_block">Отмена</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Журнал защиты</string>
+    <string name="guard_log_subtitle">Просмотр событий безопасности</string>
+    <string name="guard_log_empty">Нет записанных событий</string>
+    <string name="guard_install_blocked">Установка заблокирована</string>
+    <string name="guard_notification_blocked">Уведомление заблокировано</string>
+    <string name="guard_channel_name">Оповещения защиты</string>
+    <string name="guard_channel_desc">Оповещения при блокировке несанкционированной установки</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">Фильтры безопасности</string>
+    <string name="security_filters_subtitle">Управляйте активными защитами</string>
+    <string name="filter_notification_title">Фильтр уведомлений</string>
+    <string name="filter_notification_desc">Перехватывает сообщения WhatsApp от неизвестных контактов и анализирует признаки мошенничества</string>
+    <string name="filter_conversation_title">Сканирование переписки</string>
+    <string name="filter_conversation_desc">Читает экран WhatsApp в реальном времени для обнаружения мошенничества во время бесед</string>
+    <string name="filter_calls_title">Фильтр звонков</string>
+    <string name="filter_calls_desc">Фильтрует входящие звонки с неизвестных номеров и выявляет номера, отмеченные как мошеннические</string>
+    <string name="filter_auto_reply_title">Автоответ</string>
+    <string name="filter_auto_reply_desc">Автоматически отвечает неизвестным контактам при обнаружении подозрительной активности, сообщая, что номер защищён</string>
+    <string name="admin_security_filters">Фильтры безопасности</string>
+    <string name="admin_security_filters_subtitle">Уведомления, переписки и звонки</string>
+    <string name="admin_guard_demo">Демо перехватчика</string>
+    <string name="admin_guard_demo_subtitle">Предпросмотр фильтра WhatsApp</string>
+    <string name="admin_manage_permissions">Управление системными разрешениями</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Защита</string>
+    <string name="monitor_channel_desc">Поддерживает защиту приложений активной</string>
+    <string name="monitor_notification_title">Peter активен</string>
+    <string name="monitor_notification_text">Защита приложений активна</string>
+</resources>

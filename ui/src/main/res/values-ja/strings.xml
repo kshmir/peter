@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">大切な人のための\nもっとシンプルなスマホ</string>
+
+    <!-- Navigation -->
+    <string name="back">戻る</string>
+    <string name="cancel">キャンセル</string>
+    <string name="continue_btn">続ける</string>
+    <string name="save">変更を保存</string>
+    <string name="done">完了！</string>
+    <string name="grant_permission">権限を許可</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">連絡先</string>
+    <string name="no_apps_message">アプリが設定されていません</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">PINを入力</string>
+    <string name="create_pin">管理者PINを作成</string>
+    <string name="confirm_pin">PINを確認</string>
+    <string name="pin_explanation">このPINは設定の変更時に必要です。</string>
+    <string name="pin_incorrect">PINが正しくありません</string>
+    <string name="pin_locked">%1$ds ロック中</string>
+    <string name="pin_delete">削除</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">管理パネル</string>
+    <string name="admin_apps">許可されたアプリ</string>
+    <string name="admin_apps_subtitle">表示するアプリを管理</string>
+    <string name="admin_contacts">連絡先</string>
+    <string name="admin_contacts_subtitle">許可する連絡先を管理</string>
+    <string name="admin_display">画面と文字</string>
+    <string name="admin_display_subtitle">文字サイズと画面オプション</string>
+    <string name="admin_security">セキュリティ</string>
+    <string name="admin_security_subtitle">PINの変更と監視</string>
+    <string name="admin_permissions">システム権限</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">許可されたアプリ</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">画面と文字</string>
+    <string name="font_size">文字サイズ</string>
+    <string name="font_small">小</string>
+    <string name="font_large">大</string>
+    <string name="font_preview">プレビュー：これが現在のサイズです</string>
+    <string name="apps_per_row">1行あたりのアプリ数</string>
+    <string name="show_clock">時計を表示</string>
+    <string name="show_battery">バッテリーを表示</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">連絡先が設定されていません</string>
+    <string name="call">電話する</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">はじめる</string>
+    <string name="setup_step">ステップ %1$d / %2$d</string>
+    <string name="setup_permissions_title">必要な権限</string>
+    <string name="setup_apps_title">アプリを選択</string>
+    <string name="setup_apps_subtitle">画面に表示するアプリを選んでください。</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">ホーム画面</string>
+    <string name="perm_home_desc">Peterをホーム画面に設定</string>
+    <string name="perm_usage">使用状況へのアクセス</string>
+    <string name="perm_usage_desc">許可されたアプリの保護に必要</string>
+    <string name="perm_overlay">他のアプリの上に表示</string>
+    <string name="perm_overlay_desc">許可されていないアプリをブロック</string>
+    <string name="perm_write_settings">設定の変更</string>
+    <string name="perm_write_settings_desc">システムの文字サイズを変更可能にする</string>
+    <string name="perm_notification_access">通知へのアクセス</string>
+    <string name="perm_notification_access_desc">WhatsAppの不審なメッセージをフィルタリング</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">このアプリは\n利用できません。</string>
+    <string name="blocker_return">ホームに戻る</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">アクティブ保護</string>
+    <string name="security_monitoring_desc">許可されていないアプリをブロック</string>
+    <string name="security_change_pin">PINを変更</string>
+    <string name="security_change_pin_desc">新しい管理者PINを設定</string>
+    <string name="security_change_btn">変更</string>
+    <string name="security_new_pin">新しいPINを入力</string>
+    <string name="security_pin_mismatch">PINが一致しません。もう一度お試しください。</string>
+    <string name="security_pin_changed">PINを変更しました</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">電話番号</string>
+    <string name="contact_mgmt_name_label">名前</string>
+    <string name="contact_mgmt_title">許可された連絡先</string>
+    <string name="contact_mgmt_add">連絡先を追加</string>
+    <string name="contact_mgmt_empty">連絡先が設定されていません。\n画面に表示する連絡先を追加してください。</string>
+    <string name="contact_mgmt_delete_confirm">この連絡先を削除しますか？</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">グループ招待</string>
+    <string name="link_guard_group_message">誰かがあなたをWhatsAppグループに追加しようとしています。スパムの可能性があります。</string>
+    <string name="link_guard_unknown_title">不明な連絡先</string>
+    <string name="link_guard_unknown_message">このリンクは連絡先に登録されていない相手とのチャットを開きます。</string>
+    <string name="link_guard_allow">開く</string>
+    <string name="link_guard_block">キャンセル</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">保護ログ</string>
+    <string name="guard_log_subtitle">セキュリティイベントを確認</string>
+    <string name="guard_log_empty">イベントの記録はありません</string>
+    <string name="guard_install_blocked">インストールをブロック</string>
+    <string name="guard_notification_blocked">通知をブロック</string>
+    <string name="guard_channel_name">保護アラート</string>
+    <string name="guard_channel_desc">許可されていないインストールがブロックされた際に通知</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">セキュリティフィルター</string>
+    <string name="security_filters_subtitle">有効な保護機能を管理</string>
+    <string name="filter_notification_title">通知フィルター</string>
+    <string name="filter_notification_desc">不明な連絡先からのWhatsAppメッセージを検出し、詐欺パターンを分析</string>
+    <string name="filter_conversation_title">会話スキャン</string>
+    <string name="filter_conversation_desc">WhatsApp画面をリアルタイムで読み取り、会話中の詐欺を検出</string>
+    <string name="filter_calls_title">通話フィルター</string>
+    <string name="filter_calls_desc">不明な番号からの着信をフィルタリングし、詐欺として報告された番号を検出</string>
+    <string name="filter_auto_reply_title">自動返信</string>
+    <string name="filter_auto_reply_desc">不審なパターンを検出した際、不明な連絡先に自動返信し、この番号は保護されていることを通知</string>
+    <string name="admin_security_filters">セキュリティフィルター</string>
+    <string name="admin_security_filters_subtitle">通知、会話、通話</string>
+    <string name="admin_guard_demo">インターセプターデモ</string>
+    <string name="admin_guard_demo_subtitle">WhatsAppフィルターのプレビュー</string>
+    <string name="admin_manage_permissions">システム権限を管理</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter 保護</string>
+    <string name="monitor_channel_desc">アプリの保護を維持</string>
+    <string name="monitor_notification_title">Peter 動作中</string>
+    <string name="monitor_notification_text">アプリの保護が有効です</string>
+</resources>

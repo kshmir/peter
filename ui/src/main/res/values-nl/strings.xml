@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Een eenvoudigere telefoon\nvoor wie je het meest liefhebt</string>
+
+    <!-- Navigation -->
+    <string name="back">Terug</string>
+    <string name="cancel">Annuleren</string>
+    <string name="continue_btn">Doorgaan</string>
+    <string name="save">Wijzigingen opslaan</string>
+    <string name="done">Klaar!</string>
+    <string name="grant_permission">Toestemming verlenen</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Contacten</string>
+    <string name="no_apps_message">Geen apps geconfigureerd</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Voer uw PIN in</string>
+    <string name="create_pin">Admin-PIN aanmaken</string>
+    <string name="confirm_pin">Bevestig uw PIN</string>
+    <string name="pin_explanation">Deze PIN is nodig om instellingen te wijzigen.</string>
+    <string name="pin_incorrect">Onjuiste PIN</string>
+    <string name="pin_locked">Vergrendeld voor %1$ds</string>
+    <string name="pin_delete">Wissen</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Beheerpaneel</string>
+    <string name="admin_apps">Toegestane apps</string>
+    <string name="admin_apps_subtitle">Zichtbare apps beheren</string>
+    <string name="admin_contacts">Contacten</string>
+    <string name="admin_contacts_subtitle">Toegestane contacten beheren</string>
+    <string name="admin_display">Weergave &amp; Tekst</string>
+    <string name="admin_display_subtitle">Tekstgrootte en weergaveopties</string>
+    <string name="admin_security">Beveiliging</string>
+    <string name="admin_security_subtitle">PIN wijzigen en bewaking</string>
+    <string name="admin_permissions">Systeemrechten</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Toegestane apps</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Weergave &amp; Tekst</string>
+    <string name="font_size">Tekstgrootte</string>
+    <string name="font_small">Klein</string>
+    <string name="font_large">Groot</string>
+    <string name="font_preview">Voorbeeld: Dit is de huidige grootte</string>
+    <string name="apps_per_row">Apps per rij</string>
+    <string name="show_clock">Klok tonen</string>
+    <string name="show_battery">Batterij tonen</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">Geen contacten geconfigureerd</string>
+    <string name="call">Bellen</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Aan de slag</string>
+    <string name="setup_step">Stap %1$d van %2$d</string>
+    <string name="setup_permissions_title">Vereiste rechten</string>
+    <string name="setup_apps_title">Apps selecteren</string>
+    <string name="setup_apps_subtitle">Kies welke apps op het scherm verschijnen.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Startscherm</string>
+    <string name="perm_home_desc">Peter instellen als startscherm</string>
+    <string name="perm_usage">Gebruikstoegang</string>
+    <string name="perm_usage_desc">Vereist om toegestane apps te beschermen</string>
+    <string name="perm_overlay">Weergeven over andere apps</string>
+    <string name="perm_overlay_desc">Maakt het blokkeren van ongeautoriseerde apps mogelijk</string>
+    <string name="perm_write_settings">Instellingen wijzigen</string>
+    <string name="perm_write_settings_desc">Maakt het wijzigen van de systeemtekstgrootte mogelijk</string>
+    <string name="perm_notification_access">Toegang tot meldingen</string>
+    <string name="perm_notification_access_desc">Filtert verdachte WhatsApp-berichten</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Deze app is niet\nbeschikbaar.</string>
+    <string name="blocker_return">Terug naar startscherm</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Actieve bescherming</string>
+    <string name="security_monitoring_desc">Niet-toegestane apps blokkeren</string>
+    <string name="security_change_pin">PIN wijzigen</string>
+    <string name="security_change_pin_desc">Een nieuwe admin-PIN instellen</string>
+    <string name="security_change_btn">Wijzigen</string>
+    <string name="security_new_pin">Voer de nieuwe PIN in</string>
+    <string name="security_pin_mismatch">PIN\'s komen niet overeen. Probeer het opnieuw.</string>
+    <string name="security_pin_changed">PIN succesvol gewijzigd</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Telefoon</string>
+    <string name="contact_mgmt_name_label">Naam</string>
+    <string name="contact_mgmt_title">Toegestane contacten</string>
+    <string name="contact_mgmt_add">Contact toevoegen</string>
+    <string name="contact_mgmt_empty">Geen contacten geconfigureerd.\nVoeg contacten toe om ze op het scherm te tonen.</string>
+    <string name="contact_mgmt_delete_confirm">Dit contact verwijderen?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Groepsuitnodiging</string>
+    <string name="link_guard_group_message">Iemand probeert u toe te voegen aan een WhatsApp-groep. Dit kan spam zijn.</string>
+    <string name="link_guard_unknown_title">Onbekend contact</string>
+    <string name="link_guard_unknown_message">Deze link opent een gesprek met iemand die niet in uw contacten staat.</string>
+    <string name="link_guard_allow">Openen</string>
+    <string name="link_guard_block">Annuleren</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Beschermingslogboek</string>
+    <string name="guard_log_subtitle">Beveiligingsgebeurtenissen bekijken</string>
+    <string name="guard_log_empty">Geen gebeurtenissen geregistreerd</string>
+    <string name="guard_install_blocked">Installatie geblokkeerd</string>
+    <string name="guard_notification_blocked">Melding geblokkeerd</string>
+    <string name="guard_channel_name">Beschermingswaarschuwingen</string>
+    <string name="guard_channel_desc">Waarschuwingen wanneer een ongeautoriseerde installatie wordt geblokkeerd</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">Beveiligingsfilters</string>
+    <string name="security_filters_subtitle">Bepaal welke beschermingen actief zijn</string>
+    <string name="filter_notification_title">Meldingsfilter</string>
+    <string name="filter_notification_desc">Onderschept WhatsApp-berichten van onbekende contacten en analyseert oplichtingspatronen</string>
+    <string name="filter_conversation_title">Gesprekken scannen</string>
+    <string name="filter_conversation_desc">Leest het WhatsApp-scherm in realtime om oplichting tijdens gesprekken te detecteren</string>
+    <string name="filter_calls_title">Oproepfilter</string>
+    <string name="filter_calls_desc">Filtert inkomende oproepen van onbekende nummers en detecteert nummers die als oplichting zijn gemeld</string>
+    <string name="filter_auto_reply_title">Automatisch antwoord</string>
+    <string name="filter_auto_reply_desc">Beantwoordt automatisch onbekende contacten wanneer een verdacht patroon wordt gedetecteerd en informeert dat het nummer beschermd is</string>
+    <string name="admin_security_filters">Beveiligingsfilters</string>
+    <string name="admin_security_filters_subtitle">Meldingen, gesprekken en oproepen</string>
+    <string name="admin_guard_demo">Interceptor-demo</string>
+    <string name="admin_guard_demo_subtitle">WhatsApp-filter voorbeeld</string>
+    <string name="admin_manage_permissions">Systeemrechten beheren</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Bescherming</string>
+    <string name="monitor_channel_desc">Houdt de app-bescherming actief</string>
+    <string name="monitor_notification_title">Peter actief</string>
+    <string name="monitor_notification_text">App-bescherming actief</string>
+</resources>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Un telefon mai simplu\npentru cei pe care îi iubești cel mai mult</string>
+
+    <!-- Navigation -->
+    <string name="back">Înapoi</string>
+    <string name="cancel">Anulare</string>
+    <string name="continue_btn">Continuă</string>
+    <string name="save">Salvează Modificările</string>
+    <string name="done">Gata!</string>
+    <string name="grant_permission">Acordă permisiunea</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Contacte</string>
+    <string name="no_apps_message">Nicio aplicație configurată</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Introduceți PIN-ul</string>
+    <string name="create_pin">Creați PIN-ul de Administrator</string>
+    <string name="confirm_pin">Confirmați PIN-ul</string>
+    <string name="pin_explanation">Acest PIN va fi necesar pentru a modifica setările.</string>
+    <string name="pin_incorrect">PIN incorect</string>
+    <string name="pin_locked">Blocat pentru %1$ds</string>
+    <string name="pin_delete">Șterge</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Panou de Administrare</string>
+    <string name="admin_apps">Aplicații permise</string>
+    <string name="admin_apps_subtitle">Gestionează aplicațiile vizibile</string>
+    <string name="admin_contacts">Contacte</string>
+    <string name="admin_contacts_subtitle">Gestionează contactele permise</string>
+    <string name="admin_display">Afișaj &amp; Text</string>
+    <string name="admin_display_subtitle">Dimensiunea textului și opțiuni de afișare</string>
+    <string name="admin_security">Securitate</string>
+    <string name="admin_security_subtitle">Schimbă PIN-ul și monitorizarea</string>
+    <string name="admin_permissions">Permisiuni de Sistem</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Aplicații Permise</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Afișaj &amp; Text</string>
+    <string name="font_size">Dimensiunea textului</string>
+    <string name="font_small">Mic</string>
+    <string name="font_large">Mare</string>
+    <string name="font_preview">Previzualizare: Aceasta este dimensiunea actuală</string>
+    <string name="apps_per_row">Aplicații pe rând</string>
+    <string name="show_clock">Afișează ceasul</string>
+    <string name="show_battery">Afișează bateria</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">Niciun contact configurat</string>
+    <string name="call">Sună</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Începe</string>
+    <string name="setup_step">Pasul %1$d din %2$d</string>
+    <string name="setup_permissions_title">Permisiuni necesare</string>
+    <string name="setup_apps_title">Selectează Aplicațiile</string>
+    <string name="setup_apps_subtitle">Alege care aplicații vor apărea pe ecran.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Ecran principal</string>
+    <string name="perm_home_desc">Setează Peter ca ecran principal</string>
+    <string name="perm_usage">Acces la utilizare</string>
+    <string name="perm_usage_desc">Necesar pentru a proteja aplicațiile permise</string>
+    <string name="perm_overlay">Afișare peste alte aplicații</string>
+    <string name="perm_overlay_desc">Permite blocarea aplicațiilor neautorizate</string>
+    <string name="perm_write_settings">Modifică setările</string>
+    <string name="perm_write_settings_desc">Permite schimbarea dimensiunii textului de sistem</string>
+    <string name="perm_notification_access">Acces la notificări</string>
+    <string name="perm_notification_access_desc">Filtrează mesajele suspecte de pe WhatsApp</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Această aplicație nu este\ndisponibilă.</string>
+    <string name="blocker_return">Înapoi la Ecranul Principal</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Protecție activă</string>
+    <string name="security_monitoring_desc">Blochează aplicațiile nepermise</string>
+    <string name="security_change_pin">Schimbă PIN-ul</string>
+    <string name="security_change_pin_desc">Setează un nou PIN de administrator</string>
+    <string name="security_change_btn">Schimbă</string>
+    <string name="security_new_pin">Introduceți noul PIN</string>
+    <string name="security_pin_mismatch">PIN-urile nu se potrivesc. Încercați din nou.</string>
+    <string name="security_pin_changed">PIN-ul a fost schimbat cu succes</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Telefon</string>
+    <string name="contact_mgmt_name_label">Nume</string>
+    <string name="contact_mgmt_title">Contacte Permise</string>
+    <string name="contact_mgmt_add">Adaugă Contact</string>
+    <string name="contact_mgmt_empty">Niciun contact configurat.\nAdaugă contacte pentru a le afișa pe ecran.</string>
+    <string name="contact_mgmt_delete_confirm">Ștergeți acest contact?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Invitație într-un grup</string>
+    <string name="link_guard_group_message">Cineva încearcă să te adauge într-un grup WhatsApp. Ar putea fi spam.</string>
+    <string name="link_guard_unknown_title">Contact necunoscut</string>
+    <string name="link_guard_unknown_message">Acest link deschide o conversație cu cineva care nu este în contactele tale.</string>
+    <string name="link_guard_allow">Deschide</string>
+    <string name="link_guard_block">Anulare</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Jurnal de protecție</string>
+    <string name="guard_log_subtitle">Vezi evenimentele de securitate</string>
+    <string name="guard_log_empty">Niciun eveniment înregistrat</string>
+    <string name="guard_install_blocked">Instalare blocată</string>
+    <string name="guard_notification_blocked">Notificare blocată</string>
+    <string name="guard_channel_name">Alerte de protecție</string>
+    <string name="guard_channel_desc">Alerte când o instalare neautorizată este blocată</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">Filtre de securitate</string>
+    <string name="security_filters_subtitle">Controlează ce protecții sunt active</string>
+    <string name="filter_notification_title">Filtru de notificări</string>
+    <string name="filter_notification_desc">Interceptează mesajele WhatsApp de la contacte necunoscute și analizează tiparele de înșelăciune</string>
+    <string name="filter_conversation_title">Scanarea conversațiilor</string>
+    <string name="filter_conversation_desc">Citește ecranul WhatsApp în timp real pentru a detecta înșelăciunile în timpul conversațiilor</string>
+    <string name="filter_calls_title">Filtru de apeluri</string>
+    <string name="filter_calls_desc">Filtrează apelurile primite de la numere necunoscute și detectează numerele raportate ca înșelăciune</string>
+    <string name="filter_auto_reply_title">Răspuns automat</string>
+    <string name="filter_auto_reply_desc">Răspunde automat contactelor necunoscute când este detectat un tipar suspect, informând că numărul este protejat</string>
+    <string name="admin_security_filters">Filtre de securitate</string>
+    <string name="admin_security_filters_subtitle">Notificări, conversații și apeluri</string>
+    <string name="admin_guard_demo">Demo interceptor</string>
+    <string name="admin_guard_demo_subtitle">Previzualizare filtru WhatsApp</string>
+    <string name="admin_manage_permissions">Gestionează permisiunile de sistem</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Protecție</string>
+    <string name="monitor_channel_desc">Menține protecția aplicațiilor activă</string>
+    <string name="monitor_notification_title">Peter activ</string>
+    <string name="monitor_notification_text">Protecția aplicațiilor activă</string>
+</resources>

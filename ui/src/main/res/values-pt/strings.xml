@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Um celular mais simples\npara quem você mais ama</string>
+
+    <!-- Navigation -->
+    <string name="back">Voltar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="save">Salvar Alterações</string>
+    <string name="done">Pronto!</string>
+    <string name="grant_permission">Conceder permissão</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Contatos</string>
+    <string name="no_apps_message">Nenhum aplicativo configurado</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">Digite seu PIN</string>
+    <string name="create_pin">Criar PIN de Administrador</string>
+    <string name="confirm_pin">Confirme seu PIN</string>
+    <string name="pin_explanation">Este PIN será necessário para alterar as configurações.</string>
+    <string name="pin_incorrect">PIN incorreto</string>
+    <string name="pin_locked">Bloqueado por %1$ds</string>
+    <string name="pin_delete">Apagar</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Painel de Administração</string>
+    <string name="admin_apps">Aplicativos permitidos</string>
+    <string name="admin_apps_subtitle">Gerenciar aplicativos visíveis</string>
+    <string name="admin_contacts">Contatos</string>
+    <string name="admin_contacts_subtitle">Gerenciar contatos permitidos</string>
+    <string name="admin_display">Tela &amp; Texto</string>
+    <string name="admin_display_subtitle">Tamanho do texto e opções de tela</string>
+    <string name="admin_security">Segurança</string>
+    <string name="admin_security_subtitle">Alterar PIN e monitoramento</string>
+    <string name="admin_permissions">Permissões do Sistema</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">Aplicativos Permitidos</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Tela &amp; Texto</string>
+    <string name="font_size">Tamanho do texto</string>
+    <string name="font_small">Pequeno</string>
+    <string name="font_large">Grande</string>
+    <string name="font_preview">Prévia: Este é o tamanho atual</string>
+    <string name="apps_per_row">Aplicativos por linha</string>
+    <string name="show_clock">Mostrar relógio</string>
+    <string name="show_battery">Mostrar bateria</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">Nenhum contato configurado</string>
+    <string name="call">Ligar</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Começar</string>
+    <string name="setup_step">Passo %1$d de %2$d</string>
+    <string name="setup_permissions_title">Permissões necessárias</string>
+    <string name="setup_apps_title">Selecionar Aplicativos</string>
+    <string name="setup_apps_subtitle">Escolha quais aplicativos aparecerão na tela.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Tela inicial</string>
+    <string name="perm_home_desc">Definir Peter como tela inicial</string>
+    <string name="perm_usage">Acesso de uso</string>
+    <string name="perm_usage_desc">Necessário para proteger os aplicativos permitidos</string>
+    <string name="perm_overlay">Exibir sobre outros apps</string>
+    <string name="perm_overlay_desc">Permite bloquear aplicativos não autorizados</string>
+    <string name="perm_write_settings">Modificar configurações</string>
+    <string name="perm_write_settings_desc">Permite alterar o tamanho do texto do sistema</string>
+    <string name="perm_notification_access">Acesso a notificações</string>
+    <string name="perm_notification_access_desc">Filtra mensagens suspeitas do WhatsApp</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Este aplicativo não está\ndisponível.</string>
+    <string name="blocker_return">Voltar ao Início</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Proteção ativa</string>
+    <string name="security_monitoring_desc">Bloquear aplicativos não permitidos</string>
+    <string name="security_change_pin">Alterar PIN</string>
+    <string name="security_change_pin_desc">Definir um novo PIN de administrador</string>
+    <string name="security_change_btn">Alterar</string>
+    <string name="security_new_pin">Digite o novo PIN</string>
+    <string name="security_pin_mismatch">Os PINs não coincidem. Tente novamente.</string>
+    <string name="security_pin_changed">PIN alterado com sucesso</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Telefone</string>
+    <string name="contact_mgmt_name_label">Nome</string>
+    <string name="contact_mgmt_title">Contatos Permitidos</string>
+    <string name="contact_mgmt_add">Adicionar Contato</string>
+    <string name="contact_mgmt_empty">Nenhum contato configurado.\nAdicione contatos para exibi-los na tela.</string>
+    <string name="contact_mgmt_delete_confirm">Excluir este contato?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Convite para grupo</string>
+    <string name="link_guard_group_message">Alguém está tentando adicionar você a um grupo do WhatsApp. Isso pode ser spam.</string>
+    <string name="link_guard_unknown_title">Contato desconhecido</string>
+    <string name="link_guard_unknown_message">Este link abre uma conversa com alguém que não está nos seus contatos.</string>
+    <string name="link_guard_allow">Abrir</string>
+    <string name="link_guard_block">Cancelar</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Registro de proteção</string>
+    <string name="guard_log_subtitle">Ver eventos de segurança</string>
+    <string name="guard_log_empty">Nenhum evento registrado</string>
+    <string name="guard_install_blocked">Instalação bloqueada</string>
+    <string name="guard_notification_blocked">Notificação bloqueada</string>
+    <string name="guard_channel_name">Alertas de proteção</string>
+    <string name="guard_channel_desc">Alertas quando uma instalação não autorizada é bloqueada</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">Filtros de segurança</string>
+    <string name="security_filters_subtitle">Controle quais proteções estão ativas</string>
+    <string name="filter_notification_title">Filtro de notificações</string>
+    <string name="filter_notification_desc">Intercepta mensagens do WhatsApp de contatos desconhecidos e analisa padrões de golpe</string>
+    <string name="filter_conversation_title">Análise de conversas</string>
+    <string name="filter_conversation_desc">Lê a tela do WhatsApp em tempo real para detectar golpes durante as conversas</string>
+    <string name="filter_calls_title">Filtro de chamadas</string>
+    <string name="filter_calls_desc">Filtra chamadas recebidas de números desconhecidos e detecta números denunciados como golpe</string>
+    <string name="filter_auto_reply_title">Resposta automática</string>
+    <string name="filter_auto_reply_desc">Responde automaticamente a contatos desconhecidos quando um padrão suspeito é detectado, informando que o número está protegido</string>
+    <string name="admin_security_filters">Filtros de segurança</string>
+    <string name="admin_security_filters_subtitle">Notificações, conversas e chamadas</string>
+    <string name="admin_guard_demo">Demo do interceptador</string>
+    <string name="admin_guard_demo_subtitle">Prévia do filtro do WhatsApp</string>
+    <string name="admin_manage_permissions">Gerenciar permissões do sistema</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Proteção</string>
+    <string name="monitor_channel_desc">Mantém a proteção de aplicativos ativa</string>
+    <string name="monitor_notification_title">Peter ativo</string>
+    <string name="monitor_notification_text">Proteção de aplicativos ativa</string>
+</resources>

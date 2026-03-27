@@ -111,6 +111,23 @@
     <string name="guard_channel_name">Protection Alerts</string>
     <string name="guard_channel_desc">Alerts when an unauthorized install is blocked</string>
 
+    <!-- Security Filters -->
+    <string name="security_filters_title">Security Filters</string>
+    <string name="security_filters_subtitle">Control which protections are active</string>
+    <string name="filter_notification_title">Notification Filter</string>
+    <string name="filter_notification_desc">Intercepts WhatsApp messages from unknown contacts and analyzes scam patterns</string>
+    <string name="filter_conversation_title">Conversation Scanning</string>
+    <string name="filter_conversation_desc">Reads the WhatsApp screen in real time to detect scams during conversations</string>
+    <string name="filter_calls_title">Call Filter</string>
+    <string name="filter_calls_desc">Filters incoming calls from unknown numbers and detects numbers reported as scams</string>
+    <string name="filter_auto_reply_title">Auto Reply</string>
+    <string name="filter_auto_reply_desc">Automatically replies to unknown contacts when a suspicious pattern is detected, informing that the number is protected</string>
+    <string name="admin_security_filters">Security Filters</string>
+    <string name="admin_security_filters_subtitle">Notifications, conversations and calls</string>
+    <string name="admin_guard_demo">Interceptor Demo</string>
+    <string name="admin_guard_demo_subtitle">WhatsApp filter preview</string>
+    <string name="admin_manage_permissions">Manage system permissions</string>
+
     <!-- Monitoring Service -->
     <string name="monitor_channel_name">Peter Protection</string>
     <string name="monitor_channel_desc">Keeps app protection active</string>

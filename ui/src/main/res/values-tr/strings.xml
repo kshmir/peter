@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peter</string>
+    <string name="app_tagline">Daha basit bir telefon\nen sevdiğiniz kişi için</string>
+
+    <!-- Navigation -->
+    <string name="back">Geri</string>
+    <string name="cancel">İptal</string>
+    <string name="continue_btn">Devam</string>
+    <string name="save">Değişiklikleri Kaydet</string>
+    <string name="done">Tamam!</string>
+    <string name="grant_permission">İzin ver</string>
+
+    <!-- Home Screen -->
+    <string name="contacts_title">Kişiler</string>
+    <string name="no_apps_message">Yapılandırılmış uygulama yok</string>
+
+    <!-- PIN Entry -->
+    <string name="enter_pin">PIN\'inizi girin</string>
+    <string name="create_pin">Yönetici PIN\'i Oluşturun</string>
+    <string name="confirm_pin">PIN\'inizi onaylayın</string>
+    <string name="pin_explanation">Ayarları değiştirmek için bu PIN gerekli olacaktır.</string>
+    <string name="pin_incorrect">Yanlış PIN</string>
+    <string name="pin_locked">%1$ds süreyle kilitli</string>
+    <string name="pin_delete">Sil</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_title">Yönetici Paneli</string>
+    <string name="admin_apps">İzin Verilen Uygulamalar</string>
+    <string name="admin_apps_subtitle">Görünür uygulamaları yönetin</string>
+    <string name="admin_contacts">Kişiler</string>
+    <string name="admin_contacts_subtitle">İzin verilen kişileri yönetin</string>
+    <string name="admin_display">Ekran &amp; Metin</string>
+    <string name="admin_display_subtitle">Metin boyutu ve ekran seçenekleri</string>
+    <string name="admin_security">Güvenlik</string>
+    <string name="admin_security_subtitle">PIN ve izlemeyi değiştirin</string>
+    <string name="admin_permissions">Sistem İzinleri</string>
+
+    <!-- App Whitelist -->
+    <string name="whitelist_title">İzin Verilen Uygulamalar</string>
+
+    <!-- Display Settings -->
+    <string name="display_title">Ekran &amp; Metin</string>
+    <string name="font_size">Metin Boyutu</string>
+    <string name="font_small">Küçük</string>
+    <string name="font_large">Büyük</string>
+    <string name="font_preview">Önizleme: Bu geçerli boyuttur</string>
+    <string name="apps_per_row">Satır başına uygulama</string>
+    <string name="show_clock">Saati göster</string>
+    <string name="show_battery">Pili göster</string>
+
+    <!-- Contacts -->
+    <string name="no_contacts">Yapılandırılmış kişi yok</string>
+    <string name="call">Ara</string>
+
+    <!-- Setup -->
+    <string name="welcome_start">Başlayın</string>
+    <string name="setup_step">Adım %1$d / %2$d</string>
+    <string name="setup_permissions_title">Gerekli İzinler</string>
+    <string name="setup_apps_title">Uygulama Seçin</string>
+    <string name="setup_apps_subtitle">Ekranda hangi uygulamaların görüneceğini seçin.</string>
+
+    <!-- Permissions -->
+    <string name="perm_home">Ana Ekran</string>
+    <string name="perm_home_desc">Peter\'ı ana ekran olarak ayarlayın</string>
+    <string name="perm_usage">Kullanım Erişimi</string>
+    <string name="perm_usage_desc">İzin verilen uygulamaları korumak için gerekli</string>
+    <string name="perm_overlay">Diğer uygulamaların üzerinde göster</string>
+    <string name="perm_overlay_desc">Yetkisiz uygulamaları engellemeye izin verir</string>
+    <string name="perm_write_settings">Ayarları değiştir</string>
+    <string name="perm_write_settings_desc">Sistem metin boyutunu değiştirmeye izin verir</string>
+    <string name="perm_notification_access">Bildirim erişimi</string>
+    <string name="perm_notification_access_desc">Şüpheli WhatsApp mesajlarını filtreler</string>
+
+    <!-- Overlay Blocker -->
+    <string name="blocker_message">Bu uygulama\nkullanılamıyor.</string>
+    <string name="blocker_return">Ana Ekrana Dön</string>
+
+    <!-- Security -->
+    <string name="security_monitoring">Aktif Koruma</string>
+    <string name="security_monitoring_desc">İzin verilmeyen uygulamaları engelle</string>
+    <string name="security_change_pin">PIN Değiştir</string>
+    <string name="security_change_pin_desc">Yeni yönetici PIN\'i belirleyin</string>
+    <string name="security_change_btn">Değiştir</string>
+    <string name="security_new_pin">Yeni PIN\'i girin</string>
+    <string name="security_pin_mismatch">PIN\'ler eşleşmiyor. Tekrar deneyin.</string>
+    <string name="security_pin_changed">PIN başarıyla değiştirildi</string>
+
+    <!-- Contact Management -->
+    <string name="contact_mgmt_phone_label">Telefon</string>
+    <string name="contact_mgmt_name_label">Ad</string>
+    <string name="contact_mgmt_title">İzin Verilen Kişiler</string>
+    <string name="contact_mgmt_add">Kişi Ekle</string>
+    <string name="contact_mgmt_empty">Yapılandırılmış kişi yok.\nEkranda göstermek için kişi ekleyin.</string>
+    <string name="contact_mgmt_delete_confirm">Bu kişi silinsin mi?</string>
+
+    <!-- Link Guard -->
+    <string name="link_guard_group_title">Grup Daveti</string>
+    <string name="link_guard_group_message">Birisi sizi bir WhatsApp grubuna eklemeye çalışıyor. Bu spam olabilir.</string>
+    <string name="link_guard_unknown_title">Bilinmeyen Kişi</string>
+    <string name="link_guard_unknown_message">Bu bağlantı, kişilerinizde olmayan biriyle sohbet açar.</string>
+    <string name="link_guard_allow">Aç</string>
+    <string name="link_guard_block">İptal</string>
+
+    <!-- Guard -->
+    <string name="guard_log_title">Koruma Günlüğü</string>
+    <string name="guard_log_subtitle">Güvenlik olaylarını görüntüle</string>
+    <string name="guard_log_empty">Kayıtlı olay yok</string>
+    <string name="guard_install_blocked">Yükleme engellendi</string>
+    <string name="guard_notification_blocked">Bildirim engellendi</string>
+    <string name="guard_channel_name">Koruma Uyarıları</string>
+    <string name="guard_channel_desc">Yetkisiz yükleme engellendiğinde uyarılar</string>
+
+    <!-- Security Filters -->
+    <string name="security_filters_title">Güvenlik Filtreleri</string>
+    <string name="security_filters_subtitle">Hangi korumaların etkin olduğunu kontrol edin</string>
+    <string name="filter_notification_title">Bildirim Filtresi</string>
+    <string name="filter_notification_desc">Bilinmeyen kişilerden gelen WhatsApp mesajlarını yakalar ve dolandırıcılık kalıplarını analiz eder</string>
+    <string name="filter_conversation_title">Sohbet Taraması</string>
+    <string name="filter_conversation_desc">Sohbet sırasında dolandırıcılığı tespit etmek için WhatsApp ekranını gerçek zamanlı okur</string>
+    <string name="filter_calls_title">Arama Filtresi</string>
+    <string name="filter_calls_desc">Bilinmeyen numaralardan gelen aramaları filtreler ve dolandırıcılık olarak bildirilen numaraları tespit eder</string>
+    <string name="filter_auto_reply_title">Otomatik Yanıt</string>
+    <string name="filter_auto_reply_desc">Şüpheli bir kalıp tespit edildiğinde bilinmeyen kişilere otomatik yanıt verir ve numaranın korunduğunu bildirir</string>
+    <string name="admin_security_filters">Güvenlik Filtreleri</string>
+    <string name="admin_security_filters_subtitle">Bildirimler, sohbetler ve aramalar</string>
+    <string name="admin_guard_demo">Yakalayıcı Demo</string>
+    <string name="admin_guard_demo_subtitle">WhatsApp filtre önizlemesi</string>
+    <string name="admin_manage_permissions">Sistem izinlerini yönet</string>
+
+    <!-- Monitoring Service -->
+    <string name="monitor_channel_name">Peter Koruma</string>
+    <string name="monitor_channel_desc">Uygulama korumasını etkin tutar</string>
+    <string name="monitor_notification_title">Peter etkin</string>
+    <string name="monitor_notification_text">Uygulama koruması etkin</string>
+</resources>

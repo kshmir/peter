@@ -15,6 +15,7 @@ data class SecurityFiltersState(
     val isNotificationFilterEnabled: Boolean = true,
     val isConversationScanEnabled: Boolean = true,
     val isCallScreeningEnabled: Boolean = true,
+    val isAutoReplyEnabled: Boolean = false,
 )
 
 @HiltViewModel
@@ -34,6 +35,7 @@ class SecurityFiltersViewModel @Inject constructor(
                             isNotificationFilterEnabled = it.isNotificationFilterEnabled,
                             isConversationScanEnabled = it.isConversationScanEnabled,
                             isCallScreeningEnabled = it.isCallScreeningEnabled,
+                            isAutoReplyEnabled = it.isAutoReplyEnabled,
                         )
                     }
                 }
@@ -62,6 +64,14 @@ class SecurityFiltersViewModel @Inject constructor(
         viewModelScope.launch {
             val current = settingsRepository.getAdminSettingsSync() ?: return@launch
             settingsRepository.saveAdminSettings(current.copy(isCallScreeningEnabled = enabled))
+        }
+    }
+
+    fun toggleAutoReply(enabled: Boolean) {
+        _state.update { it.copy(isAutoReplyEnabled = enabled) }
+        viewModelScope.launch {
+            val current = settingsRepository.getAdminSettingsSync() ?: return@launch
+            settingsRepository.saveAdminSettings(current.copy(isAutoReplyEnabled = enabled))
         }
     }
 }

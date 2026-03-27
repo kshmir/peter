@@ -23,6 +23,12 @@ val MIGRATION_2_3 = object : Migration(2, 3) {
     }
 }
 
+val MIGRATION_3_4 = object : Migration(3, 4) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE admin_settings ADD COLUMN isAutoReplyEnabled INTEGER NOT NULL DEFAULT 0")
+    }
+}
+
 val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(db: SupportSQLiteDatabase) {
         db.execSQL(
@@ -44,7 +50,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
         AdminSettingsEntity::class,
         GuardLogEntity::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = false,
 )
 abstract class PeterDatabase : RoomDatabase() {
@@ -64,7 +70,7 @@ abstract class PeterDatabase : RoomDatabase() {
                     PeterDatabase::class.java,
                     "peter_database",
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                     .build()
                     .also { INSTANCE = it }
             }

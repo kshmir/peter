@@ -12,6 +12,7 @@ data class AdminSettingsEntity(
     val isNotificationFilterEnabled: Boolean = true,
     val isConversationScanEnabled: Boolean = true,
     val isCallScreeningEnabled: Boolean = true,
+    val isAutoReplyEnabled: Boolean = false,
     val maxAppsPerRow: Int = 2,
     val showClock: Boolean = true,
     val showBatteryStatus: Boolean = true,
