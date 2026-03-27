@@ -3,6 +3,7 @@ package com.peter.app.core.service
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -29,6 +30,17 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         private const val WHATSAPP_BIZ_PKG = "com.whatsapp.w4b"
         private const val GUARD_CHANNEL_ID = "peter_notif_guard"
 
+        // Samsung + AOSP dialer/incall packages
+        private val PHONE_PACKAGES = setOf(
+            "com.samsung.android.dialer",
+            "com.samsung.android.incallui",
+            "com.sec.phone",
+            "com.android.phone",
+            "com.android.dialer",
+            "com.android.server.telecom",
+            "com.google.android.dialer",
+        )
+
         // Regex to detect phone numbers (international format)
         private val PHONE_REGEX = Regex("""^\+?\d[\d\s\-()]{6,}$""")
     }
@@ -47,7 +59,36 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-        if (sbn.packageName != WHATSAPP_PKG && sbn.packageName != WHATSAPP_BIZ_PKG) return
+        val pkg = sbn.packageName
+        val isWhatsApp = pkg == WHATSAPP_PKG || pkg == WHATSAPP_BIZ_PKG
+        val isPhoneDialer = pkg in PHONE_PACKAGES
+
+        // ── CALL INTERCEPTION (runs before anything else) ──
+        // Catches: WhatsApp VoIP calls + Samsung dialer calls
+        val category = sbn.notification.category
+        val extras = sbn.notification.extras ?: return
+        val title = extras.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: ""
+        val textPreview = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
+
+        val isCallNotification = category == Notification.CATEGORY_CALL
+        val callKeywords = listOf(
+            "incoming voice call", "incoming video call",
+            "llamada de voz entrante", "videollamada entrante",
+            "chamada de voz recebida", "videochamada recebida",
+            "ringing",
+        )
+        val hasCallKeyword = callKeywords.any {
+            textPreview.contains(it, ignoreCase = true) || title.contains(it, ignoreCase = true)
+        }
+
+        if ((isWhatsApp || isPhoneDialer) && (isCallNotification || hasCallKeyword)) {
+            Log.w(TAG, "CALL detected: pkg=$pkg title='$title' text='$textPreview' category=$category ongoing=${sbn.isOngoing}")
+            handleIncomingCall(sbn, title, textPreview)
+            return
+        }
+
+        // ── Skip non-WhatsApp from here on (messages only) ──
+        if (!isWhatsApp) return
 
         // Check if notification filter is enabled
         try {
@@ -57,26 +98,21 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
             if (settings?.isNotificationFilterEnabled != true) return
         } catch (_: Exception) {}
 
-        val extras = sbn.notification.extras ?: return
-
-        // Skip non-message notifications (calls, summaries, system)
-        val category = sbn.notification.category
-        if (category == android.app.Notification.CATEGORY_CALL ||
-            category == android.app.Notification.CATEGORY_SERVICE ||
-            category == android.app.Notification.CATEGORY_PROGRESS ||
-            category == android.app.Notification.CATEGORY_TRANSPORT ||
-            category == android.app.Notification.CATEGORY_SYSTEM) {
+        // Skip non-message notifications (service, progress, system)
+        if (category == Notification.CATEGORY_SERVICE ||
+            category == Notification.CATEGORY_PROGRESS ||
+            category == Notification.CATEGORY_TRANSPORT ||
+            category == Notification.CATEGORY_SYSTEM) {
             return
         }
 
-        // Skip ongoing/foreground notifications (voice calls, video calls)
+        // Skip ongoing/foreground notifications
         if (sbn.isOngoing) return
 
         // Skip summary notifications ("WhatsApp - X messages from Y chats")
         if (sbn.notification.group != null && sbn.key.contains("|null|")) return
 
         // Skip notifications without message content
-        val title = extras.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: ""
         if (title.isBlank() || title == "WhatsApp") return
 
         // Skip group chats
@@ -94,25 +130,7 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
             return
         }
 
-        val textPreview = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
-
-        // Detect incoming WhatsApp CALLS — handle separately
-        val incomingCallKeywords = listOf(
-            "incoming voice call", "incoming video call",
-            "llamada de voz entrante", "videollamada entrante",
-            "chamada de voz recebida", "videochamada recebida",
-            "ringing",
-        )
-        val isIncomingCall = incomingCallKeywords.any {
-            textPreview.contains(it, ignoreCase = true) || title.contains(it, ignoreCase = true)
-        }
-        if (isIncomingCall) {
-            Log.w(TAG, "WhatsApp INCOMING CALL from: $title | text: $textPreview")
-            handleWhatsAppCall(title, textPreview)
-            return
-        }
-
-        // Skip other non-message call notifications (ongoing, missed)
+        // Skip non-message call notifications (ongoing, missed)
         val skipKeywords = listOf(
             "ongoing voice call", "llamada de voz en curso", "chamada de voz em andamento",
             "ongoing video call", "videollamada en curso", "videochamada em andamento",
@@ -393,55 +411,116 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         nm.createNotificationChannel(channel)
     }
 
-    // ── WhatsApp call handling ──
+    // ── Incoming call handling (WhatsApp VoIP + Samsung dialer) ──
 
-    private fun handleWhatsAppCall(caller: String, callText: String) {
+    private fun handleIncomingCall(sbn: StatusBarNotification, caller: String, callText: String) {
+        // Check if call screening is enabled
         try {
             val settings = PeterDatabase.getInstance(this).adminSettingsDao().let {
                 kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.IO) { it.getSync() }
             }
             if (settings?.isCallScreeningEnabled != true) {
-                Log.w(TAG, "Call screening disabled — allowing WhatsApp call")
+                Log.w(TAG, "Call screening disabled — allowing call")
                 return
             }
         } catch (_: Exception) {}
 
-        val contactLookup = lookupContact(caller)
-        Log.w(TAG, "WhatsApp call: $caller | inDevice=${contactLookup.inDeviceContacts} | inPeter=${contactLookup.inPeterContacts}")
+        val isWhatsApp = sbn.packageName == WHATSAPP_PKG || sbn.packageName == WHATSAPP_BIZ_PKG
+        val source = if (isWhatsApp) "WhatsApp" else "Phone"
 
-        if (contactLookup.inPeterContacts || contactLookup.inDeviceContacts) {
+        // Look up caller in contacts
+        val contactLookup = lookupContact(caller)
+        Log.w(TAG, "$source call from: $caller | inDevice=${contactLookup.inDeviceContacts} | inPeter=${contactLookup.inPeterContacts} | hasCallHistory=${contactLookup.hasOutgoingCallHistory}")
+
+        // Allow known contacts
+        if (contactLookup.inPeterContacts || contactLookup.inDeviceContacts || contactLookup.hasOutgoingCallHistory) {
             Log.w(TAG, "Known contact calling — allowing")
             return
         }
 
-        Log.w(TAG, "UNKNOWN WhatsApp caller: $caller — showing warning")
+        // For phone numbers that appear as names (e.g. "John" calling), only block if it's a phone number
+        // For the phone dialer, the title is usually the phone number for unknown callers
+        val callerIsPhoneNumber = PHONE_REGEX.matches(caller.trim())
+        if (!callerIsPhoneNumber && !isWhatsApp) {
+            // Phone dialer showing a contact name — they're in the phone's contacts
+            Log.w(TAG, "Phone call from named contact: $caller — allowing")
+            return
+        }
 
-        InterceptData.pendingProfilePic = null
+        Log.w(TAG, "UNKNOWN caller: $caller ($source) — silencing and showing warning")
+
+        // Try to decline/silence the call via the notification's action buttons
+        declineCall(sbn)
+
+        // Show intercept screen
         val isVideo = callText.contains("video", ignoreCase = true)
+        InterceptData.pendingProfilePic = null
         val intent = Intent("com.peter.app.ACTION_INTERCEPT_NOTIFICATION").apply {
             setPackage(packageName)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             putExtra("sender", caller)
-            putExtra("message", if (isVideo) "Videollamada entrante de número desconocido" else "Llamada de voz entrante de número desconocido")
+            putExtra("message",
+                if (isVideo) "Videollamada entrante de número desconocido"
+                else "Llamada entrante de número desconocido"
+            )
             putExtra("phone", contactLookup.phoneNumber ?: caller)
             putExtra("threat_level", 1)
-            putExtra("threat_label", if (isVideo) "Videollamada desconocida" else "Llamada desconocida")
+            putExtra("threat_label",
+                if (isVideo) "Videollamada desconocida"
+                else "Llamada desconocida"
+            )
             putExtra("threat_desc", "Este número no está en tus contactos. Podría ser una estafa telefónica.")
-            putExtra("status", "WA_CALL_UNKNOWN")
+            putExtra("status", if (isWhatsApp) "WA_CALL_UNKNOWN" else "PHONE_CALL_UNKNOWN")
         }
         startActivity(intent)
 
+        // Log the event
         scope.launch {
             try {
                 PeterDatabase.getInstance(this@WhatsAppNotificationGuardService)
                     .guardLogDao().insert(
-                        com.peter.app.core.database.entity.GuardLogEntity(
-                            eventType = "WA_CALL_SCREENED",
-                            packageName = "com.whatsapp",
-                            detail = "From: $caller | ${if (isVideo) "Video" else "Voice"} | Unknown",
+                        GuardLogEntity(
+                            eventType = if (isWhatsApp) "WA_CALL_SCREENED" else "PHONE_CALL_SCREENED",
+                            packageName = sbn.packageName,
+                            detail = "From: $caller | ${if (isVideo) "Video" else "Voice"} | $source | Unknown",
                         )
                     )
             } catch (_: Exception) {}
+        }
+    }
+
+    /** Try to decline/silence an incoming call by triggering the notification's Decline action */
+    private fun declineCall(sbn: StatusBarNotification) {
+        val actions = sbn.notification.actions ?: return
+        Log.w(TAG, "Call notification has ${actions.size} actions: ${actions.map { it.title }}")
+
+        // Look for Decline/Reject button by label (localized)
+        val declineLabels = listOf(
+            "decline", "reject", "dismiss", "hang up",
+            "rechazar", "colgar",
+            "recusar", "rejeitar",
+        )
+        for (action in actions) {
+            val label = action.title?.toString()?.lowercase() ?: continue
+            if (declineLabels.any { label.contains(it) }) {
+                Log.w(TAG, "Triggering Decline action: '${action.title}'")
+                try {
+                    action.actionIntent.send()
+                } catch (e: PendingIntent.CanceledException) {
+                    Log.e(TAG, "Decline PendingIntent cancelled", e)
+                }
+                return
+            }
+        }
+
+        // Fallback: first action is typically Decline on WhatsApp/Samsung
+        Log.w(TAG, "No labeled decline found — trying first action: '${actions[0].title}'")
+        try {
+            actions[0].actionIntent.send()
+        } catch (e: PendingIntent.CanceledException) {
+            Log.e(TAG, "First action PendingIntent cancelled", e)
+            // Last resort: just cancel the notification (silences the ring)
+            cancelNotification(sbn.key)
         }
     }
 
