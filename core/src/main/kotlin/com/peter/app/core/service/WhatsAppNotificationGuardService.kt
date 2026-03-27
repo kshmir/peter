@@ -236,8 +236,15 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         Log.w(TAG, "  inDeviceContacts: ${contactLookup.inDeviceContacts}")
         Log.w(TAG, "  phoneFromContacts: ${contactLookup.phoneNumber}")
         Log.w(TAG, "  inPeterContacts: ${contactLookup.inPeterContacts}")
+        Log.w(TAG, "  hasOutgoingCallHistory: ${contactLookup.hasOutgoingCallHistory}")
         Log.w(TAG, "  contactStatus: ${contactLookup.status}")
         Log.w(TAG, "──────────────────────")
+
+        // If user has previously called this number, trust it more — don't intercept
+        if (contactLookup.hasOutgoingCallHistory) {
+            Log.w(TAG, "Has outgoing call history — trusting $title")
+            return
+        }
 
         // ── Scam detection ──
         val messageContent = bigText.ifBlank { text }
@@ -445,6 +452,7 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         val phoneNumber: String?,
         val contactName: String?,
         val inPeterContacts: Boolean,
+        val hasOutgoingCallHistory: Boolean,
         val status: String,
     )
 
@@ -455,14 +463,18 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
             // Sender IS a phone number — look up by phone in device contacts
             val contactName = lookupNameByPhone(senderTitle.trim())
             val inPeter = checkPeterContacts(senderTitle.trim(), null)
+            val hasOutgoing = hasOutgoingCallTo(senderTitle.trim())
+            if (hasOutgoing) Log.w(TAG, "Has outgoing call history to: ${senderTitle.trim()}")
             ContactResult(
                 inDeviceContacts = contactName != null,
                 phoneNumber = senderTitle.trim(),
                 contactName = contactName,
                 inPeterContacts = inPeter,
+                hasOutgoingCallHistory = hasOutgoing,
                 status = when {
                     inPeter -> "APPROVED"
                     contactName != null -> "IN_PHONE_CONTACTS"
+                    hasOutgoing -> "HAS_CALL_HISTORY"
                     else -> "UNKNOWN"
                 },
             )
@@ -482,18 +494,48 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
             }
 
             val inPeter = checkPeterContacts(phone, senderTitle.trim())
+            val hasOutgoing = if (phone != null) hasOutgoingCallTo(phone) else false
             ContactResult(
                 inDeviceContacts = phone != null,
                 phoneNumber = phone,
                 contactName = matchedName,
                 inPeterContacts = inPeter,
+                hasOutgoingCallHistory = hasOutgoing,
                 status = when {
                     inPeter -> "APPROVED"
                     phone != null -> "IN_PHONE_CONTACTS"
+                    hasOutgoing -> "HAS_CALL_HISTORY"
                     else -> "NAME_NOT_IN_CONTACTS"
                 },
             )
         }
+    }
+
+    /** Check if user has made an outgoing call to this number */
+    private fun hasOutgoingCallTo(phone: String): Boolean {
+        try {
+            val digits = phone.filter { it.isDigit() }
+            if (digits.length < 7) return false
+
+            val cursor = contentResolver.query(
+                android.provider.CallLog.Calls.CONTENT_URI,
+                arrayOf(android.provider.CallLog.Calls.NUMBER),
+                "${android.provider.CallLog.Calls.TYPE} = ? AND ${android.provider.CallLog.Calls.NUMBER} LIKE ?",
+                arrayOf(
+                    android.provider.CallLog.Calls.OUTGOING_TYPE.toString(),
+                    "%${digits.takeLast(7)}%"
+                ),
+                null,
+            )
+            cursor?.use {
+                val found = it.count > 0
+                if (found) Log.w(TAG, "Found ${it.count} outgoing calls to $phone")
+                return found
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error checking call log for $phone", e)
+        }
+        return false
     }
 
     private fun lookupNameByPhone(phone: String): String? {
