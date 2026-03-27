@@ -4,12 +4,14 @@ package com.peter.app.core.util
  * Extensive rule-based scam pattern detector for WhatsApp messages.
  *
  * Designed to protect elderly users (particularly those with dementia) from
- * common scam patterns across Spanish, Portuguese, and English-speaking regions.
+ * common scam patterns across 23 languages worldwide.
  *
- * Supports regionalized patterns for:
- * - Spanish: Argentina (AR), Spain (ES), Colombia (CO), Chile (CL), Mexico (MX), Peru (PE)
- * - Portuguese: Brazil (BR)
- * - English: US/general (US)
+ * Core patterns (this file): Spanish (ES), Portuguese (PT-BR), English (EN)
+ * Extended patterns (separate files):
+ * - European: French, Italian, Romanian, German, Dutch
+ * - Eastern: Polish, Ukrainian, Russian, Turkish
+ * - Asian: Chinese, Japanese, Korean, Vietnamese, Thai, Indonesian
+ * - South Asian/Arabic/African: Hindi, Bengali, Urdu, Arabic, Swahili
  *
  * Confidence scoring: 0.0-1.0
  *   >0.7 = HIGH_ALERT (almost certainly a scam)
@@ -404,7 +406,7 @@ object ScamPatternDetector {
     // Pattern rule definition
     // ══════════════════════════════════════════════════════════════════════
 
-    private data class PatternRule(
+    internal data class PatternRule(
         val regex: Regex,
         val category: ScamCategory,
         val language: String,
@@ -426,6 +428,7 @@ object ScamPatternDetector {
 
     private val ALL_RULES: List<PatternRule> by lazy {
         buildList {
+            // Core rules (ES, PT, EN)
             addAll(bankFraudRules())
             addAll(prizeScamRules())
             addAll(phishingRules())
@@ -435,6 +438,11 @@ object ScamPatternDetector {
             addAll(techSupportRules())
             addAll(governmentScamRules())
             addAll(romanceScamRules())
+            // Extended language rules
+            addAll(ScamPatternsEuropean.allRules())
+            addAll(ScamPatternsEastern.allRules())
+            addAll(ScamPatternsAsian.allRules())
+            addAll(ScamPatternsSouthAsianArabicAfrican.allRules())
         }
     }
 
