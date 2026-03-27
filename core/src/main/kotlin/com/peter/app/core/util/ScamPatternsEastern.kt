@@ -56,7 +56,7 @@ internal object ScamPatternsEastern {
             "PL: BLIK fraud alert",
         ))
         add(ScamPatternDetector.PatternRule(
-            Regex("\\bprzelewy24.{0,20}(problem|b[łl][eą]d|weryfikacj|potwierd[zź])", RegexOption.IGNORE_CASE),
+            Regex("\\bprzelewy[2o][4a].{0,20}(problem|b[łl][eą]d|weryfikacj|potwierd[zź])", RegexOption.IGNORE_CASE),
             ScamPatternDetector.ScamCategory.BANK_FRAUD, "PL", "ALL", 0.35f,
             "PL: Przelewy24 issue",
         ))
