@@ -72,6 +72,9 @@ jobs:
       - name: Upload to Play Store (internal track)
         run: ./gradlew publishReleaseBundle
 
+      - name: Upload store listing (text, screenshots, icon)
+        run: ./gradlew publishListing
+
       - name: Upload AAB as artifact
         uses: actions/upload-artifact@v4
         with:
