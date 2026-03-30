@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Peter — Play Store Feature Graphic</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1024px;
+    height: 500px;
+    overflow: hidden;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0D1117;
+    position: relative;
+  }
+
+  /* Subtle background pattern */
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 50%, rgba(76, 175, 80, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 40%, rgba(33, 150, 243, 0.05) 0%, transparent 50%);
+    z-index: 0;
+  }
+
+  /* Bottom accent gradient */
+  .bottom-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #66BB6A, #81C784, #66BB6A, #4CAF50);
+    z-index: 10;
+  }
+
+  .bottom-glow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(76, 175, 80, 0.08), transparent);
+    z-index: 1;
+  }
+
+  /* Layout */
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 40px 60px;
+    position: relative;
+    z-index: 5;
+  }
+
+  /* LEFT SECTION — Branding */
+  .left {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .logo-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+  }
+
+  .logo-icon .heart {
+    font-size: 28px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .logo-text {
+    font-size: 48px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .tagline {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+    max-width: 260px;
+    font-weight: 400;
+  }
+
+  .tagline em {
+    color: rgba(255, 255, 255, 0.75);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* CENTER SECTION — Phone Mockup */
+  .center {
+    flex: 0 0 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .phone {
+    width: 200px;
+    height: 400px;
+    background: #1B2028;
+    border-radius: 28px;
+    border: 3px solid #2D333B;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Phone notch */
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 22px;
+    background: #0D1117;
+    border-radius: 0 0 16px 16px;
+    z-index: 3;
+  }
+
+  /* Phone status bar */
+  .status-bar {
+    height: 36px;
+    padding: 10px 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .time {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .battery-area {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .battery {
+    width: 20px;
+    height: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .battery::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 0 1px 1px 0;
+  }
+
+  .battery-fill {
+    width: 70%;
+    height: 100%;
+    background: #4CAF50;
+    border-radius: 1px;
+  }
+
+  .signal-dots {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+  }
+
+  .signal-dots span {
+    display: block;
+    width: 3px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1px;
+  }
+
+  .signal-dots span:nth-child(1) { height: 4px; }
+  .signal-dots span:nth-child(2) { height: 6px; }
+  .signal-dots span:nth-child(3) { height: 8px; }
+  .signal-dots span:nth-child(4) { height: 10px; }
+
+  /* Clock display */
+  .phone-clock {
+    text-align: center;
+    padding: 16px 0 12px;
+  }
+
+  .phone-clock .clock-time {
+    font-size: 36px;
+    font-weight: 300;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+  }
+
+  .phone-clock .clock-date {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* App grid */
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 8px 20px;
+  }
+
+  .app-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .app-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .app-icon.phone-app { background: linear-gradient(135deg, #4CAF50, #388E3C); }
+  .app-icon.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+  .app-icon.photos { background: linear-gradient(135deg, #FF7043, #E64A19); }
+  .app-icon.camera { background: linear-gradient(135deg, #42A5F5, #1976D2); }
+  .app-icon.contacts { background: linear-gradient(135deg, #AB47BC, #7B1FA2); }
+  .app-icon.clock { background: linear-gradient(135deg, #FFB300, #F57F17); }
+
+  .app-label {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* Bottom nav */
+  .phone-nav {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+  }
+
+  /* RIGHT SECTION — ElderGuard */
+  .right {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+  }
+
+  .shield-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .shield-icon {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* CSS Shield */
+  .shield-shape {
+    width: 38px;
+    height: 44px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    clip-path: polygon(50% 0%, 100% 15%, 100% 65%, 50% 100%, 0% 65%, 0% 15%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  }
+
+  .shield-check {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: -4px;
+  }
+
+  .shield-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+  }
+
+  .shield-subtitle {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* Feature list */
+  .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+
+  .feature-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .feature-dot.scam { background: rgba(239, 83, 80, 0.15); }
+  .feature-dot.call { background: rgba(66, 165, 245, 0.15); }
+  .feature-dot.lang { background: rgba(171, 71, 188, 0.15); }
+
+  .feature-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+
+  .feature-desc {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+
+<div class="bottom-glow"></div>
+<div class="bottom-accent"></div>
+
+<div class="container">
+
+  <!-- LEFT: Branding -->
+  <div class="left">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <span class="heart">&#9829;</span>
+      </div>
+      <span class="logo-text">Peter</span>
+    </div>
+    <p class="tagline">A simpler phone for <em>who you love most</em></p>
+  </div>
+
+  <!-- CENTER: Phone Mockup -->
+  <div class="center">
+    <div class="phone">
+      <div class="phone-notch"></div>
+
+      <div class="status-bar">
+        <div class="signal-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="battery-area">
+          <div class="battery"><div class="battery-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="phone-clock">
+        <div class="clock-time">10:30</div>
+        <div class="clock-date">Sunday, Mar 30</div>
+      </div>
+
+      <div class="app-grid">
+        <div class="app-item">
+          <div class="app-icon phone-app">&#128222;</div>
+          <span class="app-label">Phone</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon whatsapp">&#128172;</div>
+          <span class="app-label">WhatsApp</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon photos">&#128247;</div>
+          <span class="app-label">Photos</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon camera">&#127909;</div>
+          <span class="app-label">Camera</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon contacts">&#128100;</div>
+          <span class="app-label">Contacts</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon clock">&#9200;</div>
+          <span class="app-label">Clock</span>
+        </div>
+      </div>
+
+      <div class="phone-nav"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: ElderGuard -->
+  <div class="right">
+    <div class="shield-header">
+      <div class="shield-icon">
+        <div class="shield-shape">
+          <span class="shield-check">&#10003;</span>
+        </div>
+      </div>
+      <div>
+        <div class="shield-title">ElderGuard</div>
+        <div class="shield-subtitle">Protection</div>
+      </div>
+    </div>
+
+    <ul class="features">
+      <li>
+        <div class="feature-dot scam">&#128721;</div>
+        <div>
+          <div class="feature-text">Scam Detection</div>
+          <div class="feature-desc">Blocks suspicious links & messages</div>
+        </div>
+      </li>
+      <li>
+        <div class="feature-dot call">&#128222;</div>
+        <div>
+          <div class="feature-text">Call Screening</div>
+          <div class="feature-desc">Only trusted contacts get through</div>
+        </div>
+      </li>
+      <li>
+        <div class="feature-dot lang">&#127760;</div>
+        <div>
+          <div class="feature-text">23 Languages</div>
+          <div class="feature-desc">Multi-language scam protection</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>
