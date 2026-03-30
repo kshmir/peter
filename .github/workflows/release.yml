@@ -73,8 +73,7 @@ jobs:
         run: ./gradlew publishReleaseBundle
 
       - name: Upload store listing (text, screenshots, icon)
-        run: ./gradlew publishListing || echo "Listing upload had errors (some locales may not exist in Play Console yet)"
-        continue-on-error: true
+        run: ./gradlew publishReleaseListing
 
       - name: Upload AAB as artifact
         uses: actions/upload-artifact@v4

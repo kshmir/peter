@@ -1,5 +1,0 @@
-Versión inicial de Peter con protección ElderGuard:
-• Launcher simplificado con íconos grandes
-• Bloqueo de instalaciones no autorizadas
-• Protección contra enlaces y notificaciones sospechosas de WhatsApp
-• Panel de administración con PIN
