@@ -9,8 +9,8 @@ plugins {
 }
 
 play {
-    // Upload AAB to open testing track (beta)
-    track.set("beta")
+    // Upload AAB to internal testing track (must complete internal before open/production)
+    track.set("internal")
     releaseStatus.set(com.github.triplet.gradle.androidpublisher.ReleaseStatus.DRAFT)
     defaultToAppBundles.set(true)
     // Service account JSON provided via PLAY_SERVICE_ACCOUNT_JSON env var or file
