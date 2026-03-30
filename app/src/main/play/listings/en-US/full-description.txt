@@ -1,29 +1,46 @@
-Peter is a launcher designed for seniors and people with cognitive impairment. It replaces the home screen with a simple large-icon interface, showing only caregiver-approved apps.
+Your grandmother deserves a phone that keeps her safe. Peter is a secure launcher built by a caregiver, for caregivers -- designed to protect seniors with dementia and cognitive impairment from scams, fraud, and confusing apps.
 
-KEY FEATURES:
+Peter replaces the home screen with a calm, simple interface showing only the apps you approve. Behind the scenes, ElderGuard -- our intelligent security engine -- watches over every notification, message, and phone call so your loved one never has to worry.
 
-• Simplified home screen with large icons and readable text
-• Only shows apps approved by the caregiver
-• Automatic blocking of unauthorized app installs
-• Protection against suspicious WhatsApp links
-• Spam/scam notification filtering
-• Emergency contacts with direct calling
-• PIN-protected admin panel
-• System text size adjustment
-• Spanish and English support
+ELDERGUARD SECURITY:
 
-DESIGNED FOR:
+Scam & Fraud Detection
+Peter intercepts suspicious WhatsApp messages, SMS, and notifications before they reach your loved one. Our detection engine recognizes financial fraud patterns across Latin America, Europe, Asia, the Middle East, and Africa -- from fake prize scams to bank phishing to crypto fraud.
 
-• Seniors with technology difficulties
-• People with mild cognitive impairment or dementia
-• Families wanting to protect their loved ones
+Call Screening
+Calls from unknown or suspicious numbers are silenced automatically. Your loved one only receives calls from contacts you approve.
 
-SECURITY:
+Auto-Reply to Scammers
+When a scam message is detected, Peter can automatically respond to the sender, wasting the scammer's time and protecting your family member without any action needed.
 
-• Unapproved apps are automatically uninstalled
-• Suspicious WhatsApp links are intercepted
-• Spam messages are filtered before delivery
-• Admin access requires a 4-digit PIN
-• Full security event log
+WhatsApp Protection
+Suspicious links, unknown contacts, and phishing attempts inside WhatsApp are caught and quarantined before delivery.
 
-Peter was built with love to protect those we care about most.
+SIMPLE & SAFE HOME SCREEN:
+
+- Large icons and high-contrast text sized for aging eyes
+- Only caregiver-approved apps are visible
+- Unauthorized apps are blocked instantly
+- Emergency contacts with one-tap direct calling
+- System font size adjustment for comfort
+
+CAREGIVER CONTROL:
+
+- PIN-protected admin panel (hidden 5-tap gesture)
+- Whitelist apps, manage contacts, review security logs
+- Toggle individual security filters on or off
+- Full event log of every blocked threat
+- Configure protection remotely with peace of mind
+
+23-LANGUAGE SUPPORT:
+
+Peter speaks your family's language. Available in Spanish, English, Portuguese, French, German, Italian, Chinese, Japanese, Korean, Arabic, Hindi, Russian, Turkish, Polish, Dutch, Swedish, Norwegian, Danish, Finnish, Czech, Romanian, Hebrew, and Thai.
+
+BUILT FOR FAMILIES:
+
+- Seniors with technology difficulties
+- People living with mild cognitive impairment or dementia
+- Caregivers who need reliable, set-and-forget protection
+- Families separated by distance who worry about phone scams
+
+Peter is named after a real grandfather. It was built with love to protect the people who raised us. Because they protected us first -- now it's our turn.
