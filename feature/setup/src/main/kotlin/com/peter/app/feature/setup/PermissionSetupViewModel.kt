@@ -17,6 +17,8 @@ data class PermissionSetupState(
     val hasAccessibility: Boolean = false,
     val hasWriteSettings: Boolean = false,
     val hasNotificationAccess: Boolean = false,
+    val hasContacts: Boolean = false,
+    val hasCallLog: Boolean = false,
 )
 
 @HiltViewModel
@@ -43,6 +45,8 @@ class PermissionSetupViewModel @Inject constructor(
                 hasAccessibility = permState.hasAccessibility,
                 hasWriteSettings = permState.hasWriteSettings,
                 hasNotificationAccess = permState.hasNotificationAccess,
+                hasContacts = permState.hasContacts,
+                hasCallLog = permState.hasCallLog,
             )
         }
     }

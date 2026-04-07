@@ -71,6 +71,10 @@
     <string name="perm_write_settings_desc">Permite cambiar el tamaño de texto del sistema</string>
     <string name="perm_notification_access">Acceso a notificaciones</string>
     <string name="perm_notification_access_desc">Filtra mensajes sospechosos de WhatsApp</string>
+    <string name="perm_contacts">Acceso a contactos</string>
+    <string name="perm_contacts_desc">Identifica contactos conocidos para no bloquear sus llamadas y mensajes</string>
+    <string name="perm_call_log">Registro de llamadas</string>
+    <string name="perm_call_log_desc">Verifica si ya llamaste a un número para confiar en ese contacto</string>
 
     <!-- Overlay Blocker -->
     <string name="blocker_message">Esta aplicación no está\ndisponible.</string>

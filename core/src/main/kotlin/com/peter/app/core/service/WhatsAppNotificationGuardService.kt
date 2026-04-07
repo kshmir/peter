@@ -64,6 +64,28 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         val isWhatsApp = pkg == WHATSAPP_PKG || pkg == WHATSAPP_BIZ_PKG
         val isPhoneDialer = pkg in PHONE_PACKAGES
 
+        // ── DEBUG: Log every notification from WhatsApp/dialer ──
+        if (isWhatsApp || isPhoneDialer) {
+            Log.w(TAG, "╔══ NOTIFICATION RECEIVED ══")
+            Log.w(TAG, "║ pkg=$pkg")
+            Log.w(TAG, "║ key=${sbn.key}")
+            Log.w(TAG, "║ tag=${sbn.tag}")
+            Log.w(TAG, "║ id=${sbn.id}")
+            Log.w(TAG, "║ category=${sbn.notification.category}")
+            Log.w(TAG, "║ ongoing=${sbn.isOngoing}")
+            Log.w(TAG, "║ group=${sbn.notification.group}")
+            val extras = sbn.notification.extras
+            if (extras != null) {
+                Log.w(TAG, "║ title=${extras.getCharSequence(Notification.EXTRA_TITLE)}")
+                Log.w(TAG, "║ text=${extras.getCharSequence(Notification.EXTRA_TEXT)}")
+                Log.w(TAG, "║ bigText=${extras.getCharSequence(Notification.EXTRA_BIG_TEXT)}")
+                Log.w(TAG, "║ convTitle=${extras.getCharSequence(Notification.EXTRA_CONVERSATION_TITLE)}")
+                Log.w(TAG, "║ isGroup=${extras.getBoolean(Notification.EXTRA_IS_GROUP_CONVERSATION, false)}")
+            }
+            Log.w(TAG, "║ actions=${sbn.notification.actions?.map { it.title }}")
+            Log.w(TAG, "╚══════════════════════════")
+        }
+
         // ── CALL INTERCEPTION (runs before anything else) ──
         // Catches: WhatsApp VoIP calls + Samsung dialer calls
         val category = sbn.notification.category
@@ -82,9 +104,20 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
             textPreview.contains(it, ignoreCase = true) || title.contains(it, ignoreCase = true)
         }
 
-        if ((isWhatsApp || isPhoneDialer) && (isCallNotification || hasCallKeyword)) {
+        // Skip missed/ended call notifications — only intercept active incoming calls
+        val missedCallKeywords = listOf(
+            "missed", "perdida", "perdidas", "perdido",
+            "ended", "finalizada", "terminada",
+        )
+        val isMissedCall = missedCallKeywords.any { textPreview.contains(it, ignoreCase = true) }
+
+        if ((isWhatsApp || isPhoneDialer) && (isCallNotification || hasCallKeyword) && !isMissedCall) {
             Log.w(TAG, "CALL detected: pkg=$pkg title='$title' text='$textPreview' category=$category ongoing=${sbn.isOngoing}")
             handleIncomingCall(sbn, title, textPreview)
+            return
+        }
+        if (isMissedCall) {
+            Log.w(TAG, "Missed/ended call notification — skipping: $title / $textPreview")
             return
         }
 
@@ -246,22 +279,28 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         Log.w(TAG, "═══════════════════════════════════════")
 
         // ── Contact cross-reference ──
+        // Extract REAL phone number from notification key (JID), don't rely solely on title
+        val extractedPhone = extractPhoneFromNotificationKey(sbn)
+        val lookupTarget = extractedPhone ?: title
         val senderIsPhoneNumber = PHONE_REGEX.matches(title.trim())
-        val contactLookup = lookupContact(title)
+        val contactLookup = lookupContact(lookupTarget)
+        val isWaSynced = if (extractedPhone != null) isWhatsAppSyncedContact(extractedPhone) else false
 
         Log.w(TAG, "── CONTACT ANALYSIS ──")
         Log.w(TAG, "  sender: '$title'")
+        Log.w(TAG, "  extractedPhone: $extractedPhone")
         Log.w(TAG, "  isPhoneNumber: $senderIsPhoneNumber")
         Log.w(TAG, "  inDeviceContacts: ${contactLookup.inDeviceContacts}")
         Log.w(TAG, "  phoneFromContacts: ${contactLookup.phoneNumber}")
         Log.w(TAG, "  inPeterContacts: ${contactLookup.inPeterContacts}")
         Log.w(TAG, "  hasOutgoingCallHistory: ${contactLookup.hasOutgoingCallHistory}")
+        Log.w(TAG, "  isWhatsAppSynced: $isWaSynced")
         Log.w(TAG, "  contactStatus: ${contactLookup.status}")
         Log.w(TAG, "──────────────────────")
 
-        // If user has previously called this number, trust it more — don't intercept
-        if (contactLookup.hasOutgoingCallHistory) {
-            Log.w(TAG, "Has outgoing call history — trusting $title")
+        // If WhatsApp-synced contact or has call history — trust them
+        if (contactLookup.hasOutgoingCallHistory || isWaSynced) {
+            Log.w(TAG, "Trusted contact (call history or WA synced) — allowing $title")
             return
         }
 
@@ -514,22 +553,30 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         val isWhatsApp = sbn.packageName == WHATSAPP_PKG || sbn.packageName == WHATSAPP_BIZ_PKG
         val source = if (isWhatsApp) "WhatsApp" else "Phone"
 
-        // Look up caller in contacts
-        val contactLookup = lookupContact(caller)
-        Log.w(TAG, "$source call from: $caller | inDevice=${contactLookup.inDeviceContacts} | inPeter=${contactLookup.inPeterContacts} | hasCallHistory=${contactLookup.hasOutgoingCallHistory}")
+        // For WhatsApp: extract REAL phone number from notification key (don't trust the title)
+        // Scammers can set any profile name, but the JID in the key is their real number
+        val extractedPhone = if (isWhatsApp) extractPhoneFromNotificationKey(sbn) else null
+        val lookupTarget = extractedPhone ?: caller
+        Log.w(TAG, "$source call from: title='$caller' extractedPhone=$extractedPhone lookupTarget=$lookupTarget")
+
+        // Look up caller in contacts using the real phone number when available
+        val contactLookup = lookupContact(lookupTarget)
+        Log.w(TAG, "  inDevice=${contactLookup.inDeviceContacts} | inPeter=${contactLookup.inPeterContacts} | hasCallHistory=${contactLookup.hasOutgoingCallHistory}")
+
+        // Also check WhatsApp synced contacts (covers cases where name doesn't match)
+        val isWaSynced = if (extractedPhone != null) isWhatsAppSyncedContact(extractedPhone) else false
+        if (isWaSynced) Log.w(TAG, "  WhatsApp synced contact: YES")
 
         // Allow known contacts
-        if (contactLookup.inPeterContacts || contactLookup.inDeviceContacts || contactLookup.hasOutgoingCallHistory) {
+        if (contactLookup.inPeterContacts || contactLookup.inDeviceContacts || contactLookup.hasOutgoingCallHistory || isWaSynced) {
             Log.w(TAG, "Known contact calling — allowing")
             return
         }
 
-        // For phone numbers that appear as names (e.g. "John" calling), only block if it's a phone number
-        // For the phone dialer, the title is usually the phone number for unknown callers
+        // For non-WhatsApp (phone dialer): if showing a name, they're in device contacts
         val callerIsPhoneNumber = PHONE_REGEX.matches(caller.trim())
         if (!callerIsPhoneNumber && !isWhatsApp) {
-            // Phone dialer showing a contact name — they're in the phone's contacts
-            Log.w(TAG, "Phone call from named contact: $caller — allowing")
+            Log.w(TAG, "Phone dialer showing name: $caller — allowing (device contact)")
             return
         }
 
@@ -608,6 +655,115 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
             // Last resort: just cancel the notification (silences the ring)
             cancelNotification(sbn.key)
         }
+    }
+
+    /** Extract phone number from WhatsApp notification key (JID format: ...phone@s.whatsapp.net...) */
+    private fun extractPhoneFromNotificationKey(sbn: StatusBarNotification): String? {
+        try {
+            val key = sbn.key ?: return null
+            Log.w(TAG, "  [JID] raw key: $key")
+            Log.w(TAG, "  [JID] tag: ${sbn.tag}")
+
+            // Try tag first — WhatsApp often puts JID in the tag
+            val jidRegex = Regex("""(\d{7,15})@s\.whatsapp\.net""")
+            val tagMatch = if (sbn.tag != null) jidRegex.find(sbn.tag!!) else null
+            if (tagMatch != null) {
+                Log.w(TAG, "  [JID] found in tag: +${tagMatch.groupValues[1]}")
+                return "+${tagMatch.groupValues[1]}"
+            }
+
+            // Try key
+            val match = jidRegex.find(key)
+            if (match != null) {
+                Log.w(TAG, "  [JID] found in key: +${match.groupValues[1]}")
+                return "+${match.groupValues[1]}"
+            }
+
+            // Try notification group
+            val group = sbn.notification.group
+            if (group != null) {
+                Log.w(TAG, "  [JID] group: $group")
+                val groupMatch = jidRegex.find(group)
+                if (groupMatch != null) {
+                    Log.w(TAG, "  [JID] found in group: +${groupMatch.groupValues[1]}")
+                    return "+${groupMatch.groupValues[1]}"
+                }
+            }
+
+            // Try MessagingStyle sender_person key
+            val messages = sbn.notification.extras?.getParcelableArray(Notification.EXTRA_MESSAGES)
+            if (messages != null) {
+                for ((i, msg) in messages.withIndex()) {
+                    if (msg is android.os.Bundle) {
+                        val person = msg.get("sender_person")
+                        if (person is android.app.Person) {
+                            Log.w(TAG, "  [JID] person[$i]: name=${person.name}, key=${person.key}, uri=${person.uri}")
+                            val personKey = person.key
+                            if (personKey != null) {
+                                val personMatch = jidRegex.find(personKey)
+                                if (personMatch != null) {
+                                    Log.w(TAG, "  [JID] found in person key: +${personMatch.groupValues[1]}")
+                                    return "+${personMatch.groupValues[1]}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Log.w(TAG, "  [JID] NO phone number found in notification metadata")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error extracting phone from notification key", e)
+        }
+        return null
+    }
+
+    /** Check if a phone number belongs to a WhatsApp-synced contact in Android's ContactsContract */
+    private fun isWhatsAppSyncedContact(phone: String): Boolean {
+        try {
+            val digits = phone.filter { it.isDigit() }
+            if (digits.length < 7) return false
+            Log.w(TAG, "  [WA-SYNC] checking phone=$phone digits=$digits last10=${digits.takeLast(10)}")
+
+            // First try: WhatsApp profile MIME type
+            val cursor = contentResolver.query(
+                ContactsContract.Data.CONTENT_URI,
+                arrayOf(ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data.DATA1),
+                "${ContactsContract.Data.MIMETYPE} = ? AND ${ContactsContract.Data.DATA1} LIKE ?",
+                arrayOf(
+                    "vnd.android.cursor.item/vnd.com.whatsapp.profile",
+                    "%${digits.takeLast(10)}%"
+                ),
+                null,
+            )
+            cursor?.use {
+                Log.w(TAG, "  [WA-SYNC] WhatsApp profile query: ${it.count} results")
+                while (it.moveToNext()) {
+                    Log.w(TAG, "  [WA-SYNC]   match: name=${it.getString(0)}, data1=${it.getString(1)}")
+                }
+                if (it.count > 0) return true
+            }
+
+            // Second try: RawContacts with WhatsApp account type
+            val rawCursor = contentResolver.query(
+                ContactsContract.RawContacts.CONTENT_URI,
+                arrayOf(ContactsContract.RawContacts.DISPLAY_NAME_PRIMARY, ContactsContract.RawContacts.ACCOUNT_TYPE),
+                "${ContactsContract.RawContacts.ACCOUNT_TYPE} IN (?, ?)",
+                arrayOf("com.whatsapp", "com.whatsapp.w4b"),
+                null,
+            )
+            rawCursor?.use {
+                Log.w(TAG, "  [WA-SYNC] RawContacts with WA account: ${it.count} total")
+                // Just log first 5 for debugging
+                var logged = 0
+                while (it.moveToNext() && logged < 5) {
+                    Log.w(TAG, "  [WA-SYNC]   raw: name=${it.getString(0)}, type=${it.getString(1)}")
+                    logged++
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error checking WhatsApp synced contacts", e)
+        }
+        return false
     }
 
     // ── Contact cross-reference ──

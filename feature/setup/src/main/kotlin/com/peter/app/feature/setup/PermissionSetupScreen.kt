@@ -1,5 +1,6 @@
 package com.peter.app.feature.setup
 
+import android.Manifest
 import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
@@ -60,6 +61,12 @@ fun PermissionSetupScreen(
 
     val roleLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
+    ) {
+        viewModel.refreshPermissions(context)
+    }
+
+    val contactsLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
     ) {
         viewModel.refreshPermissions(context)
     }
@@ -139,7 +146,24 @@ fun PermissionSetupScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // 4. Accessibility — LAST because it enables app blocking
+            // 4. Contacts + Call Log (runtime permissions, single request)
+            PermissionItem(
+                title = stringResource(R.string.perm_contacts),
+                description = stringResource(R.string.perm_contacts_desc),
+                granted = state.hasContacts && state.hasCallLog,
+                onGrant = {
+                    contactsLauncher.launch(
+                        arrayOf(
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.READ_CALL_LOG,
+                        )
+                    )
+                },
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // 5. Accessibility — LAST because it enables app blocking
             PermissionItem(
                 title = stringResource(R.string.perm_overlay),
                 description = stringResource(R.string.perm_overlay_desc),

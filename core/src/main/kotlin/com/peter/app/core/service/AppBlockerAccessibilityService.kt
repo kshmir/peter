@@ -45,6 +45,11 @@ class AppBlockerAccessibilityService : AccessibilityService() {
         "com.samsung.android.honeyboard",
         "com.android.inputmethod.latin",
         "com.google.android.webview",
+        // OEM launchers (handle recents/window switcher)
+        "com.motorola.launcher3",
+        "com.sec.android.app.launcher",
+        "com.google.android.apps.nexuslauncher",
+        "com.android.launcher3",
     )
 
     override fun onServiceConnected() {

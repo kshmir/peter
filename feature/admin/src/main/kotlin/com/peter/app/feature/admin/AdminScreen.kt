@@ -48,7 +48,6 @@ fun AdminScreen(
     onNavigateToDisplay: () -> Unit,
     onNavigateToSecurity: () -> Unit,
     onNavigateToGuardLog: () -> Unit,
-    onNavigateToGuardDemo: () -> Unit,
     onNavigateToSecurityFilters: () -> Unit,
     onNavigateToPermissions: () -> Unit,
 ) {
@@ -118,22 +117,15 @@ fun AdminScreen(
             Spacer(modifier = Modifier.height(12.dp))
             AdminMenuItem(
                 icon = Icons.Filled.Shield,
-                title = "Filtros de seguridad",
-                subtitle = "Notificaciones, conversaciones y llamadas",
+                title = stringResource(R.string.admin_security_filters),
+                subtitle = stringResource(R.string.admin_security_filters_subtitle),
                 onClick = onNavigateToSecurityFilters,
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            AdminMenuItem(
-                icon = Icons.Filled.Notifications,
-                title = "Demo de interceptor",
-                subtitle = "Vista previa del filtro de WhatsApp",
-                onClick = onNavigateToGuardDemo,
             )
             Spacer(modifier = Modifier.height(12.dp))
             AdminMenuItem(
                 icon = Icons.Filled.Settings,
                 title = stringResource(R.string.admin_permissions),
-                subtitle = "Gestionar permisos del sistema",
+                subtitle = stringResource(R.string.admin_manage_permissions),
                 onClick = onNavigateToPermissions,
             )
         }

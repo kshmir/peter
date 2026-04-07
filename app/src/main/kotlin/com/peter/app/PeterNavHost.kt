@@ -13,7 +13,6 @@ import com.peter.app.feature.admin.AppWhitelistScreen
 import com.peter.app.feature.admin.ContactManagementScreen
 import com.peter.app.feature.admin.DisplaySettingsScreen
 import com.peter.app.feature.admin.GuardLogScreen
-import com.peter.app.feature.admin.NotificationGuardDemoScreen
 import com.peter.app.feature.admin.SecurityFiltersScreen
 import com.peter.app.feature.admin.PinEntryScreen
 import com.peter.app.feature.admin.SecurityScreen
@@ -37,7 +36,6 @@ import kotlinx.serialization.Serializable
 @Serializable object DisplaySettingsRoute
 @Serializable object SecurityRoute
 @Serializable object GuardLogRoute
-@Serializable object GuardDemoRoute
 @Serializable object SecurityFiltersRoute
 @Serializable object AdminPermissionsRoute
 @Serializable object ContactsRoute
@@ -137,9 +135,6 @@ fun PeterNavHost(
                 onNavigateToGuardLog = {
                     navController.navigate(GuardLogRoute)
                 },
-                onNavigateToGuardDemo = {
-                    navController.navigate(GuardDemoRoute)
-                },
                 onNavigateToSecurityFilters = {
                     navController.navigate(SecurityFiltersRoute)
                 },
@@ -175,12 +170,6 @@ fun PeterNavHost(
 
         composable<SecurityFiltersRoute> {
             SecurityFiltersScreen(
-                onBack = { navController.popBackStack() },
-            )
-        }
-
-        composable<GuardDemoRoute> {
-            NotificationGuardDemoScreen(
                 onBack = { navController.popBackStack() },
             )
         }

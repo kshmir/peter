@@ -1,8 +1,12 @@
 package com.peter.app.ui.theme
 
+import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 private val PeterColorScheme = lightColorScheme(
     primary = Amber600,
@@ -34,6 +38,17 @@ private val PeterColorScheme = lightColorScheme(
 fun PeterTheme(
     content: @Composable () -> Unit,
 ) {
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as? Activity)?.window ?: return@SideEffect
+            // Dark status bar icons on light background
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+            // Dark navigation bar icons too
+            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
+        }
+    }
+
     MaterialTheme(
         colorScheme = PeterColorScheme,
         typography = PeterTypography,
