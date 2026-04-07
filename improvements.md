@@ -93,6 +93,40 @@ When idle for X minutes, show family photos as a slideshow (from a shared Google
 
 ---
 
+## Automated WhatsApp Actions via AccessibilityService
+
+**Priority:** Medium
+**Effort:** 1-2 days
+
+The AccessibilityService can programmatically click, tap, scroll, and type in any app. This enables powerful automated actions inside WhatsApp:
+
+- **Auto-block scammer in WhatsApp** — navigate to contact info → tap "Block" → confirm
+- **Auto-delete scam conversation** — long-press chat → tap delete → confirm
+- **Auto-report scammer** — navigate to report flow inside WhatsApp
+- **Prevent replies to unknown contacts** — detect the compose box, intercept before sending
+- **Auto-archive suspicious chats** — swipe/archive scam conversations
+
+**How it works:**
+```kotlin
+// Click a specific UI element by ID
+val node = rootInActiveWindow.findAccessibilityNodeInfosByViewId("com.whatsapp:id/block")
+node[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
+
+// Tap at exact screen coordinates
+val path = Path().apply { moveTo(540f, 1200f) }
+dispatchGesture(GestureDescription.Builder()
+    .addStroke(GestureDescription.StrokeDescription(path, 0, 100))
+    .build(), null, null)
+
+// Type text into a field
+node.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT,
+    Bundle().apply { putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, "text") })
+```
+
+**Note:** This is powerful but fragile — WhatsApp UI IDs can change between updates. Should be implemented with fallbacks and robust node discovery.
+
+---
+
 ## Fall Detection
 
 **Priority:** Low

@@ -1853,6 +1853,21 @@ object ScamPatternDetector {
             "ES-AR: Transfer to CBU/CVU",
         ))
         add(PatternRule(
+            Regex("\\b(haceme|hac[eé]me|hac[eé]) (un|una) ?(transferencia|depósito|giro)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "AR", 0.3f,
+            "ES-AR: Haceme una transferencia",
+        ))
+        add(PatternRule(
+            Regex("\\b(transferi|transfer[ií])(me|le|nos)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "AR", 0.3f,
+            "ES-AR: Transferime (direct request)",
+        ))
+        add(PatternRule(
+            Regex("\\b(pas[aá]me|mand[aá]me|envi[aá]me)\\b.{0,10}(plata|guita|dinero|lucas|pesos)", RegexOption.IGNORE_CASE),
+            ScamCategory.MONEY_REQUEST, "ES", "ALL", 0.3f,
+            "ES: Pasame/mandame plata",
+        ))
+        add(PatternRule(
             Regex("\\b(mercadopago|mercado pago).{0,15}(mand[aá]|env[ií]a|pas[aá]|transferi)", RegexOption.IGNORE_CASE),
             ScamCategory.MONEY_REQUEST, "ES", "AR", 0.25f,
             "ES-AR: MercadoPago transfer request",

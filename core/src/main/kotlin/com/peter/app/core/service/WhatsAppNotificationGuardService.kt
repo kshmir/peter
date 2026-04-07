@@ -90,26 +90,37 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
         // Catches: WhatsApp VoIP calls + Samsung dialer calls
         val category = sbn.notification.category
         val extras = sbn.notification.extras ?: return
-        val title = extras.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: ""
-        val textPreview = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
+        // Strip Unicode control characters (LTR/RTL marks) that WhatsApp injects
+        val title = extras.getCharSequence(Notification.EXTRA_TITLE)?.toString()
+            ?.replace(Regex("[\\u200E\\u200F\\u200B\\u200C\\u200D\\uFEFF]"), "")?.trim() ?: ""
+        val textPreview = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString()
+            ?.replace(Regex("[\\u200E\\u200F\\u200B\\u200C\\u200D\\uFEFF]"), "")?.trim() ?: ""
 
         val isCallNotification = category == Notification.CATEGORY_CALL
         val callKeywords = listOf(
             "incoming voice call", "incoming video call",
-            "llamada de voz entrante", "videollamada entrante",
+            "llamada de voz entrante", "llamada entrante", "videollamada entrante",
             "chamada de voz recebida", "videochamada recebida",
-            "ringing",
         )
         val hasCallKeyword = callKeywords.any {
             textPreview.contains(it, ignoreCase = true) || title.contains(it, ignoreCase = true)
         }
 
-        // Skip missed/ended call notifications — only intercept active incoming calls
-        val missedCallKeywords = listOf(
+        // Skip missed/ended/outgoing call notifications — only intercept active INCOMING calls
+        val skipCallKeywords = listOf(
+            // Missed calls
             "missed", "perdida", "perdidas", "perdido",
+            // Ended calls
             "ended", "finalizada", "terminada",
+            // Silenced calls
+            "silenced", "silenci", "silenciada", "silenció",
+            // Outgoing call states
+            "calling", "llamando", "ligando", "chamando",
+            "ringing", "ongoing", "en curso", "em andamento",
         )
-        val isMissedCall = missedCallKeywords.any { textPreview.contains(it, ignoreCase = true) }
+        val isMissedCall = skipCallKeywords.any {
+            textPreview.contains(it, ignoreCase = true) || title.contains(it, ignoreCase = true)
+        }
 
         if ((isWhatsApp || isPhoneDialer) && (isCallNotification || hasCallKeyword) && !isMissedCall) {
             Log.w(TAG, "CALL detected: pkg=$pkg title='$title' text='$textPreview' category=$category ongoing=${sbn.isOngoing}")
@@ -123,6 +134,27 @@ class WhatsAppNotificationGuardService : NotificationListenerService() {
 
         // ── Skip non-WhatsApp from here on (messages only) ──
         if (!isWhatsApp) return
+
+        // ── Check blocked contacts — auto-cancel silently ──
+        try {
+            val blockedContacts = PeterDatabase.getInstance(this).blockedContactDao().let {
+                kotlinx.coroutines.runBlocking(kotlinx.coroutines.Dispatchers.IO) { it.getAllSync() }
+            }
+            val extractedPhone = extractPhoneFromNotificationKey(sbn)
+            val phoneToCheck = extractedPhone ?: title
+            val phoneDigits = phoneToCheck.filter { it.isDigit() }
+            if (phoneDigits.length >= 7) {
+                val isBlocked = blockedContacts.any { blocked ->
+                    val blockedDigits = blocked.phoneNumber.filter { it.isDigit() }
+                    blockedDigits.takeLast(7) == phoneDigits.takeLast(7)
+                }
+                if (isBlocked) {
+                    Log.w(TAG, "BLOCKED CONTACT — auto-cancelling: $title ($phoneToCheck)")
+                    cancelNotification(sbn.key)
+                    return
+                }
+            }
+        } catch (_: Exception) {}
 
         // Check if notification filter is enabled
         try {

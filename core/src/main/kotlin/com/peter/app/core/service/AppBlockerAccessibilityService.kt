@@ -402,9 +402,11 @@ class AppBlockerAccessibilityService : AccessibilityService() {
 
             // Check for scam FIRST — if quarantining, skip the notification
             var quarantined = false
+            Log.w(TAG, "Scan: contact=$contactName messages=${messages.size} texts: ${messages.joinToString(" | ").take(200)}")
             if (messages.isNotEmpty()) {
                 val fullConversation = messages.joinToString(" ")
                 val analysis = com.peter.app.core.util.ScamPatternDetector.analyze(fullConversation)
+                Log.w(TAG, "Scan result: suspicious=${analysis.isSuspicious} confidence=${analysis.confidence} pattern=${analysis.matchedPattern}")
                 if (analysis.isSuspicious) {
                     Log.w(TAG, "WhatsApp: SCAM in conversation with $contactName (confidence=${analysis.confidence}, level=${analysis.threatLevel}): ${analysis.matchedPattern}")
                     lastWarnedContact = contactName

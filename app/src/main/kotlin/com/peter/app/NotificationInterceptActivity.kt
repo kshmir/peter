@@ -5,6 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.peter.app.core.database.PeterDatabase
+import com.peter.app.core.database.entity.BlockedContactEntity
+import com.peter.app.core.database.entity.ContactEntity
+import com.peter.app.core.database.entity.GuardLogEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +19,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -93,12 +103,46 @@ class NotificationInterceptActivity : ComponentActivity() {
                         threatDesc = threatDesc,
                         profilePic = profilePic,
                         onAllow = {
-                            Log.w(TAG, "ALLOWED: $sender")
+                            Log.w(TAG, "ALLOWED: $sender (phone=$phone)")
+                            val db = PeterDatabase.getInstance(this@NotificationInterceptActivity)
+                            CoroutineScope(Dispatchers.IO).launch {
+                                // Add to Peter's approved contacts
+                                if (!phone.isNullOrBlank()) {
+                                    db.contactDao().insert(
+                                        ContactEntity(displayName = sender, phoneNumber = phone)
+                                    )
+                                }
+                                db.guardLogDao().insert(
+                                    GuardLogEntity(
+                                        eventType = "USER_ALLOWED",
+                                        packageName = "com.whatsapp",
+                                        detail = "Allowed: $sender | Phone: ${phone ?: "unknown"}",
+                                    )
+                                )
+                            }
                             openWhatsApp()
                             finish()
                         },
                         onBlock = {
-                            Log.w(TAG, "BLOCKED: $sender")
+                            Log.w(TAG, "BLOCKED: $sender (phone=$phone)")
+                            val db = PeterDatabase.getInstance(this@NotificationInterceptActivity)
+                            CoroutineScope(Dispatchers.IO).launch {
+                                // Add to blocked contacts
+                                db.blockedContactDao().insert(
+                                    BlockedContactEntity(
+                                        phoneNumber = phone ?: sender,
+                                        displayName = sender,
+                                        reason = status,
+                                    )
+                                )
+                                db.guardLogDao().insert(
+                                    GuardLogEntity(
+                                        eventType = "USER_BLOCKED",
+                                        packageName = "com.whatsapp",
+                                        detail = "Blocked: $sender | Phone: ${phone ?: "unknown"} | Reason: $status",
+                                    )
+                                )
+                            }
                             finish()
                         },
                     )
@@ -159,7 +203,8 @@ private fun InterceptScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xCC000000)),
+            .background(Color(0xCC000000))
+            .windowInsetsPadding(WindowInsets.systemBars),
         contentAlignment = Alignment.Center,
     ) {
         Card(
@@ -313,7 +358,8 @@ private fun QuarantineScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFC62828)),
+            .background(Color(0xFFC62828))
+            .windowInsetsPadding(WindowInsets.systemBars),
         contentAlignment = Alignment.Center,
     ) {
         Column(
