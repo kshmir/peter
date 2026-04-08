@@ -25,6 +25,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/Theme.Peter"
         android:supportsRtl="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:localeConfig="@xml/locales_config">
 
         <!-- Main Activity - HOME launcher -->
