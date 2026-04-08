@@ -8,7 +8,10 @@ import androidx.room.Room
 import com.peter.app.core.database.PeterDatabase
 import com.peter.app.core.database.MIGRATION_1_2
 import com.peter.app.core.database.MIGRATION_2_3
+import com.peter.app.core.database.MIGRATION_3_4
+import com.peter.app.core.database.MIGRATION_4_5
 import com.peter.app.core.database.dao.AdminSettingsDao
+import com.peter.app.core.database.dao.BlockedContactDao
 import com.peter.app.core.database.dao.ContactDao
 import com.peter.app.core.database.dao.GuardLogDao
 import com.peter.app.core.database.dao.WhitelistedAppDao
@@ -40,7 +43,7 @@ object AppModule {
             PeterDatabase::class.java,
             "peter_database",
         )
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
             .build()
     }
 
@@ -55,6 +58,9 @@ object AppModule {
 
     @Provides
     fun provideGuardLogDao(db: PeterDatabase): GuardLogDao = db.guardLogDao()
+
+    @Provides
+    fun provideBlockedContactDao(db: PeterDatabase): BlockedContactDao = db.blockedContactDao()
 
     @Provides
     @Singleton
